@@ -6,7 +6,7 @@ export const Home = () => {
       <h1>Welcome YAJIMA !</h1>
       <Link to="/shopcalender">予約一覧</Link>
       <br />
-      <Link to="/shopcalender">予約する</Link>
+      <Link to="/menu">予約する</Link>
     </div>
   );
 };
