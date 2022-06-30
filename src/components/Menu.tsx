@@ -7,12 +7,6 @@ type Props = {
 };
 
 export const Menu: React.FC<Props> = (Props) => {
-  const header = ["name", "description", "value"];
-  const data = [
-    ["Okayu", "cat", 10],
-    ["Korone", "dog", -1],
-  ];
-
   function eventOnChange(e: any) {
     Props.setMenu(e.target.value);
   }
@@ -25,11 +19,12 @@ export const Menu: React.FC<Props> = (Props) => {
           eventOnChange(e);
         }}
       >
-        <option value="N/A">N/A</option>
-        <option value="角刈り">1</option>
-        <option value="丸刈り">2</option>
-        <option value="三角刈り">3</option>
-        <option value="五角刈り">4</option>
+        <option value="N/A">メニューを選択して下さい</option>
+        <option value="角刈り">角刈り</option>
+        <option value="カット">カット</option>
+        <option value="カット＋カラー">カット＋カラー</option>
+        <option value="パーマ">パーマ</option>
+        <option value="縮毛矯正">縮毛矯正</option>
       </select>
       <button>
         <Link to={"/menu/time"}>予約時間選択へ</Link>

@@ -3,27 +3,33 @@ import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 
-import { TypeOfShopCalendar } from "../global";
+import { TypeOfShopCalendar, TypeOfReserve } from "../global";
+
+type Props = {
+  reserve: TypeOfReserve[];
+};
 
 const localizer = momentLocalizer(moment);
-const eventList: TypeOfShopCalendar[] = [
-  {
-    id: 0,
-    title: "角刈り/伊佐次",
-    allDay: false,
-    start: new Date("2022-06-29 10:00"),
-    end: new Date("2022-06-29 11:00"),
-  },
-  {
-    id: 1,
-    title: "角刈り/えり子",
-    allDay: false,
-    start: new Date("2022-06-29 15:00"),
-    end: new Date("2022-06-29 17:00"),
-  },
-];
+const eventList: TypeOfShopCalendar[] = [];
 
-export const ShopCalendar = () => {
+export const ShopCalendar: React.FC<Props> = (Props) => {
+  if (Props.reserve.length !== 0) {
+    eventList.splice(0);
+    Props.reserve.forEach((element, index) => {
+      const endDate: Date = new Date(element.date.getTime());
+      const pushObj = {
+        id: index,
+        title: element.menu,
+        allDay: false,
+        start: element.date,
+        end: new Date(
+          endDate.setMinutes(endDate.getMinutes() + element.treatmentTime)
+        ),
+      };
+      eventList.push(pushObj);
+    });
+  }
+
   return (
     <div>
       <Calendar
