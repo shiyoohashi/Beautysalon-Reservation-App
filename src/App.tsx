@@ -9,6 +9,10 @@ import { ShopCalendar } from "./components/ShopCalendar";
 import { Menu } from "./components/Menu";
 import { Time } from "./components/Time";
 
+import { Amplify } from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
+
 function App() {
   const [menu, setMenu] = useState<string | null>(null);
   const [time, setTime] = useState<Date | null>(null);

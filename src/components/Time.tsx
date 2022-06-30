@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
-
+import { useState, useEffect } from "react";
+import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { createTodo } from "../graphql/mutations";
+import { listTodos } from "../graphql/queries";
+import awsExports from "../aws-exports";
 import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
+Amplify.configure(awsExports);
 
 type Props = {
   menu: string | null;
@@ -12,7 +17,47 @@ type Props = {
   setTime: (date: Date) => void;
 };
 
+type todo = {
+  id: number;
+  name: string;
+  description: string;
+};
+const initialState: todo = { id: 0, name: "", description: "" };
+
 export const Time: React.FC<Props> = (Props) => {
+  //ここから
+  const [formState, setFormState] = useState(initialState);
+  const [todos, setTodos] = useState<todo[]>([]);
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+  function setInput(key: any, value: any) {
+    setFormState({ ...formState, [key]: value });
+  }
+
+  async function fetchTodos() {
+    try {
+      const todoData: any = await API.graphql(graphqlOperation(listTodos));
+      const todos: [todo] = todoData.data.listTodos.items;
+      setTodos(todos);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
+
+  async function addTodo() {
+    try {
+      if (!formState.name || !formState.description) return;
+      const todo: any = { ...formState };
+      setTodos([...todos, todo]);
+      setFormState(initialState);
+      await API.graphql(graphqlOperation(createTodo, { input: todo }));
+    } catch (err) {
+      console.log("error creating todo:", err);
+    }
+  }
+  //ここまで
   const localizer = momentLocalizer(moment);
   const eventList: TypeOfReserveCalendar[] = [];
 
@@ -97,34 +142,106 @@ export const Time: React.FC<Props> = (Props) => {
     };
     const registerDB: TypeOfReserve[] = [...Props.reserve, registerObj];
     Props.setReserve(registerDB);
+
+    // const reserve: any = {
+    //   id: 1,
+    //   name: "masashi",
+    //   menu: "角刈り",
+    //   date: "2022-06-22",
+    //   time: "60",
+    // };
+
     link.click();
   }
 
   return (
-    <div>
-      <Calendar
-        localizer={localizer}
-        events={eventList}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
-        defaultView={Views.WEEK}
-        // defaultDate={"2022-06-29 17:00"}
-        onSelectEvent={(event) => link(event)}
-        timeslots={2}
-        views={["week"]}
-        eventPropGetter={({ type }) => {
-          switch (type) {
-            case "true":
-              return { style: { backgroundColor: "green" } };
-            case "false":
-              return { style: { backgroundColor: "red" } };
-          }
-          return {};
-        }}
-        resourceTitleAccessor="start"
-      />
-      <Link id="link" to={"/"}></Link>
-    </div>
+    <>
+      <div>
+        <Calendar
+          localizer={localizer}
+          events={eventList}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 500 }}
+          defaultView={Views.WEEK}
+          // defaultDate={"2022-06-29 17:00"}
+          onSelectEvent={(event) => link(event)}
+          timeslots={2}
+          views={["week"]}
+          eventPropGetter={({ type }) => {
+            switch (type) {
+              case "true":
+                return { style: { backgroundColor: "green" } };
+              case "false":
+                return { style: { backgroundColor: "red" } };
+            }
+            return {};
+          }}
+          resourceTitleAccessor="start"
+        />
+        <Link id="link" to={"/"}></Link>
+      </div>
+      <div style={styles.container}>
+        <h2>Amplify Todos</h2>
+        <input
+          onChange={(event) => setInput("name", event.target.value)}
+          style={styles.input}
+          value={formState.name}
+          placeholder="Name"
+        />
+        <input
+          onChange={(event) => setInput("description", event.target.value)}
+          style={styles.input}
+          value={formState.description}
+          placeholder="Description"
+        />
+        <button style={styles.button} onClick={addTodo}>
+          Create Todo
+        </button>
+        {todos.map((todo, index) => (
+          <div key={todo.id ? todo.id : index} style={styles.todo}>
+            <p style={styles.todoName}>{todo.name}</p>
+            <p style={styles.todoDescription}>{todo.description}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
+};
+
+type style = {
+  container: any;
+  todo: any;
+  input: any;
+  todoName: any;
+  todoDescription: any;
+  button: any;
+};
+
+const styles: style = {
+  container: {
+    width: 400,
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: 20,
+  },
+  todo: { marginBottom: 15 },
+  input: {
+    border: "none",
+    backgroundColor: "#ddd",
+    marginBottom: 10,
+    padding: 8,
+    fontSize: 18,
+  },
+  todoName: { fontSize: 20, fontWeight: "bold" },
+  todoDescription: { marginBottom: 0 },
+  button: {
+    backgroundColor: "black",
+    color: "white",
+    outline: "none",
+    fontSize: 18,
+    padding: "12px 0px",
+  },
 };

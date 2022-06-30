@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "salonapp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authsalonapp56a8865c",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

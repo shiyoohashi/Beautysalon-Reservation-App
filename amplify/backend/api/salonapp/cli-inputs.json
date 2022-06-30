@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "salonapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/kazunorinakajima/Desktop/BootCamp2/Beautysalon-Reservation-App/amplify/backend/api/salonapp/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authsalonapp56a8865c"
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    }
+  }
+}
