@@ -5,6 +5,10 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type Todo @model {
   id: ID!
-  name: String!
-  description: String
+  date: String
+  menu: String
+  amountOfMoney: Int
+  treatmentTime: Int
+  stylistName: String
+  customerName: String
 }

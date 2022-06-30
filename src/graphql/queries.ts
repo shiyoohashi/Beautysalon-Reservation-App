@@ -6,8 +6,12 @@ export const getTodo = /* GraphQL */ `
   query GetTodo($id: ID!) {
     getTodo(id: $id) {
       id
-      name
-      description
+      date
+      menu
+      amountOfMoney
+      treatmentTime
+      stylistName
+      customerName
       createdAt
       updatedAt
       _version
@@ -25,8 +29,12 @@ export const listTodos = /* GraphQL */ `
     listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
-        description
+        date
+        menu
+        amountOfMoney
+        treatmentTime
+        stylistName
+        customerName
         createdAt
         updatedAt
         _version
@@ -53,8 +61,12 @@ export const syncTodos = /* GraphQL */ `
     ) {
       items {
         id
-        name
-        description
+        date
+        menu
+        amountOfMoney
+        treatmentTime
+        stylistName
+        customerName
         createdAt
         updatedAt
         _version

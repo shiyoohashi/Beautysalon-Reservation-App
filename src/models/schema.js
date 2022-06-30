@@ -10,15 +10,43 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
+                "date": {
+                    "name": "date",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
-                "description": {
-                    "name": "description",
+                "menu": {
+                    "name": "menu",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "amountOfMoney": {
+                    "name": "amountOfMoney",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "treatmentTime": {
+                    "name": "treatmentTime",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "stylistName": {
+                    "name": "stylistName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "customerName": {
+                    "name": "customerName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -53,5 +81,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4401034582a70c60713e1f7f9da3b752"
+    "version": "5c5bfefebf8813ef97cbf5b7f939707c"
 };

@@ -9,8 +9,12 @@ export const createTodo = /* GraphQL */ `
   ) {
     createTodo(input: $input, condition: $condition) {
       id
-      name
-      description
+      date
+      menu
+      amountOfMoney
+      treatmentTime
+      stylistName
+      customerName
       createdAt
       updatedAt
       _version
@@ -26,8 +30,12 @@ export const updateTodo = /* GraphQL */ `
   ) {
     updateTodo(input: $input, condition: $condition) {
       id
-      name
-      description
+      date
+      menu
+      amountOfMoney
+      treatmentTime
+      stylistName
+      customerName
       createdAt
       updatedAt
       _version
@@ -43,8 +51,12 @@ export const deleteTodo = /* GraphQL */ `
   ) {
     deleteTodo(input: $input, condition: $condition) {
       id
-      name
-      description
+      date
+      menu
+      amountOfMoney
+      treatmentTime
+      stylistName
+      customerName
       createdAt
       updatedAt
       _version

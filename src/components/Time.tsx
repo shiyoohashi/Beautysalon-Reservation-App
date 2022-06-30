@@ -17,21 +17,48 @@ type Props = {
   setTime: (date: Date) => void;
 };
 
+// type todo = {
+//   id?: number;
+//   name: string;
+//   description: string;
+// };
+
 type todo = {
-  id: number;
-  name: string;
-  description: string;
+  id?: number;
+  date: string;
+  menu: string;
+  amountOfMoney: number;
+  treatmentTime: number;
+  stylistName: string;
+  customerName: string;
 };
-const initialState: todo = { id: 0, name: "", description: "" };
+const initialState: todo = {
+  date: "",
+  menu: "",
+  amountOfMoney: 0,
+  treatmentTime: 0,
+  stylistName: "",
+  customerName: "",
+};
 
 export const Time: React.FC<Props> = (Props) => {
   //ここから
+  const registerData: todo = {
+    date: "2022-12-12-12:00",
+    menu: "角刈り",
+    amountOfMoney: 5000,
+    treatmentTime: 60,
+    stylistName: "スタイリストまさし",
+    customerName: "お客まさし",
+  };
+
   const [formState, setFormState] = useState(initialState);
   const [todos, setTodos] = useState<todo[]>([]);
 
   useEffect(() => {
     fetchTodos();
   }, []);
+
   function setInput(key: any, value: any) {
     setFormState({ ...formState, [key]: value });
   }
@@ -40,6 +67,7 @@ export const Time: React.FC<Props> = (Props) => {
     try {
       const todoData: any = await API.graphql(graphqlOperation(listTodos));
       const todos: [todo] = todoData.data.listTodos.items;
+      console.log("fetch", todos);
       setTodos(todos);
     } catch (err) {
       console.log("error fetching todos");
@@ -48,11 +76,13 @@ export const Time: React.FC<Props> = (Props) => {
 
   async function addTodo() {
     try {
-      if (!formState.name || !formState.description) return;
+      // if (!formState.name || !formState.description) return;
       const todo: any = { ...formState };
+      console.log(todo);
       setTodos([...todos, todo]);
       setFormState(initialState);
-      await API.graphql(graphqlOperation(createTodo, { input: todo }));
+      registerData.customerName += "hoge";
+      await API.graphql(graphqlOperation(createTodo, { input: registerData }));
     } catch (err) {
       console.log("error creating todo:", err);
     }
@@ -80,7 +110,7 @@ export const Time: React.FC<Props> = (Props) => {
       // customerName: string;
 
       const comparisonDate = new Date(`${ttmmdd}-${i}:00`);
-      console.log("comparisonDate: ", comparisonDate);
+      // console.log("comparisonDate: ", comparisonDate);
 
       const result = Props.reserve.find((obj) => {
         return JSON.stringify(obj.date) === JSON.stringify(comparisonDate);
@@ -184,15 +214,15 @@ export const Time: React.FC<Props> = (Props) => {
       <div style={styles.container}>
         <h2>Amplify Todos</h2>
         <input
-          onChange={(event) => setInput("name", event.target.value)}
+          // onChange={(event) => setInput("name", event.target.value)}
           style={styles.input}
-          value={formState.name}
+          // value={formState.name}
           placeholder="Name"
         />
         <input
-          onChange={(event) => setInput("description", event.target.value)}
+          // onChange={(event) => setInput("description", event.target.value)}
           style={styles.input}
-          value={formState.description}
+          // value={formState.description}
           placeholder="Description"
         />
         <button style={styles.button} onClick={addTodo}>
@@ -200,8 +230,9 @@ export const Time: React.FC<Props> = (Props) => {
         </button>
         {todos.map((todo, index) => (
           <div key={todo.id ? todo.id : index} style={styles.todo}>
-            <p style={styles.todoName}>{todo.name}</p>
-            <p style={styles.todoDescription}>{todo.description}</p>
+            {/* <p style={styles.todo}>{todo.id}</p> */}
+            <p style={styles.todoName}>{todo.menu}</p>
+            <p style={styles.todoName}>{todo.customerName}</p>
           </div>
         ))}
       </div>
