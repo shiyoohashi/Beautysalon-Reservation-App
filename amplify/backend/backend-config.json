@@ -1,6 +1,6 @@
 {
   "auth": {
-    "salonapp56a8865c": {
+    "salonapp1ee1b87a": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -11,7 +11,8 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,

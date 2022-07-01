@@ -4,10 +4,11 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { createReservation } from "../graphql/mutations";
+import { deleteReservation } from "../graphql/mutations";
 import { listReservations } from "../graphql/queries";
 import awsExports from "../aws-exports";
 import { TypeOfShopCalendar, reservation, TypeOfMenu } from "../global";
+Amplify.configure(awsExports);
 
 const localizer = momentLocalizer(moment);
 const eventList: TypeOfShopCalendar[] = [];
@@ -17,6 +18,56 @@ type Props = {
 };
 
 export const ShopCalendar: React.FC<Props> = (Props) => {
+  async function delReservation(wantToDeleteReservation: reservation) {
+    try {
+      if (
+        !wantToDeleteReservation.date ||
+        !wantToDeleteReservation.menu ||
+        !wantToDeleteReservation.stylistId ||
+        !wantToDeleteReservation.customerId
+      ) {
+        console.log("====deleteReservationできてないよ=====");
+        console.log(
+          "====wantToDeleteReservation.date=====",
+          wantToDeleteReservation.date
+        );
+        console.log(
+          "====wantToDeleteReservation.menuId=====",
+          wantToDeleteReservation.menu
+        );
+        console.log(
+          "====wantToDeleteReservation.stylistId=====",
+          wantToDeleteReservation.stylistId
+        );
+        console.log(
+          "====wantToDeleteReservation.customerId=====",
+          wantToDeleteReservation.customerId
+        );
+        return;
+      }
+      console.log("====このデータ消します=====", wantToDeleteReservation);
+      await API.graphql({
+        query: deleteReservation,
+        variables: { input: { id: wantToDeleteReservation.id } },
+      });
+      // await API.graphql(
+      //   graphqlOperation(deleteReservation, {
+      //     input: { id: wantToDeleteReservation.id },
+      //   })
+      // );
+
+      console.log("====このデータ消しました=====", wantToDeleteReservation);
+    } catch (err) {
+      console.log("error deleteReservation:", err);
+    }
+  }
+
+  async function deleteAllReservation() {
+    reservations.forEach((reservation: reservation) => {
+      delReservation(reservation);
+    });
+  }
+
   const [reservations, setReservations] = useState<reservation[]>([]);
   useEffect(() => {
     fetchReservations();
@@ -64,7 +115,7 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
         if (selectMenu !== undefined) {
           const pushObj = {
             id: index,
-            title: `${Props.userName}様 ${element.menu}`,
+            title: `${element.customerId}様 ${element.menu}`,
             allDay: false,
             start: new Date(ttmmddhhmm),
             end: new Date(
@@ -81,6 +132,11 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
     }
   }
 
+  function onClickEvent(event: any) {
+    console.log(event);
+    alert(`${event.title}\n来店時間：${event.start}\n退店時間：${event.end}`);
+  }
+
   return (
     <div>
       <Calendar
@@ -88,7 +144,14 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
         events={eventList}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
+        style={{ height: 2000 }}
+        defaultView={Views.WEEK}
+        onSelectEvent={(event) => onClickEvent(event)}
+      />
+      <input
+        type="button"
+        value={"全ての予約を消去する"}
+        onClick={() => deleteAllReservation()}
       />
     </div>
   );

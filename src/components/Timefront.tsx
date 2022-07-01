@@ -4,7 +4,7 @@ import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { createReservation, deleteReservation } from "../graphql/mutations";
+import { createReservation } from "../graphql/mutations";
 import { listReservations } from "../graphql/queries";
 import awsExports from "../aws-exports";
 import {
@@ -29,7 +29,6 @@ const shopMenu: TypeOfMenu[] = [
 ];
 
 type Props = {
-  menu: string;
   setReserve: (typeOfReserve: TypeOfReserve[]) => void;
   reserve: TypeOfReserve[];
   setTime: (date: Date) => void;
@@ -37,6 +36,8 @@ type Props = {
 };
 const eventList: TypeOfReserveCalendar[] = [];
 export const Time: React.FC<Props> = (Props) => {
+  const selectedMenu: string | null = sessionStorage.getItem("menu");
+
   //ここから
 
   const [reservations, setReservations] = useState<reservation[]>([]);
@@ -86,7 +87,7 @@ export const Time: React.FC<Props> = (Props) => {
           );
 
           const selectMenu: any = shopMenu.find((menuObj) => {
-            return menuObj.menu === Props.menu;
+            return menuObj.menu === selectedMenu;
           });
 
           const result = reservations.find((reservation) => {
@@ -126,25 +127,25 @@ export const Time: React.FC<Props> = (Props) => {
               type: "true",
             });
           } else {
-            if (Props.menu === "角刈り") {
+            if (selectedMenu === "角刈り") {
               startTime -= 30;
               startHour = Math.floor(startTime / 60);
               startMinute = startTime % 60;
               console.log("counter: ", counter);
               eventList.splice(counter - 1, 1);
-            } else if (Props.menu === "カット＋カラー") {
+            } else if (selectedMenu === "カット＋カラー") {
               startTime -= 30;
               startHour = Math.floor(startTime / 60);
               startMinute = startTime % 60;
               console.log("counter: ", counter);
               eventList.splice(counter - 1, 1);
-            } else if (Props.menu === "パーマ") {
+            } else if (selectedMenu === "パーマ") {
               startTime -= 30;
               startHour = Math.floor(startTime / 60);
               startMinute = startTime % 60;
               console.log("消すやつcounter: ", counter - 1);
               eventList.splice(counter - 1, 1);
-            } else if (Props.menu === "縮毛矯正") {
+            } else if (selectedMenu === "縮毛矯正") {
               startTime -= 60;
               startHour = Math.floor(startTime / 60);
               startMinute = startTime % 60;
@@ -200,65 +201,28 @@ export const Time: React.FC<Props> = (Props) => {
     }
   }
 
-  async function DeleteReservation(wantToDeleteReservation: reservation) {
-    try {
-      if (
-        !wantToDeleteReservation.date ||
-        !wantToDeleteReservation.menu ||
-        !wantToDeleteReservation.stylistId ||
-        !wantToDeleteReservation.customerId
-      ) {
-        console.log("====deleteReservationできてないよ=====");
-        console.log(
-          "====wantToDeleteReservation.date=====",
-          wantToDeleteReservation.date
-        );
-        console.log(
-          "====wantToDeleteReservation.menuId=====",
-          wantToDeleteReservation.menu
-        );
-        console.log(
-          "====wantToDeleteReservation.stylistId=====",
-          wantToDeleteReservation.stylistId
-        );
-        console.log(
-          "====wantToDeleteReservation.customerId=====",
-          wantToDeleteReservation.customerId
-        );
-        return;
-      }
-      console.log("====このデータ消します=====", wantToDeleteReservation);
-      await API.graphql(
-        graphqlOperation(deleteReservation, {
-          input: wantToDeleteReservation,
-        })
-      );
-      console.log("====このデータ消しました=====", wantToDeleteReservation);
-    } catch (err) {
-      console.log("error creating deleteReservation:", err);
-    }
-  }
-
-  async function deleteAllReservation() {
-    reservations.forEach((reservation: reservation) => {
-      DeleteReservation(reservation);
-    });
-  }
-
   //ここまで
   function link(event: any) {
-    const link: any | null = document.getElementById("link");
-    alert("予約完了");
+    console.log(event);
+    if (event.title === "○") {
+      const result: boolean = window.confirm(
+        `予約日：${event.start}\nメニュー：${selectedMenu}\nで予約しますか？`
+      );
+      if (result) {
+        const reservation: reservation = {
+          date: event.start,
+          menu: selectedMenu!,
+          stylistId: 2,
+          customerId: Props.userName,
+        };
 
-    const reservation: reservation = {
-      date: event.start,
-      menu: Props.menu,
-      stylistId: 2,
-      customerId: Props.userName,
-    };
-
-    addReservation(reservation);
-    link.click();
+        addReservation(reservation);
+        const link: any | null = document.getElementById("link");
+        link.click();
+      }
+    } else {
+      alert("※すでに予約されています！");
+    }
   }
 
   const localizer = momentLocalizer(moment);
@@ -286,11 +250,7 @@ export const Time: React.FC<Props> = (Props) => {
         }}
         resourceTitleAccessor="start"
       />
-      <input
-        type="button"
-        value={"データベース消します"}
-        onClick={() => deleteAllReservation()}
-      />
+
       <Link id="link" to={"/"}></Link>
     </div>
   );

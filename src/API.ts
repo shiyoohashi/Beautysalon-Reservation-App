@@ -8,7 +8,6 @@ export type CreateReservationInput = {
   menu?: string | null,
   stylistId?: number | null,
   customerId?: string | null,
-  _version?: number | null,
 };
 
 export type ModelReservationConditionInput = {
@@ -82,9 +81,6 @@ export type reservation = {
   customerId?: string | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateReservationInput = {
@@ -93,12 +89,10 @@ export type UpdateReservationInput = {
   menu?: string | null,
   stylistId?: number | null,
   customerId?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteReservationInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateMenuInput = {
@@ -106,7 +100,6 @@ export type CreateMenuInput = {
   menu?: string | null,
   amountOfMoney?: number | null,
   treatmentTime?: number | null,
-  _version?: number | null,
 };
 
 export type ModelMenuConditionInput = {
@@ -126,9 +119,6 @@ export type menu = {
   treatmentTime?: number | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateMenuInput = {
@@ -136,18 +126,15 @@ export type UpdateMenuInput = {
   menu?: string | null,
   amountOfMoney?: number | null,
   treatmentTime?: number | null,
-  _version?: number | null,
 };
 
 export type DeleteMenuInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateStylistInput = {
   id?: string | null,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type ModelStylistConditionInput = {
@@ -163,27 +150,21 @@ export type stylist = {
   name?: string | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateStylistInput = {
   id: string,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteStylistInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateCustomerInput = {
   id?: string | null,
   name?: string | null,
   mail?: string | null,
-  _version?: number | null,
 };
 
 export type ModelCustomerConditionInput = {
@@ -201,21 +182,16 @@ export type customer = {
   mail?: string | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type UpdateCustomerInput = {
   id: string,
   name?: string | null,
   mail?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteCustomerInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelReservationFilterInput = {
@@ -249,7 +225,6 @@ export type ModelReservationConnection = {
   __typename: "ModelReservationConnection",
   items:  Array<reservation | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelMenuFilterInput = {
@@ -266,7 +241,6 @@ export type ModelMenuConnection = {
   __typename: "ModelMenuConnection",
   items:  Array<menu | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelStylistFilterInput = {
@@ -281,7 +255,6 @@ export type ModelStylistConnection = {
   __typename: "ModelStylistConnection",
   items:  Array<stylist | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelCustomerFilterInput = {
@@ -297,7 +270,6 @@ export type ModelCustomerConnection = {
   __typename: "ModelCustomerConnection",
   items:  Array<customer | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type CreateReservationMutationVariables = {
@@ -315,9 +287,6 @@ export type CreateReservationMutation = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -336,9 +305,6 @@ export type UpdateReservationMutation = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -357,9 +323,6 @@ export type DeleteReservationMutation = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -377,9 +340,6 @@ export type CreateMenuMutation = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -397,9 +357,6 @@ export type UpdateMenuMutation = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -417,9 +374,6 @@ export type DeleteMenuMutation = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -435,9 +389,6 @@ export type CreateStylistMutation = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -453,9 +404,6 @@ export type UpdateStylistMutation = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -471,9 +419,6 @@ export type DeleteStylistMutation = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -490,9 +435,6 @@ export type CreateCustomerMutation = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -509,9 +451,6 @@ export type UpdateCustomerMutation = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -528,9 +467,6 @@ export type DeleteCustomerMutation = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -548,9 +484,6 @@ export type GetReservationQuery = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -572,40 +505,8 @@ export type ListReservationsQuery = {
       customerId?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncReservationsQueryVariables = {
-  filter?: ModelReservationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncReservationsQuery = {
-  syncReservations?:  {
-    __typename: "ModelReservationConnection",
-    items:  Array< {
-      __typename: "reservation",
-      id: string,
-      date?: string | null,
-      menu?: string | null,
-      stylistId?: number | null,
-      customerId?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -622,9 +523,6 @@ export type GetMenuQuery = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -645,39 +543,8 @@ export type ListMenusQuery = {
       treatmentTime?: number | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncMenusQueryVariables = {
-  filter?: ModelMenuFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncMenusQuery = {
-  syncMenus?:  {
-    __typename: "ModelMenuConnection",
-    items:  Array< {
-      __typename: "menu",
-      id: string,
-      menu?: string | null,
-      amountOfMoney?: number | null,
-      treatmentTime?: number | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -692,9 +559,6 @@ export type GetStylistQuery = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -713,37 +577,8 @@ export type ListStylistsQuery = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncStylistsQueryVariables = {
-  filter?: ModelStylistFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncStylistsQuery = {
-  syncStylists?:  {
-    __typename: "ModelStylistConnection",
-    items:  Array< {
-      __typename: "stylist",
-      id: string,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -759,9 +594,6 @@ export type GetCustomerQuery = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -781,38 +613,8 @@ export type ListCustomersQuery = {
       mail?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncCustomersQueryVariables = {
-  filter?: ModelCustomerFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncCustomersQuery = {
-  syncCustomers?:  {
-    __typename: "ModelCustomerConnection",
-    items:  Array< {
-      __typename: "customer",
-      id: string,
-      name?: string | null,
-      mail?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -826,9 +628,6 @@ export type OnCreateReservationSubscription = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -842,9 +641,6 @@ export type OnUpdateReservationSubscription = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -858,9 +654,6 @@ export type OnDeleteReservationSubscription = {
     customerId?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -873,9 +666,6 @@ export type OnCreateMenuSubscription = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -888,9 +678,6 @@ export type OnUpdateMenuSubscription = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -903,9 +690,6 @@ export type OnDeleteMenuSubscription = {
     treatmentTime?: number | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -916,9 +700,6 @@ export type OnCreateStylistSubscription = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -929,9 +710,6 @@ export type OnUpdateStylistSubscription = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -942,9 +720,6 @@ export type OnDeleteStylistSubscription = {
     name?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -956,9 +731,6 @@ export type OnCreateCustomerSubscription = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -970,9 +742,6 @@ export type OnUpdateCustomerSubscription = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -984,8 +753,5 @@ export type OnDeleteCustomerSubscription = {
     mail?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
