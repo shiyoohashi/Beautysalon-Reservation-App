@@ -60,11 +60,9 @@
     "dependsOn": [],
     "hostedUI": true,
     "hostedUIDomainName": "salonapp8d66866f-8d66866f",
-    "authProvidersUserPool": [
-      "Facebook"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:19002/\"],\"LogoutURLs\":[\"http://localhost:19002/\"]}",
-    "authProviders": []
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "authProviders": [],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:19002/\"],\"LogoutURLs\":[\"http://localhost:19002/\"]}"
   }
 }
