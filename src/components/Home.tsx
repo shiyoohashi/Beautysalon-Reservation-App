@@ -104,7 +104,11 @@ export const Home: React.FC<Props> = (Props) => {
         alt="フリー画像"
       />
       <br />
-      <Link to="/shopcalender">予約一覧</Link>
+      {(() => {
+        if (Props.user.attributes.name === "administrator") {
+          return <Link to="/shopcalender">予約一覧</Link>;
+        }
+      })()}
     </div>
   );
 };
