@@ -7,7 +7,7 @@ import { TypeOfReserve } from "./global";
 import { Home } from "./components/Home";
 import { ShopCalendar } from "./components/ShopCalendar";
 import { Menu } from "./components/Menu";
-import { Time } from "./components/Time";
+import { Time } from "./components/Timefront";
 import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
@@ -15,7 +15,7 @@ import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
 
 function App({ signOut, user }: any) {
-  const [menu, setMenu] = useState<string | null>(null);
+  const [menu, setMenu] = useState<string>("");
   const [time, setTime] = useState<Date | null>(null);
   const [reserve, setReserve] = useState<TypeOfReserve[] | []>([]);
   console.log("reserve: ", reserve);

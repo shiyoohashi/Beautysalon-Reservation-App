@@ -7,7 +7,7 @@ export const getReservation = /* GraphQL */ `
     getReservation(id: $id) {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt
@@ -28,7 +28,7 @@ export const listReservations = /* GraphQL */ `
       items {
         id
         date
-        menuId
+        menu
         stylistId
         customerId
         createdAt
@@ -58,7 +58,7 @@ export const syncReservations = /* GraphQL */ `
       items {
         id
         date
-        menuId
+        menu
         stylistId
         customerId
         createdAt

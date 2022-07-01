@@ -17,10 +17,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "menuId": {
-                    "name": "menuId",
+                "menu": {
+                    "name": "menu",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -217,5 +217,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "a7b2b5a6e103297e61101d813ada014e"
+    "version": "bd4b92223fa1009c952b827f325c693e"
 };

@@ -18,22 +18,6 @@ type Props = {
   userName: string;
 };
 
-// type todo = {
-//   id?: number;
-//   name: string;
-//   description: string;
-// };
-
-// type todo = {
-//   id?: number;
-//   date: string;
-//   menu: string;
-//   amountOfMoney: number;
-//   treatmentTime: number;
-//   stylistName: string;
-//   customerName: string;
-// };
-
 type reservation = {
   id?: number;
   date: string;
@@ -42,16 +26,9 @@ type reservation = {
   customerId: string;
 };
 
-// const initialState: reservation = {
-//   date: "yyyy-mm-dd-hh:mm:ss",
-//   menuId: 0,
-//   stylistId: 0,
-//   customerId: 0,
-// };
-
 export const Time: React.FC<Props> = (Props) => {
-  console.log("=====Props=====", Props);
   //ここから
+  console.log("=====Props=====", Props);
 
   // const [formState, setFormState] = useState(initialState);
   const [reservations, setReservations] = useState<reservation[]>([]);
@@ -169,11 +146,16 @@ export const Time: React.FC<Props> = (Props) => {
     alert("予約完了");
 
     const shopMenu: TypeOfMenu[] = [
-      { menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
-      { menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
-      { menu: "カット＋カラー", amountOfMoney: 20000, treatmentTime: 60 },
-      { menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
-      { menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
+      { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
+      { id: 2, menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
+      {
+        id: 3,
+        menu: "カット＋カラー",
+        amountOfMoney: 20000,
+        treatmentTime: 60,
+      },
+      { id: 4, menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
+      { id: 5, menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
     ];
 
     const selectMenu: any = shopMenu.find((hairMenu) => {

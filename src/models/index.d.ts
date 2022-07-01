@@ -23,7 +23,7 @@ type customerMetaData = {
 export declare class reservation {
   readonly id: string;
   readonly date?: string | null;
-  readonly menuId?: number | null;
+  readonly menu?: string | null;
   readonly stylistId?: number | null;
   readonly customerId?: string | null;
   readonly createdAt?: string | null;
