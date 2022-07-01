@@ -27,7 +27,7 @@ function App({ signOut, user }: any) {
           <Route path="/" element={<Home />} />
           <Route
             path="/shopcalender"
-            element={<ShopCalendar reserve={reserve} />}
+            element={<ShopCalendar userName={user.username} />}
           />
           <Route
             path="/menu"

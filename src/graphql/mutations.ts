@@ -59,6 +59,13 @@ export const deleteReservation = /* GraphQL */ `
     }
   }
 `;
+export const deleteAll = /* GraphQL */ `
+  mutation DeleteTesting {
+    deleteReservation(where: { reservation_id: { _eq: null } }) {
+      affected_rows
+    }
+  }
+`;
 export const createMenu = /* GraphQL */ `
   mutation CreateMenu(
     $input: CreateMenuInput!
