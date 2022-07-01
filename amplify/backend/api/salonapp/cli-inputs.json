@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "salonapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/kazunorinakajima/Desktop/BootCamp2/Beautysalon-Reservation-App/amplify/backend/api/salonapp/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7,
+      "apiKeyExpirationDate": "2022-07-07T13:00:07.430Z",
+      "keyDescription": ""
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    },
+    "additionalAuthTypes": []
+  }
+}

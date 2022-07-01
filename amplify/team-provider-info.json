@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-salonapp-dev-173124-authRole",
+      "UnauthRoleArn": "arn:aws:iam::845339839545:role/amplify-salonapp-dev-173124-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::845339839545:role/amplify-salonapp-dev-173124-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-salonapp-dev-173124-deployment",
+      "UnauthRoleName": "amplify-salonapp-dev-173124-unauthRole",
+      "StackName": "amplify-salonapp-dev-173124",
+      "StackId": "arn:aws:cloudformation:us-east-1:845339839545:stack/amplify-salonapp-dev-173124/090ffbb0-f84f-11ec-8171-0aaafb70ed0d",
+      "AmplifyAppId": "d2757boomziwik"
+    },
+    "categories": {
+      "auth": {
+        "salonapp56a8865c": {}
+      }
+    }
+  }
+}
