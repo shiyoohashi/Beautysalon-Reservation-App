@@ -3,12 +3,28 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type Todo @model {
+type reservation @model {
   id: ID!
   date: String
+  menuId: Int
+  stylistId: Int
+  customerId: Int
+}
+
+type menu @model {
+  id: ID!
   menu: String
   amountOfMoney: Int
   treatmentTime: Int
-  stylistName: String
-  customerName: String
+}
+
+type stylist @model {
+  id: ID!
+  name: String
+}
+
+type customer @model {
+  id: ID!
+  name: String
+  mail: String
 }

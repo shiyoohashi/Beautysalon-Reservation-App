@@ -2,19 +2,17 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createReservation = /* GraphQL */ `
+  mutation CreateReservation(
+    $input: CreateReservationInput!
+    $condition: ModelReservationConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createReservation(input: $input, condition: $condition) {
       id
       date
-      menu
-      amountOfMoney
-      treatmentTime
-      stylistName
-      customerName
+      menuId
+      stylistId
+      customerId
       createdAt
       updatedAt
       _version
@@ -23,19 +21,17 @@ export const createTodo = /* GraphQL */ `
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateReservation = /* GraphQL */ `
+  mutation UpdateReservation(
+    $input: UpdateReservationInput!
+    $condition: ModelReservationConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateReservation(input: $input, condition: $condition) {
       id
       date
-      menu
-      amountOfMoney
-      treatmentTime
-      stylistName
-      customerName
+      menuId
+      stylistId
+      customerId
       createdAt
       updatedAt
       _version
@@ -44,19 +40,170 @@ export const updateTodo = /* GraphQL */ `
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteReservation = /* GraphQL */ `
+  mutation DeleteReservation(
+    $input: DeleteReservationInput!
+    $condition: ModelReservationConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteReservation(input: $input, condition: $condition) {
       id
       date
+      menuId
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createMenu = /* GraphQL */ `
+  mutation CreateMenu(
+    $input: CreateMenuInput!
+    $condition: ModelMenuConditionInput
+  ) {
+    createMenu(input: $input, condition: $condition) {
+      id
       menu
       amountOfMoney
       treatmentTime
-      stylistName
-      customerName
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateMenu = /* GraphQL */ `
+  mutation UpdateMenu(
+    $input: UpdateMenuInput!
+    $condition: ModelMenuConditionInput
+  ) {
+    updateMenu(input: $input, condition: $condition) {
+      id
+      menu
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteMenu = /* GraphQL */ `
+  mutation DeleteMenu(
+    $input: DeleteMenuInput!
+    $condition: ModelMenuConditionInput
+  ) {
+    deleteMenu(input: $input, condition: $condition) {
+      id
+      menu
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createStylist = /* GraphQL */ `
+  mutation CreateStylist(
+    $input: CreateStylistInput!
+    $condition: ModelStylistConditionInput
+  ) {
+    createStylist(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateStylist = /* GraphQL */ `
+  mutation UpdateStylist(
+    $input: UpdateStylistInput!
+    $condition: ModelStylistConditionInput
+  ) {
+    updateStylist(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteStylist = /* GraphQL */ `
+  mutation DeleteStylist(
+    $input: DeleteStylistInput!
+    $condition: ModelStylistConditionInput
+  ) {
+    deleteStylist(input: $input, condition: $condition) {
+      id
+      name
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createCustomer = /* GraphQL */ `
+  mutation CreateCustomer(
+    $input: CreateCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    createCustomer(input: $input, condition: $condition) {
+      id
+      name
+      mail
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateCustomer = /* GraphQL */ `
+  mutation UpdateCustomer(
+    $input: UpdateCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    updateCustomer(input: $input, condition: $condition) {
+      id
+      name
+      mail
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteCustomer = /* GraphQL */ `
+  mutation DeleteCustomer(
+    $input: DeleteCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    deleteCustomer(input: $input, condition: $condition) {
+      id
+      name
+      mail
       createdAt
       updatedAt
       _version

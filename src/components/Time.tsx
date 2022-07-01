@@ -4,8 +4,8 @@ import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { createTodo } from "../graphql/mutations";
-import { listTodos } from "../graphql/queries";
+import { createReservation } from "../graphql/mutations";
+import { listReservations } from "../graphql/queries";
 import awsExports from "../aws-exports";
 import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 Amplify.configure(awsExports);
@@ -23,66 +23,82 @@ type Props = {
 //   description: string;
 // };
 
-type todo = {
+// type todo = {
+//   id?: number;
+//   date: string;
+//   menu: string;
+//   amountOfMoney: number;
+//   treatmentTime: number;
+//   stylistName: string;
+//   customerName: string;
+// };
+
+type reservation = {
   id?: number;
   date: string;
-  menu: string;
-  amountOfMoney: number;
-  treatmentTime: number;
-  stylistName: string;
-  customerName: string;
+  menuId: number;
+  stylistId: number;
+  customerId: number;
 };
-const initialState: todo = {
-  date: "",
-  menu: "",
-  amountOfMoney: 0,
-  treatmentTime: 0,
-  stylistName: "",
-  customerName: "",
-};
+
+// const initialState: reservation = {
+//   date: "yyyy-mm-dd-hh:mm:ss",
+//   menuId: 0,
+//   stylistId: 0,
+//   customerId: 0,
+// };
 
 export const Time: React.FC<Props> = (Props) => {
   //ここから
-  const registerData: todo = {
-    date: "2022-12-12-12:00",
-    menu: "角刈り",
-    amountOfMoney: 5000,
-    treatmentTime: 60,
-    stylistName: "スタイリストまさし",
-    customerName: "お客まさし",
-  };
 
-  const [formState, setFormState] = useState(initialState);
-  const [todos, setTodos] = useState<todo[]>([]);
+  // const [formState, setFormState] = useState(initialState);
+  const [reservations, setReservations] = useState<reservation[]>([]);
 
   useEffect(() => {
-    fetchTodos();
+    fetchReservations();
   }, []);
 
-  function setInput(key: any, value: any) {
-    setFormState({ ...formState, [key]: value });
-  }
+  // function setInput(key: any, value: any) {
+  //   setFormState({ ...formState, [key]: value });
+  // }
 
-  async function fetchTodos() {
+  async function fetchReservations() {
     try {
-      const todoData: any = await API.graphql(graphqlOperation(listTodos));
-      const todos: [todo] = todoData.data.listTodos.items;
-      console.log("fetch", todos);
-      setTodos(todos);
+      const reservationData: any = await API.graphql(
+        graphqlOperation(listReservations)
+      );
+      const reservations: [reservation] =
+        reservationData.data.listReservations.items;
+      console.log("fetch", reservations);
+      setReservations(reservations);
     } catch (err) {
       console.log("error fetching todos");
     }
   }
 
-  async function addTodo() {
+  async function addTodo(reservation: reservation) {
     try {
-      // if (!formState.name || !formState.description) return;
-      const todo: any = { ...formState };
-      console.log(todo);
-      setTodos([...todos, todo]);
-      setFormState(initialState);
-      registerData.customerName += "hoge";
-      await API.graphql(graphqlOperation(createTodo, { input: registerData }));
+      if (
+        !reservation.date ||
+        !reservation.menuId ||
+        !reservation.stylistId ||
+        !reservation.customerId
+      ) {
+        console.log("====addTodoできてないよ=====");
+        console.log("====reservation.date=====", reservation.date);
+        console.log("====reservation.menuId=====", reservation.menuId);
+        console.log("====reservation.stylistId=====", reservation.stylistId);
+        console.log("====reservation.customerId=====", reservation.customerId);
+
+        return;
+      }
+      // const todo: any = { ...formState };
+      // console.log(todo);
+      // setReservations([...todos, todo]);
+      // setFormState(initialState);
+      await API.graphql(
+        graphqlOperation(createReservation, { input: reservation })
+      );
     } catch (err) {
       console.log("error creating todo:", err);
     }
@@ -170,8 +186,17 @@ export const Time: React.FC<Props> = (Props) => {
       stylistName: "スタイリストまさし",
       customerName: "お客まさし",
     };
+
+    const reservation: reservation = {
+      date: event.start,
+      menuId: 1031,
+      stylistId: 2,
+      customerId: 1192,
+    };
+
     const registerDB: TypeOfReserve[] = [...Props.reserve, registerObj];
     Props.setReserve(registerDB);
+    addTodo(reservation);
 
     // const reserve: any = {
     //   id: 1,
@@ -212,27 +237,38 @@ export const Time: React.FC<Props> = (Props) => {
         <Link id="link" to={"/"}></Link>
       </div>
       <div style={styles.container}>
-        <h2>Amplify Todos</h2>
-        <input
+        <h2>DB内の予約情報</h2>
+        {/* <input
           // onChange={(event) => setInput("name", event.target.value)}
-          style={styles.input}
+          // style={styles.input}
           // value={formState.name}
-          placeholder="Name"
-        />
-        <input
+          // placeholder="Name"
+        /> */}
+        {/* <input
           // onChange={(event) => setInput("description", event.target.value)}
-          style={styles.input}
+          // style={styles.input}
           // value={formState.description}
-          placeholder="Description"
-        />
-        <button style={styles.button} onClick={addTodo}>
-          Create Todo
-        </button>
-        {todos.map((todo, index) => (
-          <div key={todo.id ? todo.id : index} style={styles.todo}>
+          // placeholder="Description"
+        /> */}
+        {/* <button style={styles.button}>Create Todo</button> */}
+        {reservations.map((reservation, index) => (
+          <div
+            key={reservation.id ? reservation.id : index}
+            style={styles.reservation}
+          >
             {/* <p style={styles.todo}>{todo.id}</p> */}
-            <p style={styles.todoName}>{todo.menu}</p>
-            <p style={styles.todoName}>{todo.customerName}</p>
+            <p style={styles.reservationName}>
+              {"予約日時 : " + reservation.date}
+            </p>
+            <p style={styles.reservationName}>
+              {"メニューId : " + reservation.menuId}
+            </p>
+            <p style={styles.reservationName}>
+              {"スタイリストId : " + reservation.stylistId}
+            </p>
+            <p style={styles.reservationName}>
+              {"カスタマーId : " + reservation.customerId}
+            </p>
           </div>
         ))}
       </div>
@@ -242,23 +278,23 @@ export const Time: React.FC<Props> = (Props) => {
 
 type style = {
   container: any;
-  todo: any;
+  reservation: any;
   input: any;
-  todoName: any;
-  todoDescription: any;
+  reservationName: any;
+  reservationDescription: any;
   button: any;
 };
 
 const styles: style = {
   container: {
-    width: 400,
+    width: 600,
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     padding: 20,
   },
-  todo: { marginBottom: 15 },
+  reservation: { marginBottom: 15 },
   input: {
     border: "none",
     backgroundColor: "#ddd",
@@ -266,8 +302,8 @@ const styles: style = {
     padding: 8,
     fontSize: 18,
   },
-  todoName: { fontSize: 20, fontWeight: "bold" },
-  todoDescription: { marginBottom: 0 },
+  reservationName: { fontSize: 15, fontWeight: "bold" },
+  reservationDescription: { marginBottom: 0 },
   button: {
     backgroundColor: "black",
     color: "white",
