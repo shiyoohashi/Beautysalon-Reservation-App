@@ -41,6 +41,7 @@ function App({ signOut, user }: any) {
                 reserve={reserve}
                 setReserve={setReserve}
                 setTime={setTime}
+                userName={user.username}
               />
             }
           />

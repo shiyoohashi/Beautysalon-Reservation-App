@@ -8,7 +8,7 @@ type reservation @model {
   date: String
   menuId: Int
   stylistId: Int
-  customerId: Int
+  customerId: String
 }
 
 type menu @model {

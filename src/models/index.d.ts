@@ -25,7 +25,7 @@ export declare class reservation {
   readonly date?: string | null;
   readonly menuId?: number | null;
   readonly stylistId?: number | null;
-  readonly customerId?: number | null;
+  readonly customerId?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<reservation, reservationMetaData>);

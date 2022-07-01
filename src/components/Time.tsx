@@ -15,6 +15,7 @@ type Props = {
   setReserve: (typeOfReserve: TypeOfReserve[]) => void;
   reserve: TypeOfReserve[];
   setTime: (date: Date) => void;
+  userName: string;
 };
 
 // type todo = {
@@ -38,7 +39,7 @@ type reservation = {
   date: string;
   menuId: number;
   stylistId: number;
-  customerId: number;
+  customerId: string;
 };
 
 // const initialState: reservation = {
@@ -49,6 +50,7 @@ type reservation = {
 // };
 
 export const Time: React.FC<Props> = (Props) => {
+  console.log("=====Props=====", Props);
   //ここから
 
   // const [formState, setFormState] = useState(initialState);
@@ -100,7 +102,7 @@ export const Time: React.FC<Props> = (Props) => {
         graphqlOperation(createReservation, { input: reservation })
       );
     } catch (err) {
-      console.log("error creating todo:", err);
+      console.log("error creating reservation:", err);
     }
   }
   //ここまで
@@ -191,7 +193,7 @@ export const Time: React.FC<Props> = (Props) => {
       date: event.start,
       menuId: 1031,
       stylistId: 2,
-      customerId: 1192,
+      customerId: Props.userName,
     };
 
     const registerDB: TypeOfReserve[] = [...Props.reserve, registerObj];

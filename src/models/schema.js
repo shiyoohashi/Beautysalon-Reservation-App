@@ -34,7 +34,7 @@ export const schema = {
                 "customerId": {
                     "name": "customerId",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -217,5 +217,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4d0442745b831ba4ed2beb65607bfb06"
+    "version": "a7b2b5a6e103297e61101d813ada014e"
 };
