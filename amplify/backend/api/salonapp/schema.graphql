@@ -6,9 +6,9 @@ input AMPLIFY {
 type reservation @model {
   id: ID!
   date: String
-  menuId: Int
+  menu: String
   stylistId: Int
-  customerId: Int
+  customerId: String
 }
 
 type menu @model {

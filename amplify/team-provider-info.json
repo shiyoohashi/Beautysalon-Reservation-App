@@ -16,5 +16,29 @@
         "salonapp56a8865c": {}
       }
     }
+  },
+  "beatysalon": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-salonapp-beatysalon-112758-authRole",
+      "UnauthRoleArn": "arn:aws:iam::845339839545:role/amplify-salonapp-beatysalon-112758-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::845339839545:role/amplify-salonapp-beatysalon-112758-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-salonapp-beatysalon-112758-deployment",
+      "UnauthRoleName": "amplify-salonapp-beatysalon-112758-unauthRole",
+      "StackName": "amplify-salonapp-beatysalon-112758",
+      "StackId": "arn:aws:cloudformation:us-east-1:845339839545:stack/amplify-salonapp-beatysalon-112758/6ee58ea0-f8e5-11ec-ae34-0a96580371d1",
+      "AmplifyAppId": "d14otd2oot7bkl"
+    },
+    "categories": {
+      "auth": {
+        "salonapp56a8865c": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d14otd2oot7bkl",
+          "type": "cicd"
+        }
+      }
+    }
   }
 }

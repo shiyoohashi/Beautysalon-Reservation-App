@@ -24,7 +24,16 @@ export interface TypeOfReserve {
 }
 
 export interface TypeOfMenu {
+  id: number;
   menu: string | null;
   amountOfMoney: number;
   treatmentTime: number;
+}
+
+export interface reservation {
+  id?: number;
+  date: string;
+  menu: string;
+  stylistId: number;
+  customerId: string;
 }

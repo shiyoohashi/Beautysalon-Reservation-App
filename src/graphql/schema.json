@@ -486,12 +486,12 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "menuId",
+          "name" : "menu",
           "description" : null,
           "args" : [ ],
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "String",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -513,7 +513,7 @@
           "args" : [ ],
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "String",
             "ofType" : null
           },
           "isDeprecated" : false,
@@ -722,11 +722,11 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "menuId",
+          "name" : "menu",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelIntInput",
+            "name" : "ModelStringInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -744,7 +744,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelIntInput",
+            "name" : "ModelStringInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2419,11 +2419,11 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "menuId",
+          "name" : "menu",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2441,7 +2441,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2473,11 +2473,11 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "menuId",
+          "name" : "menu",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelIntInput",
+            "name" : "ModelStringInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2495,7 +2495,7 @@
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
-            "name" : "ModelIntInput",
+            "name" : "ModelStringInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2566,11 +2566,11 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "menuId",
+          "name" : "menu",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2588,7 +2588,7 @@
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "Int",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null

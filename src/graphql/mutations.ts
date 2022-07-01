@@ -10,7 +10,7 @@ export const createReservation = /* GraphQL */ `
     createReservation(input: $input, condition: $condition) {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt
@@ -29,7 +29,7 @@ export const updateReservation = /* GraphQL */ `
     updateReservation(input: $input, condition: $condition) {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt
@@ -48,7 +48,7 @@ export const deleteReservation = /* GraphQL */ `
     deleteReservation(input: $input, condition: $condition) {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt

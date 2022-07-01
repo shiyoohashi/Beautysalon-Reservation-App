@@ -17,10 +17,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "menuId": {
-                    "name": "menuId",
+                "menu": {
+                    "name": "menu",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -34,7 +34,7 @@ export const schema = {
                 "customerId": {
                     "name": "customerId",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -217,5 +217,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4d0442745b831ba4ed2beb65607bfb06"
+    "version": "bd4b92223fa1009c952b827f325c693e"
 };
