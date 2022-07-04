@@ -71,7 +71,7 @@ export const Home: React.FC<Props> = (Props) => {
     }
   }
 
-  async function onClickButton() {
+  async function onClickCancelButton() {
     const result: boolean = window.confirm(`予約日をキャンセルしますか？`);
     if (result) {
       const wantToDel = await fetchReservations().then((res) =>
@@ -83,8 +83,14 @@ export const Home: React.FC<Props> = (Props) => {
       console.log("====wantToDel====", wantToDel);
       if (wantToDel) {
         wantToDel.forEach((reservation) => delReservation(reservation));
+        alert("予約をキャンセルしました。");
       }
     }
+  }
+
+  function onClickReserveButton() {
+    const reserveLink: any = document.getElementById("reserve");
+    reserveLink.click();
   }
 
   return (
@@ -92,9 +98,19 @@ export const Home: React.FC<Props> = (Props) => {
       <h1>ビューティー矢島へようこそ💓</h1>
 
       <br />
-      <Link to="/menu">予約する</Link>
-      <button onClick={() => onClickButton()}>
-        🌟予約をキャンセルする場合はこちら
+      <Link id="reserve" to="/menu"></Link>
+      <button
+        className="btn btn-primary btn-sm"
+        onClick={() => onClickReserveButton()}
+      >
+        予約する
+      </button>
+
+      <button
+        className="btn btn-secondary btn-sm"
+        onClick={() => onClickCancelButton()}
+      >
+        予約をキャンセルする
       </button>
       <br />
       <img
