@@ -11,9 +11,8 @@ import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 Amplify.configure(awsExports);
 
 type Props = {
-  menu: string | null;
-  setReserve: (typeOfReserve: TypeOfReserve[]) => void;
   reserve: TypeOfReserve[];
+  setReserve: (typeOfReserve: TypeOfReserve[]) => void;
   setTime: (date: Date) => void;
   userName: string;
 };
@@ -159,7 +158,7 @@ export const Time: React.FC<Props> = (Props) => {
     ];
 
     const selectMenu: any = shopMenu.find((hairMenu) => {
-      return hairMenu.menu === Props.menu;
+      return hairMenu.menu === sessionStorage.getItem("menu");
     });
 
     const registerObj: TypeOfReserve = {
@@ -201,7 +200,7 @@ export const Time: React.FC<Props> = (Props) => {
           events={eventList}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{ height: 2000 }}
           defaultView={Views.WEEK}
           // defaultDate={"2022-06-29 17:00"}
           onSelectEvent={(event) => link(event)}

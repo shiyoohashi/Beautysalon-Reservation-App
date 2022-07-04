@@ -15,9 +15,6 @@ export const createReservation = /* GraphQL */ `
       customerId
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -34,9 +31,6 @@ export const updateReservation = /* GraphQL */ `
       customerId
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -53,9 +47,6 @@ export const deleteReservation = /* GraphQL */ `
       customerId
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -71,9 +62,6 @@ export const createMenu = /* GraphQL */ `
       treatmentTime
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -89,9 +77,6 @@ export const updateMenu = /* GraphQL */ `
       treatmentTime
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -107,9 +92,6 @@ export const deleteMenu = /* GraphQL */ `
       treatmentTime
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -123,9 +105,6 @@ export const createStylist = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -139,9 +118,6 @@ export const updateStylist = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -155,9 +131,6 @@ export const deleteStylist = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -172,9 +145,6 @@ export const createCustomer = /* GraphQL */ `
       mail
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -189,9 +159,6 @@ export const updateCustomer = /* GraphQL */ `
       mail
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -206,9 +173,6 @@ export const deleteCustomer = /* GraphQL */ `
       mail
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

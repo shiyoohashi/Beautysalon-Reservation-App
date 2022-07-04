@@ -30,14 +30,14 @@
       "AmplifyAppId": "d14otd2oot7bkl"
     },
     "categories": {
-      "auth": {
-        "salonapp56a8865c": {}
-      },
       "hosting": {
         "amplifyhosting": {
           "appId": "d14otd2oot7bkl",
           "type": "cicd"
         }
+      },
+      "auth": {
+        "salonapp1ee1b87a": {}
       }
     }
   }
