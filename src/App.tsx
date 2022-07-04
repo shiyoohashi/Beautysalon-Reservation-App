@@ -3,8 +3,9 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
 import { TypeOfReserve } from "./global";
-
 import { Home } from "./components/Home";
+import { Main } from "./components/main";
+
 import { ShopCalendar } from "./components/ShopCalendar";
 import { Menu } from "./components/Menu";
 import { Time } from "./components/Timefront";
@@ -24,7 +25,8 @@ function App({ signOut, user }: any) {
     <>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          {/* <Route path="/" element={<Home user={user} />} /> */}
+          <Route path="/" element={<Main />} />
           <Route
             path="/shopcalender"
             element={<ShopCalendar userName={user.attributes.name} />}
