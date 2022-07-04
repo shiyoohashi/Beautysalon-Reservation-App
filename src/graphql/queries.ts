@@ -42,7 +42,7 @@ export const getMenu = /* GraphQL */ `
       menu
       amountOfMoney
       treatmentTime
-      createdAt
+      createdAtんpm
       updatedAt
     }
   }

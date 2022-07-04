@@ -3,7 +3,7 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 import { createReservation, deleteReservation } from "../graphql/mutations";
 import { listReservations } from "../graphql/queries";
 import awsExports from "../aws-exports";
-import { reservation } from "../global";
+import { TypeOfReserve } from "../global";
 import { userInfo } from "os";
 Amplify.configure(awsExports);
 
@@ -17,7 +17,7 @@ export const Home: React.FC<Props> = (Props) => {
       const reservationData: any = await API.graphql(
         graphqlOperation(listReservations)
       );
-      const reservations: [reservation] =
+      const reservations: [TypeOfReserve] =
         reservationData.data.listReservations.items;
       console.log("fetch", reservations);
       // setReservations(reservations);
@@ -27,7 +27,7 @@ export const Home: React.FC<Props> = (Props) => {
     }
   }
 
-  async function delReservation(wantToDeleteReservation: reservation) {
+  async function delReservation(wantToDeleteReservation: TypeOfReserve) {
     try {
       if (
         !wantToDeleteReservation.date ||
