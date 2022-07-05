@@ -1,24 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import { deleteReservation } from "../graphql/mutations";
-import { listReservations } from "../graphql/queries";
+import { listReserves } from "../graphql/queries";
 import awsExports from "../aws-exports";
-import { TypeOfShopCalendar, reservation, TypeOfMenu } from "../global";
+import { TypeOfShopCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 Amplify.configure(awsExports);
 
 const localizer = momentLocalizer(moment);
 const eventList: TypeOfShopCalendar[] = [];
 
 type Props = {
-  userName: string;
+  reserves: TypeOfReserve[];
+  setReserves: (reserves: TypeOfReserve[]) => void;
 };
 
 export const ShopCalendar: React.FC<Props> = (Props) => {
-  async function delReservation(wantToDeleteReservation: reservation) {
+  async function delReservation(wantToDeleteReservation: TypeOfReserve) {
     try {
       if (
         !wantToDeleteReservation.date ||
@@ -63,12 +64,11 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
   }
 
   async function deleteAllReservation() {
-    reservations.forEach((reservation: reservation) => {
+    Props.reserves.forEach((reservation: TypeOfReserve) => {
       delReservation(reservation);
     });
   }
 
-  const [reservations, setReservations] = useState<reservation[]>([]);
   useEffect(() => {
     fetchReservations();
   }, []);
@@ -76,12 +76,12 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
   async function fetchReservations() {
     try {
       const reservationData: any = await API.graphql(
-        graphqlOperation(listReservations)
+        graphqlOperation(listReserves)
       );
-      const reservations: [reservation] =
+      const reservations: [TypeOfReserve] =
         reservationData.data.listReservations.items;
       console.log("fetch", reservations);
-      setReservations(reservations);
+      Props.setReserves(reservations);
 
       const shopMenu: TypeOfMenu[] = [
         { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
