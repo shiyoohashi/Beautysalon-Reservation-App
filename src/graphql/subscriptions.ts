@@ -7,14 +7,11 @@ export const onCreateReservation = /* GraphQL */ `
     onCreateReservation {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -23,14 +20,11 @@ export const onUpdateReservation = /* GraphQL */ `
     onUpdateReservation {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -39,14 +33,11 @@ export const onDeleteReservation = /* GraphQL */ `
     onDeleteReservation {
       id
       date
-      menuId
+      menu
       stylistId
       customerId
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -59,9 +50,6 @@ export const onCreateMenu = /* GraphQL */ `
       treatmentTime
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -74,9 +62,6 @@ export const onUpdateMenu = /* GraphQL */ `
       treatmentTime
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -89,9 +74,6 @@ export const onDeleteMenu = /* GraphQL */ `
       treatmentTime
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -102,9 +84,6 @@ export const onCreateStylist = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -115,9 +94,6 @@ export const onUpdateStylist = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -128,9 +104,6 @@ export const onDeleteStylist = /* GraphQL */ `
       name
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -142,9 +115,6 @@ export const onCreateCustomer = /* GraphQL */ `
       mail
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -156,9 +126,6 @@ export const onUpdateCustomer = /* GraphQL */ `
       mail
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -170,9 +137,6 @@ export const onDeleteCustomer = /* GraphQL */ `
       mail
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

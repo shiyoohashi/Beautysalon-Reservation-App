@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "salonapp56a8865c_identitypool_56a8865c",
+    "identityPoolName": "salonapp1ee1b87a_identitypool_1ee1b87a",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "salona56a8865c",
-    "userPoolName": "salonapp56a8865c_userpool_56a8865c",
+    "resourceNameTruncated": "salona1ee1b87a",
+    "userPoolName": "salonapp1ee1b87a_userpool_1ee1b87a",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -20,7 +20,8 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email"
+      "email",
+      "name"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
@@ -31,15 +32,16 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "salona56a8865c_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "salona1ee1b87a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "56a8865c",
-    "resourceName": "salonapp56a8865c",
+    "sharedId": "1ee1b87a",
+    "resourceName": "salonapp1ee1b87a",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
     "usernameAttributes": [
       "email"
     ],
+    "triggers": {},
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

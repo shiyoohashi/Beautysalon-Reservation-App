@@ -11,45 +11,23 @@ import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 Amplify.configure(awsExports);
 
 type Props = {
-  menu: string | null;
-  setReserve: (typeOfReserve: TypeOfReserve[]) => void;
   reserve: TypeOfReserve[];
+  setReserve: (typeOfReserve: TypeOfReserve[]) => void;
   setTime: (date: Date) => void;
+  userName: string;
 };
-
-// type todo = {
-//   id?: number;
-//   name: string;
-//   description: string;
-// };
-
-// type todo = {
-//   id?: number;
-//   date: string;
-//   menu: string;
-//   amountOfMoney: number;
-//   treatmentTime: number;
-//   stylistName: string;
-//   customerName: string;
-// };
 
 type reservation = {
   id?: number;
   date: string;
   menuId: number;
   stylistId: number;
-  customerId: number;
+  customerId: string;
 };
-
-// const initialState: reservation = {
-//   date: "yyyy-mm-dd-hh:mm:ss",
-//   menuId: 0,
-//   stylistId: 0,
-//   customerId: 0,
-// };
 
 export const Time: React.FC<Props> = (Props) => {
   //ここから
+  console.log("=====Props=====", Props);
 
   // const [formState, setFormState] = useState(initialState);
   const [reservations, setReservations] = useState<reservation[]>([]);
@@ -100,7 +78,7 @@ export const Time: React.FC<Props> = (Props) => {
         graphqlOperation(createReservation, { input: reservation })
       );
     } catch (err) {
-      console.log("error creating todo:", err);
+      console.log("error creating reservation:", err);
     }
   }
   //ここまで
@@ -167,15 +145,20 @@ export const Time: React.FC<Props> = (Props) => {
     alert("予約完了");
 
     const shopMenu: TypeOfMenu[] = [
-      { menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
-      { menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
-      { menu: "カット＋カラー", amountOfMoney: 20000, treatmentTime: 60 },
-      { menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
-      { menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
+      { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
+      { id: 2, menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
+      {
+        id: 3,
+        menu: "カット＋カラー",
+        amountOfMoney: 20000,
+        treatmentTime: 60,
+      },
+      { id: 4, menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
+      { id: 5, menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
     ];
 
     const selectMenu: any = shopMenu.find((hairMenu) => {
-      return hairMenu.menu === Props.menu;
+      return hairMenu.menu === sessionStorage.getItem("menu");
     });
 
     const registerObj: TypeOfReserve = {
@@ -191,7 +174,7 @@ export const Time: React.FC<Props> = (Props) => {
       date: event.start,
       menuId: 1031,
       stylistId: 2,
-      customerId: 1192,
+      customerId: Props.userName,
     };
 
     const registerDB: TypeOfReserve[] = [...Props.reserve, registerObj];
@@ -217,7 +200,7 @@ export const Time: React.FC<Props> = (Props) => {
           events={eventList}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
+          style={{ height: 2000 }}
           defaultView={Views.WEEK}
           // defaultDate={"2022-06-29 17:00"}
           onSelectEvent={(event) => link(event)}
