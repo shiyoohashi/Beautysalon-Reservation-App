@@ -59,6 +59,7 @@ export const Header: React.FC<Props> = (Props) => {
           <a
             href="
       https://japan-crew-cut-association.github.io/Tashinami-HP/"
+            onClick={Props.signOut}
             target="_blank"
             className="header__reserve__link"
           >
