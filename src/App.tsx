@@ -33,7 +33,11 @@ const components = {
 
     return (
       <View textAlign="center" padding={tokens.space.large}>
-        <Image alt="Amplify logo" src="../kakugarilogo.png" />
+        <Image
+          alt="Amplify logo"
+          src="https://user-images.githubusercontent.com/98013294/177288142-baffb92c-6129-4109-8dd0-9d1084bfa4db.png"
+          height="200px"
+        />
       </View>
     );
   },
@@ -262,7 +266,7 @@ const formFields = {
 function App() {
   const [time, setTime] = useState<Date | null>(null);
   const [reserve, setReserve] = useState<TypeOfReserve[] | []>([]);
-  console.log("reserve: ", reserve);
+  // console.log("reserve: ", reserve);
   // console.log("user: ", user);
 
   const { tokens } = useTheme();
