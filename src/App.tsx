@@ -22,7 +22,7 @@ function App({ signOut, user }: any) {
     <>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/shopcalender"
             element={

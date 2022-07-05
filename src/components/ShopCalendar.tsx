@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import { deleteReservation } from "../graphql/mutations";
-import { listReservations } from "../graphql/queries";
+import { listReserves } from "../graphql/queries";
 import awsExports from "../aws-exports";
 import { TypeOfShopCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 Amplify.configure(awsExports);
@@ -76,7 +76,7 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
   async function fetchReservations() {
     try {
       const reservationData: any = await API.graphql(
-        graphqlOperation(listReservations)
+        graphqlOperation(listReserves)
       );
       const reservations: [TypeOfReserve] =
         reservationData.data.listReservations.items;

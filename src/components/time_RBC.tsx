@@ -168,79 +168,32 @@ export const Time: React.FC<Props> = (Props) => {
     }
   }
 
-  function createDateAndDayOfWeek() {
-    const listDay = ["日", "月", "火", "水", "木", "金", "土"];
-    const nowDate: Date = new Date();
-
-    return listDay.map(() => {
-      const dayOfNumber: number = nowDate.getDay();
-      nowDate.setDate(nowDate.getDate() + 1);
-      return (
-        <td>
-          {22}
-          <br />
-          {`(${listDay[dayOfNumber]})`}
-        </td>
-      );
-    });
-  }
-
-  const times = [
-    "9:00",
-    "9:30",
-    "10:00",
-    "10:30",
-    "11:00",
-    "11:30",
-    "12:00",
-    "12:30",
-    "13:00",
-    "13:30",
-    "14:00",
-    "14:30",
-    "15:00",
-    "15:30",
-    "16:00",
-    "16:30",
-    "17:00",
-    "17:30",
-    "18:00",
-    "18:30",
-    "19:00",
-  ];
-
+  const localizer = momentLocalizer(moment);
   return (
     <div>
-      <table className="table">
-        <tbody>
-          <tr>
-            <th scope="row" rowSpan={2}>
-              前の週へ
-            </th>
-            <th scope="col" colSpan={7}>
-              2022年7月
-            </th>
-            <th scope="row" rowSpan={2}>
-              次の週へ
-            </th>
-          </tr>
-          <tr>{createDateAndDayOfWeek()}</tr>
-          {times.map((time) => (
-            <tr>
-              <th scope="row">{time}</th>
-              <td>○</td>
-              <td>○</td>
-              <td>○</td>
-              <td>○</td>
-              <td>○</td>
-              <td>○</td>
-              <td>○</td>
-              <th scope="row">{time}</th>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <Link id="link" to={"/"}></Link>
+      <Calendar
+        localizer={localizer}
+        events={eventList}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 2800 }}
+        defaultView={Views.WEEK}
+        onSelectEvent={(event) => link(event)}
+        timeslots={2}
+        views={["week", "day"]}
+        eventPropGetter={({ type }) => {
+          switch (type) {
+            case "true":
+              return { style: { backgroundColor: "green" } };
+            case "false":
+              return { style: { backgroundColor: "red" } };
+          }
+          return {};
+        }}
+        resourceTitleAccessor="start"
+      />
+
+      <Link id="link" to={"/menu/time/checkreserve"}></Link>
     </div>
   );
 };
