@@ -5,11 +5,11 @@ import { TypeOfReserve } from "./global";
 import { Home } from "./components/Home";
 import { Main } from "./components/main";
 import { Admin } from "./components/Admin";
+import { Header } from "./components/Header";
 
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
 import { Menu } from "./components/Menu";
-
 
 import {
   Authenticator,
@@ -25,7 +25,6 @@ import {
 } from "@aws-amplify/ui-react";
 
 import { Time } from "./components/Time";
-
 
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
@@ -66,10 +65,13 @@ const components = {
 
       return (
         <Heading
+          style={{ fontSize: "10" }}
           padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
-          level={3}
+          level={6}
         >
-          ログインしてください
+          どんな角刈りにする？
+          <br />
+          ログインしてね
         </Heading>
       );
     },
@@ -98,9 +100,11 @@ const components = {
       return (
         <Heading
           padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
-          level={3}
+          level={6}
         >
-          新規登録
+          初めまして。
+          <br />
+          あなたの男気見せてください。
         </Heading>
       );
     },
@@ -270,9 +274,8 @@ const formFields = {
 };
 
 function App() {
-  
   const [reserves, setReserves] = useState<TypeOfReserve[] | []>([]);
-  sessionStorage.setItem("user", user.attributes.name);
+
   // console.log("reserve: ", reserve);
   // console.log("user: ", user);
 
@@ -340,44 +343,47 @@ function App() {
     <ThemeProvider theme={theme}>
       <Authenticator formFields={formFields} components={components}>
         {({ signOut, user }: any) => {
+          sessionStorage.setItem("user", user.attributes.name);
           console.log("=====user=====", user);
           return (
-            <main>
-              <div className="App">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/admin" element={<Admin />} />
-                  {/* <Route path="/" element={<Home user={user} />} /> */}
-                  {/* <Route path="/" element={<Main />} /> */}
-                  <Route
-            path="/shopcalender"
-            element={
-              <ShopCalendar reserves={reserves} setReserves={setReserves} />
-            }
-          />
-                  <Route path="/menu" element={<Menu />} />
-                  <Route
-            path="/menu/time"
-            element={<Time reserves={reserves} setReserves={setReserves} />}
-          />
-                    }
-                  />
-                  <Route path="/menu/time/checkreserve" element={<CheckReserve />} />
-                </Routes>
-                <Heading level={4}>
-                  ログインユーザー：{user.attributes.name} さん
-                </Heading>
+            <>
+              <Header signOut={signOut} userName={user.attributes.name} />
+              <main>
+                <div className="App">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/admin" element={<Admin />} />
+                    {/* <Route path="/" element={<Home user={user} />} /> */}
+                    {/* <Route path="/" element={<Main />} /> */}
+                    <Route
+                      path="/shopcalender"
+                      element={
+                        <ShopCalendar
+                          reserves={reserves}
+                          setReserves={setReserves}
+                        />
+                      }
+                    />
+                    <Route path="/menu" element={<Menu />} />
+                    <Route
+                      path="/menu/time"
+                      element={
+                        <Time reserves={reserves} setReserves={setReserves} />
+                      }
+                    />
 
-                {/* <Button onClick={signOut}>Sign out</Button> */}
-              </div>
-              <h1>Hello {user.attributes.name}</h1>
-              <button onClick={signOut}>Sign out</button>
-            </main>
+                    <Route
+                      path="/menu/time/checkreserve"
+                      element={<CheckReserve />}
+                    />
+                  </Routes>
+                </div>
+              </main>
+            </>
           );
         }}
       </Authenticator>
     </ThemeProvider>
-
   );
 }
 

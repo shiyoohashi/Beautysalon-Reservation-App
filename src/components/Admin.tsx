@@ -7,7 +7,7 @@ export const Admin: React.FC = () => {
     console.log("hello");
   }
   function confirmReservation() {
-    const link: any = document.getElementById("confirm_reservation");
+    const link: any = document.getElementById("confirm_reserve");
     link.click();
   }
   function editMenu() {
@@ -29,7 +29,7 @@ export const Admin: React.FC = () => {
     <div className="admin_page">
       <h1>Administrator access</h1>
       <div className="menus">
-        <Link id="confirm_reservation" to="/shopcalender"></Link>
+        <Link id="confirm_reserve" to="/shopcalender"></Link>
         <button
           className="header__reserve__link"
           onClick={() => confirmReservation()}
