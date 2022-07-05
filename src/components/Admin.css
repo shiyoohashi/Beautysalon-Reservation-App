@@ -42,10 +42,9 @@
   /* margin-bottom: 10%; */
 }
 
-.header__reserve__link:hover {
-  /* display: block; */
-  color: #fff;
-  background: #000;
+body:not(.touch) .header__reserve__link:hover {
+  background-color: #fff;
+  color: #727171;
 }
 
 .menus {

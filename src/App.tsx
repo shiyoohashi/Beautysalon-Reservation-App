@@ -6,6 +6,7 @@ import { Home } from "./components/Home";
 import { Main } from "./components/main";
 import { Admin } from "./components/Admin";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
@@ -379,6 +380,7 @@ function App() {
                   </Routes>
                 </div>
               </main>
+              <Footer />
             </>
           );
         }}
