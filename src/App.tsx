@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-
 import { TypeOfReserve } from "./global";
 import { Home } from "./components/Home";
 import { Main } from "./components/main";
 import { Admin } from "./components/Admin";
 
 import { ShopCalendar } from "./components/ShopCalendar";
+import { CheckReserve } from "./components/CheckReserve";
 import { Menu } from "./components/Menu";
-import { Time } from "./components/Timefront";
+
+
 import {
   Authenticator,
   Button,
@@ -22,9 +23,14 @@ import {
   ThemeProvider,
   Theme,
 } from "@aws-amplify/ui-react";
+
+import { Time } from "./components/Time";
+
+
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
+
 Amplify.configure(awsExports);
 
 const components = {
@@ -264,8 +270,9 @@ const formFields = {
 };
 
 function App() {
-  const [time, setTime] = useState<Date | null>(null);
-  const [reserve, setReserve] = useState<TypeOfReserve[] | []>([]);
+  
+  const [reserves, setReserves] = useState<TypeOfReserve[] | []>([]);
+  sessionStorage.setItem("user", user.attributes.name);
   // console.log("reserve: ", reserve);
   // console.log("user: ", user);
 
@@ -338,28 +345,24 @@ function App() {
             <main>
               <div className="App">
                 <Routes>
-                  <Route path="/" element={<Home user={user} />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="/admin" element={<Admin />} />
                   {/* <Route path="/" element={<Home user={user} />} /> */}
                   {/* <Route path="/" element={<Main />} /> */}
                   <Route
-                    path="/shopcalender"
-                    element={<ShopCalendar userName={user.attributes.name} />}
-                    // element={<ShopCalendar userName={user.name} />}
-                  />
+            path="/shopcalender"
+            element={
+              <ShopCalendar reserves={reserves} setReserves={setReserves} />
+            }
+          />
                   <Route path="/menu" element={<Menu />} />
                   <Route
-                    path="/menu/time"
-                    element={
-                      <Time
-                        reserve={reserve}
-                        setReserve={setReserve}
-                        setTime={setTime}
-                        userName={"kazunori"}
-                        // userName={user.name}
-                      />
+            path="/menu/time"
+            element={<Time reserves={reserves} setReserves={setReserves} />}
+          />
                     }
                   />
+                  <Route path="/menu/time/checkreserve" element={<CheckReserve />} />
                 </Routes>
                 <Heading level={4}>
                   ログインユーザー：{user.attributes.name} さん
@@ -374,6 +377,7 @@ function App() {
         }}
       </Authenticator>
     </ThemeProvider>
+
   );
 }
 

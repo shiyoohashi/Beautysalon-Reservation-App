@@ -13,16 +13,6 @@ export interface TypeOfReserveCalendar {
   type: string;
 }
 
-export interface TypeOfReserve {
-  date: Date;
-  // time: Date;
-  menu: string | null;
-  amountOfMoney: number;
-  treatmentTime: number;
-  stylistName: string;
-  customerName: string;
-}
-
 export interface TypeOfMenu {
   id: number;
   menu: string | null;
@@ -30,7 +20,15 @@ export interface TypeOfMenu {
   treatmentTime: number;
 }
 
-export interface reservation {
+export interface TypeOfMenuDetail {
+  id: number;
+  menu: string;
+  detail: string;
+  amountOfMoney: number;
+  treatmentTime: number;
+}
+
+export interface TypeOfReserve {
   id?: number;
   date: string;
   menu: string;
