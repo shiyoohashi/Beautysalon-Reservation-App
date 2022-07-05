@@ -2,18 +2,10 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
-import { useState, useEffect } from "react";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { createReservation } from "../graphql/mutations";
-import { listReservations } from "../graphql/queries";
-import awsExports from "../aws-exports";
-import {
-  TypeOfReserveCalendar,
-  TypeOfReserve,
-  TypeOfMenu,
-  reservation,
-} from "../global";
-Amplify.configure(awsExports);
+import { useEffect } from "react";
+import { API, graphqlOperation } from "aws-amplify";
+import { listReserves } from "../graphql/queries";
+import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 
 const shopMenu: TypeOfMenu[] = [
   { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
@@ -29,38 +21,32 @@ const shopMenu: TypeOfMenu[] = [
 ];
 
 type Props = {
-  setReserve: (typeOfReserve: TypeOfReserve[]) => void;
-  reserve: TypeOfReserve[];
-  setTime: (date: Date) => void;
-  userName: string;
+  setReserves: (reserves: TypeOfReserve[]) => void;
+  reserves: TypeOfReserve[];
 };
 const eventList: TypeOfReserveCalendar[] = [];
+
 export const Time: React.FC<Props> = (Props) => {
   const selectedMenu: string | null = sessionStorage.getItem("menu");
 
-  //ここから
-
-  const [reservations, setReservations] = useState<reservation[]>([]);
-
   useEffect(() => {
-    fetchReservations();
+    fetchReserves();
   }, []);
 
-  async function fetchReservations() {
+  async function fetchReserves() {
     try {
-      const reservationData: any = await API.graphql(
-        graphqlOperation(listReservations)
+      const reserveData: any = await API.graphql(
+        graphqlOperation(listReserves)
       );
-      const reservations: [reservation] =
-        reservationData.data.listReservations.items;
-      console.log("fetch", reservations);
-      setReservations(reservations);
-      /////front
+      const reserves: TypeOfReserve[] = reserveData.data.listReservations.items;
+      console.log("fetch", reserves);
+      Props.setReserves(reserves);
 
       const nowDate: Date = new Date();
 
       let counter: number = 0;
       eventList.splice(0); //リスト消去しないと増えるので削除
+
       for (let addDate = 1; addDate <= 90; addDate++) {
         const copyNowDate: Date = new Date(nowDate.getTime());
         new Date(copyNowDate.setDate(copyNowDate.getDate() + addDate));
@@ -90,22 +76,16 @@ export const Time: React.FC<Props> = (Props) => {
             return menuObj.menu === selectedMenu;
           });
 
-          const result = reservations.find((reservation) => {
-            if (
-              JSON.stringify(reservation.date) ===
-              JSON.stringify(comparisonDate)
-            ) {
-              if (selectMenu.treatmentTime / 30 === 1) {
-                return true;
-              } else if (selectMenu.treatmentTime / 30 === 2) {
+          const result = reserves.find((reserve) => {
+            if (reserve.date === String(comparisonDate)) {
+              if (selectMenu.treatmentTime / 30 === 2) {
                 endTime += 30;
                 i += 1;
-                return true;
               } else {
                 endTime += 60;
                 i += 2;
-                return true;
               }
+              return true;
             }
           });
 
@@ -176,50 +156,13 @@ export const Time: React.FC<Props> = (Props) => {
     }
   }
 
-  async function addReservation(reservation: reservation) {
-    try {
-      if (
-        !reservation.date ||
-        !reservation.menu ||
-        !reservation.stylistId ||
-        !reservation.customerId
-      ) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.date=====", reservation.date);
-        console.log("====reservation.menuId=====", reservation.menu);
-        console.log("====reservation.stylistId=====", reservation.stylistId);
-        console.log("====reservation.customerId=====", reservation.customerId);
-
-        return;
-      }
-
-      await API.graphql(
-        graphqlOperation(createReservation, { input: reservation })
-      );
-    } catch (err) {
-      console.log("error creating reservation:", err);
-    }
-  }
-
   //ここまで
   function link(event: any) {
-    console.log(event);
     if (event.title === "○") {
-      const result: boolean = window.confirm(
-        `予約日：${event.start}\nメニュー：${selectedMenu}\nで予約しますか？`
-      );
-      if (result) {
-        const reservation: reservation = {
-          date: event.start,
-          menu: selectedMenu!,
-          stylistId: 2,
-          customerId: Props.userName,
-        };
+      sessionStorage.setItem("start", event.start);
 
-        addReservation(reservation);
-        const link: any | null = document.getElementById("link");
-        link.click();
-      }
+      const link: any | null = document.getElementById("link");
+      link.click();
     } else {
       alert("※すでに予約されています！");
     }
@@ -235,7 +178,6 @@ export const Time: React.FC<Props> = (Props) => {
         endAccessor="end"
         style={{ height: 2800 }}
         defaultView={Views.WEEK}
-        // defaultDate={"2022-06-29 17:00"}
         onSelectEvent={(event) => link(event)}
         timeslots={2}
         views={["week", "day"]}
@@ -251,7 +193,7 @@ export const Time: React.FC<Props> = (Props) => {
         resourceTitleAccessor="start"
       />
 
-      <Link id="link" to={"/"}></Link>
+      <Link id="link" to={"/menu/time/checkreserve"}></Link>
     </div>
   );
 };

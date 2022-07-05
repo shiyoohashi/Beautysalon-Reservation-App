@@ -1,58 +1,57 @@
 {
-  "auth": {
-    "salonapp1ee1b87a": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL",
-          "NAME"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      }
-    }
-  },
-  "api": {
-    "salonapp": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "apiKeyExpirationDate": "2022-07-07T13:00:07.430Z",
-              "description": ""
+    "auth": {
+        "salonapp1ee1b87a": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false,
+            "frontendAuthConfig": {
+                "socialProviders": [],
+                "usernameAttributes": [
+                    "EMAIL"
+                ],
+                "signupAttributes": [
+                    "EMAIL",
+                    "NAME"
+                ],
+                "passwordProtectionSettings": {
+                    "passwordPolicyMinLength": 8,
+                    "passwordPolicyCharacters": []
+                },
+                "mfaConfiguration": "OFF",
+                "mfaTypes": [
+                    "SMS"
+                ],
+                "verificationMechanisms": [
+                    "EMAIL"
+                ]
             }
-          },
-          "additionalAuthenticationProviders": []
         }
-      }
+    },
+    "api": {
+        "salonapp": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "apiKeyExpirationDays": 7,
+                            "apiKeyExpirationDate": "2022-07-07T13:00:07.430Z",
+                            "description": ""
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                }
+            }
+        }
+    },
+    "hosting": {
+        "amplifyhosting": {
+            "service": "amplifyhosting",
+            "type": "cicd"
+        }
     }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2022-07-01T02:44:19.590Z"
-    }
-  }
 }

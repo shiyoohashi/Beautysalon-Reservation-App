@@ -15,7 +15,7 @@ export const getReservation = /* GraphQL */ `
     }
   }
 `;
-export const listReservations = /* GraphQL */ `
+export const listReserves = /* GraphQL */ `
   query ListReservations(
     $filter: ModelReservationFilterInput
     $limit: Int

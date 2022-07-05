@@ -1,54 +1,384 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-
 import { TypeOfReserve } from "./global";
 import { Home } from "./components/Home";
 import { Main } from "./components/main";
+import { Admin } from "./components/Admin";
 
 import { ShopCalendar } from "./components/ShopCalendar";
+import { CheckReserve } from "./components/CheckReserve";
 import { Menu } from "./components/Menu";
-import { Time } from "./components/Timefront";
-import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
+
+
+import {
+  Authenticator,
+  Button,
+  Heading,
+  useTheme,
+  View,
+  Image,
+  Text,
+  useAuthenticator,
+  ThemeProvider,
+  Theme,
+} from "@aws-amplify/ui-react";
+
+import { Time } from "./components/Time";
+
+
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
+
 Amplify.configure(awsExports);
 
-function App({ signOut, user }: any) {
-  const [time, setTime] = useState<Date | null>(null);
-  const [reserve, setReserve] = useState<TypeOfReserve[] | []>([]);
-  console.log("reserve: ", reserve);
-  console.log("user: ", user.attributes);
+const components = {
+  Header() {
+    const { tokens } = useTheme();
+
+    return (
+      <View textAlign="center" padding={tokens.space.large}>
+        <Image
+          alt="Amplify logo"
+          src="https://user-images.githubusercontent.com/98013294/177288142-baffb92c-6129-4109-8dd0-9d1084bfa4db.png"
+          height="200px"
+        />
+      </View>
+    );
+  },
+
+  Footer() {
+    const { tokens } = useTheme();
+
+    return (
+      <View textAlign="center" padding={tokens.space.large}>
+        <Text color={tokens.colors.neutral[80]}>
+          &copy; All Rights Reserved
+        </Text>
+      </View>
+    );
+  },
+
+  SignIn: {
+    Header() {
+      const { tokens } = useTheme();
+
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          ログインしてください
+        </Heading>
+      );
+    },
+    Footer() {
+      const { toResetPassword } = useAuthenticator();
+
+      return (
+        <View textAlign="center">
+          <Button
+            fontWeight="normal"
+            onClick={toResetPassword}
+            size="small"
+            variation="link"
+          >
+            パスワードを忘れた場合
+          </Button>
+        </View>
+      );
+    },
+  },
+
+  SignUp: {
+    Header() {
+      const { tokens } = useTheme();
+
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          新規登録
+        </Heading>
+      );
+    },
+    Footer() {
+      const { toSignIn } = useAuthenticator();
+
+      return (
+        <View textAlign="center">
+          <Button
+            fontWeight="normal"
+            onClick={toSignIn}
+            size="small"
+            variation="link"
+          >
+            Back to Sign In
+          </Button>
+        </View>
+      );
+    },
+  },
+  ConfirmSignUp: {
+    Header() {
+      const { tokens } = useTheme();
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          Enter Information:
+        </Heading>
+      );
+    },
+    Footer() {
+      return <Text>Footer Information</Text>;
+    },
+  },
+  SetupTOTP: {
+    Header() {
+      const { tokens } = useTheme();
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          Enter Information:
+        </Heading>
+      );
+    },
+    Footer() {
+      return <Text>Footer Information</Text>;
+    },
+  },
+  ConfirmSignIn: {
+    Header() {
+      const { tokens } = useTheme();
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          Enter Information:
+        </Heading>
+      );
+    },
+    Footer() {
+      return <Text>Footer Information</Text>;
+    },
+  },
+  ResetPassword: {
+    Header() {
+      const { tokens } = useTheme();
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          Enter Information:
+        </Heading>
+      );
+    },
+    Footer() {
+      return <Text>Footer Information</Text>;
+    },
+  },
+  ConfirmResetPassword: {
+    Header() {
+      const { tokens } = useTheme();
+      return (
+        <Heading
+          padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
+          level={3}
+        >
+          Enter Information:
+        </Heading>
+      );
+    },
+    Footer() {
+      return <Text>Footer Information</Text>;
+    },
+  },
+};
+const formFields = {
+  signIn: {
+    username: {
+      labelHidden: false,
+      placeholder: "Enter your email",
+    },
+  },
+  signUp: {
+    password: {
+      labelHidden: false,
+      label: "Password:",
+      placeholder: "Enter your Password:",
+      isRequired: false,
+      order: 2,
+    },
+    confirm_password: {
+      labelHidden: false,
+      label: "Confirm Password:",
+      order: 1,
+    },
+  },
+  forceNewPassword: {
+    password: {
+      labelHidden: false,
+      placeholder: "Enter your Password:",
+    },
+  },
+  resetPassword: {
+    username: {
+      labelHidden: false,
+      placeholder: "Enter your email:",
+    },
+  },
+  confirmResetPassword: {
+    confirmation_code: {
+      labelHidden: false,
+      placeholder: "Enter your Confirmation Code:",
+      label: "New Label",
+      isRequired: false,
+    },
+    confirm_password: {
+      labelHidden: false,
+      placeholder: "Enter your Password Please:",
+    },
+  },
+  setupTOTP: {
+    QR: {
+      totpIssuer: "test issuer",
+      totpUsername: "amplify_qr_test_user",
+    },
+    confirmation_code: {
+      labelHidden: false,
+      label: "New Label",
+      placeholder: "Enter your Confirmation Code:",
+      isRequired: false,
+    },
+  },
+  confirmSignIn: {
+    confirmation_code: {
+      labelHidden: false,
+      label: "New Label",
+      placeholder: "Enter your Confirmation Code:",
+      isRequired: false,
+    },
+  },
+};
+
+function App() {
+  
+  const [reserves, setReserves] = useState<TypeOfReserve[] | []>([]);
+  sessionStorage.setItem("user", user.attributes.name);
+  // console.log("reserve: ", reserve);
+  // console.log("user: ", user);
+
+  const { tokens } = useTheme();
+  const theme: Theme = {
+    name: "Auth Example Theme",
+    tokens: {
+      colors: {
+        background: {
+          primary: {
+            value: "#fff",
+            // value: tokens.colors.neutral["80"].value,
+          },
+          secondary: {
+            value: "#ffffff",
+          },
+        },
+        font: {
+          primary: {
+            value: "#000000",
+            // value: tokens.colors.neutral["80"].value,
+          },
+          secondary: {
+            value: "#000000",
+            // value: tokens.colors.neutral["80"].value,
+          },
+          interactive: {
+            value: tokens.colors.black.value,
+          },
+        },
+        brand: {
+          primary: {
+            "10": tokens.colors.teal["100"],
+            "80": tokens.colors.teal["40"],
+            "90": tokens.colors.teal["20"],
+            "100": tokens.colors.teal["10"],
+          },
+        },
+      },
+      components: {
+        tabs: {
+          item: {
+            _focus: {
+              color: {
+                value: tokens.colors.black.value,
+              },
+            },
+            _hover: {
+              color: {
+                value: tokens.colors.yellow["80"].value,
+              },
+            },
+            _active: {
+              color: {
+                value: tokens.colors.black.value,
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 
   return (
-    <>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home user={user} />} />
-          {/* <Route path="/" element={<Main />} /> */}
-          <Route
+    <ThemeProvider theme={theme}>
+      <Authenticator formFields={formFields} components={components}>
+        {({ signOut, user }: any) => {
+          console.log("=====user=====", user);
+          return (
+            <main>
+              <div className="App">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/admin" element={<Admin />} />
+                  {/* <Route path="/" element={<Home user={user} />} /> */}
+                  {/* <Route path="/" element={<Main />} /> */}
+                  <Route
             path="/shopcalender"
-            element={<ShopCalendar userName={user.attributes.name} />}
-          />
-          <Route path="/menu" element={<Menu />} />
-          <Route
-            path="/menu/time"
             element={
-              <Time
-                reserve={reserve}
-                setReserve={setReserve}
-                setTime={setTime}
-                userName={user.attributes.name}
-              />
+              <ShopCalendar reserves={reserves} setReserves={setReserves} />
             }
           />
-        </Routes>
-      </div>
-      <Heading level={4}>ログインユーザー：{user.attributes.name} さん</Heading>
-      <Button onClick={signOut}>Sign out</Button>
-    </>
+                  <Route path="/menu" element={<Menu />} />
+                  <Route
+            path="/menu/time"
+            element={<Time reserves={reserves} setReserves={setReserves} />}
+          />
+                    }
+                  />
+                  <Route path="/menu/time/checkreserve" element={<CheckReserve />} />
+                </Routes>
+                <Heading level={4}>
+                  ログインユーザー：{user.attributes.name} さん
+                </Heading>
+
+                {/* <Button onClick={signOut}>Sign out</Button> */}
+              </div>
+              <h1>Hello {user.attributes.name}</h1>
+              <button onClick={signOut}>Sign out</button>
+            </main>
+          );
+        }}
+      </Authenticator>
+    </ThemeProvider>
+
   );
 }
 
-export default withAuthenticator(App);
+export default App;

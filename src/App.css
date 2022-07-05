@@ -1,5 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Sawarabi+Mincho");
+/* @import url("https://fonts.googleapis.com/css?family=Noto+Serif+JP"); */
+
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background-color: #727171;
+  font-family: "Sawarabi Mincho", sans-serif;
+  /* font-family: "Noto Serif JP", sans-serif; */
+  color: white;
 }
 
 .App-logo {
@@ -36,3 +43,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.amplify-button[data-variation="primary"] {
+  background: gray;
+}
+
+
