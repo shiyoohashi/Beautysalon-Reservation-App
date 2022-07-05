@@ -25,8 +25,8 @@ function App({ signOut, user }: any) {
     <>
       <div className="App">
         <Routes>
-          {/* <Route path="/" element={<Home user={user} />} /> */}
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Home user={user} />} />
+          {/* <Route path="/" element={<Main />} /> */}
           <Route
             path="/shopcalender"
             element={<ShopCalendar userName={user.attributes.name} />}
