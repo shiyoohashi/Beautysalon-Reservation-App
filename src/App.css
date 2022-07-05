@@ -44,6 +44,9 @@
   }
 }
 
-/* button {
-  border-color: white;
-} */
+
+.amplify-button[data-variation="primary"] {
+  background: gray;
+}
+
+
