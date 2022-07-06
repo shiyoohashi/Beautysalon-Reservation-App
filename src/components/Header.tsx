@@ -26,6 +26,11 @@ export const Header: React.FC<Props> = (Props) => {
     link.click();
   }
 
+  function clickAdmin() {
+    const link: any = document.getElementById("admin");
+    link.click();
+  }
+
   return (
     // <>
     //   <header className="header">
@@ -43,8 +48,13 @@ export const Header: React.FC<Props> = (Props) => {
     // </>
     <header className="header">
       <h1 className="header__logo">
-        <div className="header__logo__img">YAJIMA HAIR</div>
-        <a href="./admin">Link</a>
+        <div className="header__logo__img" onClick={() => clickAdmin()}>
+          YAJIMA HAIR
+        </div>
+
+        {/* <a href="./admin">Link</a> */}
+
+        <Link id="admin" to={"/admin"}></Link>
       </h1>
 
       <div className="header__container" style={{ height: "1037px" }}>
@@ -60,6 +70,7 @@ export const Header: React.FC<Props> = (Props) => {
             target="_blank"
             className="header__reserve__link"
           >
+            <Link id="adomin" to={"/"}></Link>
             <span className="header__reserve__ja">SignOut</span>
           </a>
         </div>
