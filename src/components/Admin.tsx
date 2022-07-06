@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Admin.css";
+// import "./Admin.css";
+import "./main.css";
 
 export const Admin: React.FC = () => {
-  function sayHello() {
-    console.log("hello");
-  }
   function confirmReservation() {
-    const link: any = document.getElementById("confirm_reservation");
+    const link: any = document.getElementById("confirm_reserve");
     link.click();
   }
   function editMenu() {
@@ -27,26 +25,38 @@ export const Admin: React.FC = () => {
 
   return (
     <div className="admin_page">
+      <br />
       <h1>Administrator access</h1>
       <div className="menus">
-        <Link id="confirm_reservation" to="/shopcalender"></Link>
+        <Link id="confirm_reserve" to="/shopcalender"></Link>
+
         <button
           className="header__reserve__link"
           onClick={() => confirmReservation()}
         >
-          Confirm customer's reservations
+          <br />
+          <div className="header__reserve__en">
+            Confirm customer's reservation
+          </div>
+          <br />
         </button>
         <Link id="edit_menu" to="/shopcalender"></Link>
         <button className="header__reserve__link" onClick={() => editMenu()}>
-          Edit the menu
+          <br />
+          <div className="header__reserve__en">Edit menus</div>
+          <br />
         </button>
         <Link id="set_holidays" to="/shopcalender"></Link>
         <button className="header__reserve__link" onClick={() => setHolidays()}>
-          Set holidays
+          <br />
+          <div className="header__reserve__en">Set holidays</div>
+          <br />
         </button>
         <Link id="edit_stylist" to="/shopcalender"></Link>
         <button className="header__reserve__link" onClick={() => editStylist()}>
-          Edit stylist's status
+          <br />
+          <div className="header__reserve__en">Edit stylist's status</div>
+          <br />
         </button>
       </div>
     </div>
