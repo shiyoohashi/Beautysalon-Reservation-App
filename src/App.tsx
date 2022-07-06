@@ -337,14 +337,11 @@ function App() {
               <main>
                 <div className="App">
                   <Routes>
-                    <Route path="/home" element={<Home />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/shopcalendar" element={<ShopCalendar />} />
+                    <Route path="/selecttime" element={<Time />} />
                     <Route
-                      path="/home/shopcalendar"
-                      element={<ShopCalendar />}
-                    />
-                    <Route path="/home/selecttime" element={<Time />} />
-                    <Route
-                      path="/home/selecttime/checkreserve"
+                      path="/selecttime/checkreserve"
                       element={<CheckReserve />}
                     />
                   </Routes>

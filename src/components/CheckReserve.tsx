@@ -79,7 +79,7 @@ export const CheckReserve = () => {
           予約確定
         </button>
       </div>
-      <Link id="home" to={"/home"}></Link>
+      <Link id="home" to={"/"}></Link>
     </div>
   );
 };
