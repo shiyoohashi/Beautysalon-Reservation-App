@@ -27,8 +27,13 @@ export const Header: React.FC<Props> = (Props) => {
   }
 
   function clickAdmin() {
-    const link: any = document.getElementById("admin");
-    link.click();
+    if (
+      Props.userName === "Administrater" ||
+      Props.userName === "administrater"
+    ) {
+      const link: any = document.getElementById("admin");
+      link.click();
+    }
   }
 
   return (
