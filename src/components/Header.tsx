@@ -69,14 +69,12 @@ export const Header: React.FC<Props> = (Props) => {
         </span> */}
         <div className="header__reserve">
           <a
-            href="
-      https://japan-crew-cut-association.github.io/Tashinami-HP/"
+            href="https://japan-crew-cut-association.github.io/Tashinami-HP/"
             onClick={Props.signOut}
             target="_blank"
-            className="header__reserve__link"
+            className="header__reserve__link header__reserve__ja"
           >
-            <Link id="adomin" to={"/"}></Link>
-            <span className="header__reserve__ja">SignOut</span>
+            SignOut
           </a>
         </div>
         <div className="header__container__inner" style={{ height: "1037px" }}>

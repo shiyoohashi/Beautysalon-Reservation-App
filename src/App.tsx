@@ -339,7 +339,7 @@ function App() {
                   <Routes>
                     <Route path="/home" element={<Home />} />
                     <Route
-                      path="/admin/shopcalender"
+                      path="/home/shopcalendar"
                       element={<ShopCalendar />}
                     />
                     <Route path="/home/selecttime" element={<Time />} />
