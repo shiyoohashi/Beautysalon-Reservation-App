@@ -347,7 +347,6 @@ function App() {
           sessionStorage.setItem("user", user.attributes.name);
           console.log("=====user=====", user);
           return (
-
             <>
               <Header signOut={signOut} userName={user.attributes.name} />
               <main>

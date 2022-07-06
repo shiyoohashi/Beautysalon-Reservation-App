@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./Admin.css";
-import "./main.css";
+import "./Admin.css";
+// import "./main.css";
 
 export const Admin: React.FC = () => {
   function confirmReservation() {
@@ -24,39 +24,37 @@ export const Admin: React.FC = () => {
   }
 
   return (
-    <div className="admin_page">
+    <div id="admin_page">
       <br />
       <h1>Administrator access</h1>
       <div className="menus">
         <Link id="confirm_reserve" to="/shopcalender"></Link>
 
-        <button
-          className="header__reserve__link"
-          onClick={() => confirmReservation()}
-        >
-          <br />
+        <button className="adminButton" onClick={() => confirmReservation()}>
+          Reservations
+          {/* <br />
           <div className="header__reserve__en">
             Confirm customer's reservation
           </div>
-          <br />
+          <br /> */}
         </button>
         <Link id="edit_menu" to="/shopcalender"></Link>
-        <button className="header__reserve__link" onClick={() => editMenu()}>
-          <br />
-          <div className="header__reserve__en">Edit menus</div>
-          <br />
+        <button className="adminButton" onClick={() => editMenu()}>
+          Menus
         </button>
         <Link id="set_holidays" to="/shopcalender"></Link>
-        <button className="header__reserve__link" onClick={() => setHolidays()}>
-          <br />
+        <button className="adminButton" onClick={() => setHolidays()}>
+          {/* <br />
           <div className="header__reserve__en">Set holidays</div>
-          <br />
+          <br /> */}
+          Holidays
         </button>
         <Link id="edit_stylist" to="/shopcalender"></Link>
-        <button className="header__reserve__link" onClick={() => editStylist()}>
-          <br />
+        <button className="adminButton" onClick={() => editStylist()}>
+          {/* <br />
           <div className="header__reserve__en">Edit stylist's status</div>
-          <br />
+          <br /> */}
+          Stylists
         </button>
       </div>
     </div>
