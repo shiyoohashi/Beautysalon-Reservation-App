@@ -1,17 +1,10 @@
-import React, { useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { TypeOfReserve } from "./global";
 import { Home } from "./components/Home";
-import { Main } from "./components/main";
-import { Admin } from "./components/Admin";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
-import { Menu } from "./components/Menu";
-
 import {
   Authenticator,
   Button,
@@ -24,13 +17,10 @@ import {
   ThemeProvider,
   Theme,
 } from "@aws-amplify/ui-react";
-
 import { Time } from "./components/Time";
-
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
-
 Amplify.configure(awsExports);
 
 const components = {
@@ -275,11 +265,6 @@ const formFields = {
 };
 
 function App() {
-  const [reserves, setReserves] = useState<TypeOfReserve[] | []>([]);
-
-  // console.log("reserve: ", reserve);
-  // console.log("user: ", user);
-
   const { tokens } = useTheme();
   const theme: Theme = {
     name: "Auth Example Theme",
@@ -352,29 +337,14 @@ function App() {
               <main>
                 <div className="App">
                   <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/admin" element={<Admin />} />
-                    {/* <Route path="/" element={<Home user={user} />} /> */}
-                    {/* <Route path="/" element={<Main />} /> */}
+                    <Route path="/home" element={<Home />} />
                     <Route
-                      path="/shopcalender"
-                      element={
-                        <ShopCalendar
-                          reserves={reserves}
-                          setReserves={setReserves}
-                        />
-                      }
+                      path="/admin/shopcalender"
+                      element={<ShopCalendar />}
                     />
-                    <Route path="/menu" element={<Menu />} />
+                    <Route path="/home/selecttime" element={<Time />} />
                     <Route
-                      path="/menu/time"
-                      element={
-                        <Time reserves={reserves} setReserves={setReserves} />
-                      }
-                    />
-
-                    <Route
-                      path="/menu/time/checkreserve"
+                      path="/home/selecttime/checkreserve"
                       element={<CheckReserve />}
                     />
                   </Routes>

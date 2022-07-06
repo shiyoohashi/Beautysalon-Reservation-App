@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-
-import { Route, Routes } from "react-router-dom";
 import "./main.css";
-import { TypeOfReserve } from "../global";
 
 export const Main: React.FC = () => {
   return (

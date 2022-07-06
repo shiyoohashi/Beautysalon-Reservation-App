@@ -1,20 +1,11 @@
 import { Link } from "react-router-dom";
-import React from "react";
-import { Calendar, momentLocalizer, Views } from "react-big-calendar";
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listReserves } from "../graphql/queries";
-import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
+import { TypeOfReserve } from "../global";
 import dayjs from "dayjs";
 
-type Props = {
-  setReserves: (reserves: TypeOfReserve[]) => void;
-  reserves: TypeOfReserve[];
-};
-const eventList: TypeOfReserveCalendar[] = [];
-
-export const Time: React.FC<Props> = (Props) => {
+export const Time = () => {
   const [nowDate, setNowDate] = useState(new Date());
 
   const initialMarubatsu: any = [
@@ -85,7 +76,6 @@ export const Time: React.FC<Props> = (Props) => {
     marubatsuDate.setMinutes(0);
     marubatsuDate.setSeconds(0);
     marubatsuDate.setMilliseconds(0);
-    console.log("marubatsuDate", marubatsuDate);
     marubatsuDate.setDate(marubatsuDate.getDate() + col);
     marubatsuDate.setMinutes(marubatsuDate.getMinutes() + 30 * row);
     return marubatsuDate;
@@ -99,21 +89,14 @@ export const Time: React.FC<Props> = (Props) => {
     縮毛矯正: 60,
   };
 
+  const maru = "◯";
+  const batsu = "✖️";
+
   function changeReservePropriety(reserves: any) {
     let result: any = JSON.parse(JSON.stringify(initialMarubatsu));
 
     for (let row = 0; row < 21; row++) {
       for (let col = 0; col < 7; col++) {
-        console.log("reserves", reserves);
-        console.log(
-          "compairDate(col, row).getTime() : ",
-          compairDate(col, row).getTime()
-        );
-        console.log(
-          "new Date(reserves[0].date).getTime(): ",
-          new Date(reserves[0].date).getTime()
-        );
-
         reserves.forEach((reserve: any) => {
           if (
             new Date(reserve.date).setMinutes(
@@ -127,16 +110,14 @@ export const Time: React.FC<Props> = (Props) => {
                   30
               )
           ) {
-            console.log("eriko");
-            if ((result[row][col] = "◯")) {
-              result[row][col] = "✖️";
+            if ((result[row][col] = maru)) {
+              result[row][col] = batsu;
             }
           }
         });
       }
     }
     setMarubatsu(result);
-    console.log("result: ", result);
   }
 
   const times = [
@@ -164,21 +145,20 @@ export const Time: React.FC<Props> = (Props) => {
   ];
 
   function createReservePropriety() {
-    console.log("nankai");
     return times.map((time, index) => {
       return (
         <tr key={index}>
           <th scope="row">{time}</th>
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-0`}
           >
             {marubatsu[index][0]}
           </td>
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-1`}
           >
             {marubatsu[index][1]}
@@ -186,35 +166,35 @@ export const Time: React.FC<Props> = (Props) => {
 
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-2`}
           >
             {marubatsu[index][2]}
           </td>
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-3`}
           >
             {marubatsu[index][3]}
           </td>
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-4`}
           >
             {marubatsu[index][4]}
           </td>
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-5`}
           >
             {marubatsu[index][5]}
           </td>
           <td
             className="time-cells"
-            onClick={(e) => onClickMarubaru(e)}
+            onClick={(e) => onClickMarubatsu(e)}
             id={`${index}-6`}
           >
             {marubatsu[index][6]}
@@ -225,51 +205,60 @@ export const Time: React.FC<Props> = (Props) => {
     });
   }
 
-  function onClickMarubaru(e: any) {
-    const changeIdTime: any = {};
-    for (let timeIndex = 0; timeIndex < 21; timeIndex++) {
-      let initialTime = 9;
+  function onClickMarubatsu(e: any) {
+    if (document.getElementById(e.target.id)?.innerText === maru) {
+      const changeIdTime: any = {};
+      for (let timeIndex = 0; timeIndex < 21; timeIndex++) {
+        let initialTime = 9;
 
-      const addHour = Math.floor(timeIndex / 2);
-      let minute = "";
-      if (timeIndex % 2 === 0) {
-        minute = "00";
-      } else {
-        minute = "30";
+        const addHour = Math.floor(timeIndex / 2);
+        let minute = "";
+        if (timeIndex % 2 === 0) {
+          minute = "00";
+        } else {
+          minute = "30";
+        }
+        for (let dayIndex = 0; dayIndex <= 6; dayIndex++) {
+          changeIdTime[`${timeIndex}-${dayIndex}`] = `${dayIndex},${
+            initialTime + addHour
+          }:${minute}`;
+        }
       }
-      for (let dayIndex = 0; dayIndex <= 6; dayIndex++) {
-        changeIdTime[`${timeIndex}-${dayIndex}`] = `${dayIndex},${
-          initialTime + addHour
-        }:${minute}`;
-      }
-    }
 
-    // 選択したセルの位置を特定
-    const tempSelected = changeIdTime[e.target.id];
-    const [numberOfDay, time] = tempSelected.split(",");
-    // 選択したセルの列の日付のテキストを取得
-    const tempSelectedDate = document.getElementById(
-      `dateAndDay${numberOfDay}`
-    )!.innerText;
-    // 取得した日付テキストから日にちを取り出す
-    const [selectedDate] = tempSelectedDate.split("\n");
-    // 年月を取得
-    const yearMonth = document.getElementById("yearMonth")?.innerText;
-    // 現在表示している週の一番最初の日のテキスト取得
-    const tempLeftDate = document.getElementById("dateAndDay0")!.innerText;
-    const [leftDate] = tempLeftDate.split("\n");
-    // 現在表示している週の一番最後の日のテキスト取得
-    const tempRightDate = document.getElementById("dateAndDay6")!.innerText;
-    const [rightDate] = tempRightDate.split("\n");
+      // 選択したセルの位置を特定
+      const tempSelected = changeIdTime[e.target.id];
+      const [numberOfDay, time] = tempSelected.split(",");
+      // 選択したセルの列の日付のテキストを取得
+      const tempSelectedDate = document.getElementById(
+        `dateAndDay${numberOfDay}`
+      )!.innerText;
+      // 取得した日付テキストから日にちを取り出す
+      const [selectedDate] = tempSelectedDate.split("\n");
+      // 年月を取得
+      const yearMonth = document.getElementById("yearMonth")?.innerText;
+      // 現在表示している週の一番最初の日のテキスト取得
+      const tempLeftDate = document.getElementById("dateAndDay0")!.innerText;
+      const [leftDate] = tempLeftDate.split("\n");
+      // 現在表示している週の一番最後の日のテキスト取得
+      const tempRightDate = document.getElementById("dateAndDay6")!.innerText;
+      const [rightDate] = tempRightDate.split("\n");
 
-    if (Number(leftDate) > Number(rightDate)) {
-      if (Number(selectedDate) < 7) {
-        const sliceYearMonth = yearMonth?.slice(0, -1);
-        const [year, month] = sliceYearMonth!.split("年");
-        const saveDate: Date = new Date(
-          `20${year}-${Number(month) + 1}-${selectedDate} ${time}`
-        );
-        sessionStorage.setItem("start", String(saveDate));
+      if (Number(leftDate) > Number(rightDate)) {
+        if (Number(selectedDate) < 7) {
+          const sliceYearMonth = yearMonth?.slice(0, -1);
+          const [year, month] = sliceYearMonth!.split("年");
+          const saveDate: Date = new Date(
+            `20${year}-${Number(month) + 1}-${selectedDate} ${time}`
+          );
+          sessionStorage.setItem("start", String(saveDate));
+        } else {
+          const sliceYearMonth = yearMonth?.slice(0, -1);
+          const [year, month] = sliceYearMonth!.split("年");
+          const saveDate: Date = new Date(
+            `20${year}-${month}-${selectedDate} ${time}`
+          );
+          sessionStorage.setItem("start", String(saveDate));
+        }
       } else {
         const sliceYearMonth = yearMonth?.slice(0, -1);
         const [year, month] = sliceYearMonth!.split("年");
@@ -278,17 +267,10 @@ export const Time: React.FC<Props> = (Props) => {
         );
         sessionStorage.setItem("start", String(saveDate));
       }
-    } else {
-      const sliceYearMonth = yearMonth?.slice(0, -1);
-      const [year, month] = sliceYearMonth!.split("年");
-      const saveDate: Date = new Date(
-        `20${year}-${month}-${selectedDate} ${time}`
-      );
-      sessionStorage.setItem("start", String(saveDate));
-    }
 
-    const link: any | null = document.getElementById("link");
-    link.click();
+      const link: any | null = document.getElementById("link");
+      link.click();
+    }
   }
 
   function onClickLastWeek() {
@@ -332,7 +314,7 @@ export const Time: React.FC<Props> = (Props) => {
           {createReservePropriety()}
         </tbody>
       </table>
-      <Link id="link" to={"/menu/time/checkreserve"}></Link>
+      <Link id="link" to={"checkreserve"}></Link>
     </div>
   );
 };

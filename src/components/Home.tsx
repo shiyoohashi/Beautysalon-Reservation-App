@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { listReserves } from "../graphql/queries";
-import awsExports from "../aws-exports";
 import { TypeOfReserve } from "../global";
 import { Menu } from "./Menu";
 import { ReserveInfo } from "./ReserveInfo";
-Amplify.configure(awsExports);
+import { Admin } from "./Admin";
 
 export const Home = () => {
   const [loadedScreen, setLoadedScreen] = useState(<></>);
@@ -22,8 +20,11 @@ export const Home = () => {
       const wantToDel = reservations.find((reservation) => {
         return reservation.customerId === sessionStorage.getItem("user");
       });
+
       console.log("====wantToDel====", wantToDel);
-      if (wantToDel) {
+      if (sessionStorage.getItem("user") === "administrator") {
+        setLoadedScreen(<Admin />);
+      } else if (wantToDel) {
         setLoadedScreen(<ReserveInfo />);
       } else {
         setLoadedScreen(<Menu />);
@@ -37,14 +38,5 @@ export const Home = () => {
     fetchReserves();
   }, []);
 
-  return (
-    <>
-      {loadedScreen}
-      {/* {(() => {
-        if (sessionStorage.getItem("user") === "administrator") {
-          return <Link to="/shopcalender">予約一覧</Link>;
-        }
-      })() */}
-    </>
-  );
+  return <>{loadedScreen}</>;
 };

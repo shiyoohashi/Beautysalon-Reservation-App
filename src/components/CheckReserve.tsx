@@ -43,10 +43,10 @@ export const CheckReserve = () => {
 
     addReservation(reserve);
 
-    alert(`予約が完了しました。`);
-
     const homeLink: any | null = document.getElementById("home");
-    homeLink.click();
+    setTimeout(function () {
+      homeLink.click();
+    }, 500);
   }
 
   return (
@@ -79,7 +79,7 @@ export const CheckReserve = () => {
           予約確定
         </button>
       </div>
-      <Link id="home" to={"/"}></Link>
+      <Link id="home" to={"/home"}></Link>
     </div>
   );
 };
