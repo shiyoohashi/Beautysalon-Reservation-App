@@ -6,6 +6,7 @@ import awsExports from "../aws-exports";
 import { TypeOfReserve } from "../global";
 import { Menu } from "./Menu";
 import { ReserveInfo } from "./ReserveInfo";
+import "./main.css";
 Amplify.configure(awsExports);
 
 export const Home = () => {

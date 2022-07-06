@@ -168,6 +168,12 @@ a {
   -webkit-animation: gradanim 10s linear 0s infinite;
   animation: gradanim 10s linear 0s infinite;
 }
+#reserveInfo {
+  margin-top: 15%;
+}
+#time {
+  margin-top: 10%;
+}
 @-webkit-keyframes gradanim {
   0% {
     -webkit-transform: translate(0);
