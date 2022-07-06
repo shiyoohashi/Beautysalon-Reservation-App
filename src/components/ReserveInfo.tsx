@@ -1,13 +1,13 @@
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { deleteReservation } from "../graphql/mutations";
 import { listReserves } from "../graphql/queries";
-import awsExports from "../aws-exports";
 import { TypeOfReserve } from "../global";
 import dayjs from "dayjs";
 
-Amplify.configure(awsExports);
-
-export const ReserveInfo = () => {
+type Props = {
+  reserve: TypeOfReserve;
+};
+export const ReserveInfo: React.FC<Props> = (Props) => {
   async function fetchReservations() {
     try {
       const reservationData: any = await API.graphql(
@@ -79,6 +79,14 @@ export const ReserveInfo = () => {
     }
   }
 
+  const change: any = {
+    角刈り: "1,000,000",
+    カット: "1,000",
+    "カット＋カラー": "20,000",
+    パーマ: "10,000",
+    縮毛矯正: "10,000",
+  };
+
   return (
     <div id="reserveInfo">
       <h3 className="text-center">Reserve Information</h3>
@@ -87,18 +95,19 @@ export const ReserveInfo = () => {
           <tr>
             <td className="text-center">予約日</td>
             <td className="text-center">
-              {dayjs(sessionStorage.getItem("start")).format(
+              {/* {dayjs(sessionStorage.getItem("start")).format(
                 "YY年MM月DD日\nHH時mm分"
-              )}
+              )} */}
+              {dayjs(Props.reserve.date).format("YY年MM月DD日\nHH時mm分")}
             </td>
           </tr>
           <tr className="text-center">
             <td>メニュー</td>
-            <td>{sessionStorage.getItem("menu")}</td>
+            <td>{Props.reserve.menu}</td>
           </tr>
           <tr className="text-center">
             <td>料金</td>
-            <td>{sessionStorage.getItem("amountOfMoney")} 円</td>
+            <td>{change[Props.reserve.menu]} 円</td>
           </tr>
         </tbody>
       </table>

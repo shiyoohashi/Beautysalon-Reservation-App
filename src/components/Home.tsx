@@ -26,7 +26,9 @@ export const Home = () => {
       if (sessionStorage.getItem("user") === "administrator") {
         setLoadedScreen(<Admin />);
       } else if (wantToDel) {
-        setLoadedScreen(<ReserveInfo />);
+        setTimeout(function () {
+          setLoadedScreen(<ReserveInfo reserve={wantToDel} />);
+        }, 500);
       } else {
         setLoadedScreen(<Menu />);
       }
