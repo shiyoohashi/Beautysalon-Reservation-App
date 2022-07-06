@@ -64,7 +64,7 @@ export const ReserveInfo: React.FC<Props> = (Props) => {
   }
 
   async function onClickCancelButton() {
-    const result: boolean = window.confirm(`予約日をキャンセルしますか？`);
+    const result: boolean = window.confirm(`予約をキャンセルしますか？`);
     if (result) {
       const wantToDel = await fetchReservations().then((res) =>
         res?.filter((reservation) => {
