@@ -8,19 +8,6 @@ import { listReserves } from "../graphql/queries";
 import { TypeOfReserveCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 import dayjs from "dayjs";
 
-// const shopMenu: TypeOfMenu[] = [
-//   { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
-//   { id: 2, menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
-//   {
-//     id: 3,
-//     menu: "カット＋カラー",
-//     amountOfMoney: 20000,
-//     treatmentTime: 60,
-//   },
-//   { id: 4, menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
-//   { id: 5, menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
-// ];
-
 type Props = {
   setReserves: (reserves: TypeOfReserve[]) => void;
   reserves: TypeOfReserve[];
@@ -29,147 +16,50 @@ const eventList: TypeOfReserveCalendar[] = [];
 
 export const Time: React.FC<Props> = (Props) => {
   const [nowDate, setNowDate] = useState(new Date());
-  const forCalenderDate = nowDate;
-  //   const selectedMenu: string | null = sessionStorage.getItem("menu");
 
-  //   useEffect(() => {
-  //     fetchReserves();
-  //   }, []);
+  const initialMarubatsu: any = [
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+  ];
 
-  //   async function fetchReserves() {
-  //     try {
-  //       const reserveData: any = await API.graphql(
-  //         graphqlOperation(listReserves)
-  //       );
-  //       const reserves: TypeOfReserve[] = reserveData.data.listReservations.items;
-  //       console.log("fetch", reserves);
-  //       Props.setReserves(reserves);
+  const [marubatsu, setMarubatsu] = useState(initialMarubatsu);
+  const forCalenderDate = new Date(nowDate);
 
-  //       const nowDate: Date = new Date();
+  useEffect(() => {
+    fetchReserves();
+  }, []);
 
-  //       let counter: number = 0;
-  //       eventList.splice(0); //リスト消去しないと増えるので削除
-
-  //       for (let addDate = 1; addDate <= 90; addDate++) {
-  //         const copyNowDate: Date = new Date(nowDate.getTime());
-  //         new Date(copyNowDate.setDate(copyNowDate.getDate() + addDate));
-
-  //         const year = copyNowDate.getFullYear();
-  //         const month = copyNowDate.getMonth() + 1;
-  //         const date = copyNowDate.getDate();
-  //         const ttmmdd = `${year}-${month}-${date}`;
-
-  //         let startTime: number = 540;
-  //         let endTime: number = 540;
-  //         for (let i = 1; i <= 20; i++) {
-  //           let startHour: number = Math.floor(startTime / 60);
-  //           let startMinute: number = startTime % 60;
-  //           let strStartMinute: string = "";
-  //           if (startMinute % 60 === 0) {
-  //             strStartMinute = "00";
-  //           } else {
-  //             strStartMinute = "30";
-  //           }
-
-  //           const comparisonDate = new Date(
-  //             `${ttmmdd}-${startHour}:${strStartMinute}`
-  //           );
-
-  //           const selectMenu: any = shopMenu.find((menuObj) => {
-  //             return menuObj.menu === selectedMenu;
-  //           });
-
-  //           const result = reserves.find((reserve) => {
-  //             if (reserve.date === String(comparisonDate)) {
-  //               if (selectMenu.treatmentTime / 30 === 2) {
-  //                 endTime += 30;
-  //                 i += 1;
-  //               } else {
-  //                 endTime += 60;
-  //                 i += 2;
-  //               }
-  //               return true;
-  //             }
-  //           });
-
-  //           endTime += 30;
-  //           let endHour: number = Math.floor(endTime / 60);
-  //           let endMinute: number = endTime % 60;
-  //           let strEndMinute: string = "00";
-  //           if (endMinute % 60 === 0) {
-  //             strEndMinute = "00";
-  //           } else {
-  //             strEndMinute = "30";
-  //           }
-
-  //           if (result === undefined) {
-  //             eventList.push({
-  //               title: "○",
-  //               start: new Date(`${ttmmdd} ${startHour}:${strStartMinute}`),
-  //               end: new Date(`${ttmmdd} ${endHour}:${strEndMinute}`),
-  //               type: "true",
-  //             });
-  //           } else {
-  //             if (selectedMenu === "角刈り") {
-  //               startTime -= 30;
-  //               startHour = Math.floor(startTime / 60);
-  //               startMinute = startTime % 60;
-  //               console.log("counter: ", counter);
-  //               eventList.splice(counter - 1, 1);
-  //             } else if (selectedMenu === "カット＋カラー") {
-  //               startTime -= 30;
-  //               startHour = Math.floor(startTime / 60);
-  //               startMinute = startTime % 60;
-  //               console.log("counter: ", counter);
-  //               eventList.splice(counter - 1, 1);
-  //             } else if (selectedMenu === "パーマ") {
-  //               startTime -= 30;
-  //               startHour = Math.floor(startTime / 60);
-  //               startMinute = startTime % 60;
-  //               console.log("消すやつcounter: ", counter - 1);
-  //               eventList.splice(counter - 1, 1);
-  //             } else if (selectedMenu === "縮毛矯正") {
-  //               startTime -= 60;
-  //               startHour = Math.floor(startTime / 60);
-  //               startMinute = startTime % 60;
-  //               console.log("counter: ", counter);
-  //               eventList.splice(counter - 1, 1);
-  //               eventList.splice(counter - 2, 1);
-  //             }
-
-  //             if (startMinute % 60 === 0) {
-  //               strStartMinute = "00";
-  //             } else {
-  //               strStartMinute = "30";
-  //             }
-
-  //             eventList.push({
-  //               title: "×",
-  //               start: new Date(`${ttmmdd} ${startHour}:${strStartMinute}`),
-  //               end: new Date(`${ttmmdd} ${endHour}:${strEndMinute}`),
-  //               type: "false",
-  //             });
-  //           }
-  //           startTime = endTime;
-  //           counter++;
-  //         }
-  //       }
-  //     } catch (err) {
-  //       console.log("error fetching todos");
-  //     }
-  //   }
-
-  //   //ここまで
-  //   function link(event: any) {
-  //     if (event.title === "○") {
-  //       sessionStorage.setItem("start", event.start);
-
-  //       const link: any | null = document.getElementById("link");
-  //       link.click();
-  //     } else {
-  //       alert("※すでに予約されています！");
-  //     }
-  //   }
+  async function fetchReserves() {
+    try {
+      const reserveData: any = await API.graphql(
+        graphqlOperation(listReserves)
+      );
+      const reserves: TypeOfReserve[] = reserveData.data.listReservations.items;
+      console.log("fetch", reserves);
+      changeReservePropriety(reserves);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
 
   function createDateAndDayOfWeek() {
     const listDay = ["日", "月", "火", "水", "木", "金", "土"];
@@ -178,6 +68,7 @@ export const Time: React.FC<Props> = (Props) => {
       const dayOfNumber: number = forCalenderDate.getDay();
       const tempDate = JSON.stringify(forCalenderDate.getDate());
       forCalenderDate.setDate(forCalenderDate.getDate() + 1);
+
       return (
         <td id={`dateAndDay${index}`} key={index}>
           {tempDate}
@@ -186,6 +77,66 @@ export const Time: React.FC<Props> = (Props) => {
         </td>
       );
     });
+  }
+
+  function compairDate(col: number, row: number): Date {
+    const marubatsuDate = new Date(nowDate);
+    marubatsuDate.setHours(9);
+    marubatsuDate.setMinutes(0);
+    marubatsuDate.setSeconds(0);
+    marubatsuDate.setMilliseconds(0);
+    console.log("marubatsuDate", marubatsuDate);
+    marubatsuDate.setDate(marubatsuDate.getDate() + col);
+    marubatsuDate.setMinutes(marubatsuDate.getMinutes() + 30 * row);
+    return marubatsuDate;
+  }
+
+  const menu_treatmentTime: any = {
+    角刈り: 30,
+    カット: 0,
+    "カット＋カラー": 30,
+    パーマ: 30,
+    縮毛矯正: 60,
+  };
+
+  function changeReservePropriety(reserves: any) {
+    let result: any = JSON.parse(JSON.stringify(initialMarubatsu));
+
+    for (let row = 0; row < 21; row++) {
+      for (let col = 0; col < 7; col++) {
+        console.log("reserves", reserves);
+        console.log(
+          "compairDate(col, row).getTime() : ",
+          compairDate(col, row).getTime()
+        );
+        console.log(
+          "new Date(reserves[0].date).getTime(): ",
+          new Date(reserves[0].date).getTime()
+        );
+
+        reserves.forEach((reserve: any) => {
+          if (
+            new Date(reserve.date).setMinutes(
+              new Date(reserve.date).getMinutes() -
+                menu_treatmentTime[sessionStorage.getItem("menu")!]
+            ) <= compairDate(col, row).getTime() &&
+            compairDate(col, row).getTime() <
+              new Date(reserve.date).setMinutes(
+                new Date(reserve.date).getMinutes() +
+                  menu_treatmentTime[reserve.menu] +
+                  30
+              )
+          ) {
+            console.log("eriko");
+            if ((result[row][col] = "◯")) {
+              result[row][col] = "✖️";
+            }
+          }
+        });
+      }
+    }
+    setMarubatsu(result);
+    console.log("result: ", result);
   }
 
   const times = [
@@ -213,30 +164,68 @@ export const Time: React.FC<Props> = (Props) => {
   ];
 
   function createReservePropriety() {
-    const marubatsu: any = [
-      ["◯", "×", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-      ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ];
+    console.log("nankai");
+    return times.map((time, index) => {
+      return (
+        <tr key={index}>
+          <th scope="row">{time}</th>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-0`}
+          >
+            {marubatsu[index][0]}
+          </td>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-1`}
+          >
+            {marubatsu[index][1]}
+          </td>
 
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-2`}
+          >
+            {marubatsu[index][2]}
+          </td>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-3`}
+          >
+            {marubatsu[index][3]}
+          </td>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-4`}
+          >
+            {marubatsu[index][4]}
+          </td>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-5`}
+          >
+            {marubatsu[index][5]}
+          </td>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-6`}
+          >
+            {marubatsu[index][6]}
+          </td>
+          <th scope="row">{time}</th>
+        </tr>
+      );
+    });
+  }
+
+  function onClickMarubaru(e: any) {
     const changeIdTime: any = {};
     for (let timeIndex = 0; timeIndex < 21; timeIndex++) {
       let initialTime = 9;
@@ -255,105 +244,61 @@ export const Time: React.FC<Props> = (Props) => {
       }
     }
 
-    function onClickMarubaru(e: any) {
-      // 選択したセルの位置を特定
-      const tempSelected = changeIdTime[e.target.id];
-      const [numberOfDay, time] = tempSelected.split(",");
-      // 選択したセルの列の日付のテキストを取得
-      const tempSelectedDate = document.getElementById(
-        `dateAndDay${numberOfDay}`
-      )!.innerText;
-      // 取得した日付テキストから日にちを取り出す
-      const [selectedDate] = tempSelectedDate.split("\n");
-      // 年月を取得
-      const yearMonth = document.getElementById("yearMonth")?.innerText;
-      // 現在表示している週の一番最初の日のテキスト取得
-      const tempLeftDate = document.getElementById("dateAndDay0")!.innerText;
-      const [leftDate] = tempLeftDate.split("\n");
-      // 現在表示している週の一番最後の日のテキスト取得
-      const tempRightDate = document.getElementById("dateAndDay6")!.innerText;
-      const [rightDate] = tempRightDate.split("\n");
+    // 選択したセルの位置を特定
+    const tempSelected = changeIdTime[e.target.id];
+    const [numberOfDay, time] = tempSelected.split(",");
+    // 選択したセルの列の日付のテキストを取得
+    const tempSelectedDate = document.getElementById(
+      `dateAndDay${numberOfDay}`
+    )!.innerText;
+    // 取得した日付テキストから日にちを取り出す
+    const [selectedDate] = tempSelectedDate.split("\n");
+    // 年月を取得
+    const yearMonth = document.getElementById("yearMonth")?.innerText;
+    // 現在表示している週の一番最初の日のテキスト取得
+    const tempLeftDate = document.getElementById("dateAndDay0")!.innerText;
+    const [leftDate] = tempLeftDate.split("\n");
+    // 現在表示している週の一番最後の日のテキスト取得
+    const tempRightDate = document.getElementById("dateAndDay6")!.innerText;
+    const [rightDate] = tempRightDate.split("\n");
 
-      if (Number(leftDate) > Number(rightDate)) {
-        if (Number(selectedDate) < 7) {
-          const sliceYearMonth = yearMonth?.slice(0, -1);
-          const [year, month] = sliceYearMonth!.split("年");
-          console.log("year: ", year);
-          console.log("Month: ", Number(month) + 1);
-          console.log("selectedDate: ", selectedDate);
-          console.log("time: ", time);
-        } else {
-          const sliceYearMonth = yearMonth?.slice(0, -1);
-          const [year, month] = sliceYearMonth!.split("年");
-          console.log("year: ", year);
-          console.log("Month: ", Number(month));
-          console.log("selectedDate: ", selectedDate);
-          console.log("time: ", time);
-        }
+    if (Number(leftDate) > Number(rightDate)) {
+      if (Number(selectedDate) < 7) {
+        const sliceYearMonth = yearMonth?.slice(0, -1);
+        const [year, month] = sliceYearMonth!.split("年");
+        const saveDate: Date = new Date(
+          `20${year}-${Number(month) + 1}-${selectedDate} ${time}`
+        );
+        sessionStorage.setItem("start", String(saveDate));
       } else {
         const sliceYearMonth = yearMonth?.slice(0, -1);
         const [year, month] = sliceYearMonth!.split("年");
-        console.log("year: ", year);
-        console.log("Month: ", Number(month));
-        console.log("selectedDate: ", selectedDate);
-        console.log("time: ", time);
+        const saveDate: Date = new Date(
+          `20${year}-${month}-${selectedDate} ${time}`
+        );
+        sessionStorage.setItem("start", String(saveDate));
       }
-
-      /////////////
-      //赤チョンに入れる
-      /////////////
-      const link: any | null = document.getElementById("link");
-      link.click();
+    } else {
+      const sliceYearMonth = yearMonth?.slice(0, -1);
+      const [year, month] = sliceYearMonth!.split("年");
+      const saveDate: Date = new Date(
+        `20${year}-${month}-${selectedDate} ${time}`
+      );
+      sessionStorage.setItem("start", String(saveDate));
     }
 
-    return times.map((time, index) => {
-      return (
-        <tr key={index}>
-          <th scope="row">{time}</th>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-0`}>
-            {marubatsu[index][0]}
-          </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-1`}>
-            {marubatsu[index][1]}
-          </td>
-
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-2`}>
-            {marubatsu[index][2]}
-          </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-3`}>
-            {marubatsu[index][3]}
-          </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-4`}>
-            {marubatsu[index][4]}
-          </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-5`}>
-            {marubatsu[index][5]}
-          </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-6`}>
-            {marubatsu[index][6]}
-          </td>
-          <th scope="row">{time}</th>
-        </tr>
-      );
-    });
-
-    const reservePropriety: any = [];
-
-    times.forEach((_, index) => {
-      for (let i = 0; i < 7; i++) {
-        reservePropriety.push(
-          document.getElementById(`${i}-${index}`)?.innerText
-        );
-      }
-    });
-    console.log("reservePropriety: ", reservePropriety);
+    const link: any | null = document.getElementById("link");
+    link.click();
   }
 
   function onClickLastWeek() {
-    setNowDate(new Date(nowDate.setDate(nowDate.getDate() - 14)));
+    setNowDate(new Date(nowDate.setDate(nowDate.getDate() - 7)));
+    fetchReserves();
+    console.log("nowDate: ", nowDate);
   }
   function onClickNextWeek() {
-    setNowDate(new Date(nowDate.setDate(nowDate.getDate())));
+    setNowDate(new Date(nowDate.setDate(nowDate.getDate() + 7)));
+    fetchReserves();
   }
 
   return (
@@ -362,7 +307,18 @@ export const Time: React.FC<Props> = (Props) => {
         <tbody>
           <tr>
             <th scope="row" rowSpan={2}>
-              <button onClick={() => onClickLastWeek()}>前の週へ</button>
+              {(() => {
+                if (
+                  dayjs(nowDate).format("YYYYMMDD") ===
+                  dayjs(new Date()).format("YYYYMMDD")
+                ) {
+                  return <></>;
+                } else {
+                  return (
+                    <button onClick={() => onClickLastWeek()}>前の週へ</button>
+                  );
+                }
+              })()}
             </th>
             <th id="yearMonth" scope="col" colSpan={7}>
               {dayjs(nowDate).format("YY年MM月")}

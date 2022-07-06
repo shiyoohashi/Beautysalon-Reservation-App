@@ -55,3 +55,7 @@
 .amplify-button[data-variation="primary"] {
   background: gray;
 }
+
+.time-cells:hover {
+  background-color: #728888;
+}
