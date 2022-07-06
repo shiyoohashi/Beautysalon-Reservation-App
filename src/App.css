@@ -44,9 +44,10 @@
   }
 }
 
-
 .amplify-button[data-variation="primary"] {
   background: gray;
 }
 
-
+.time-cells:hover {
+  background-color: #728888; /*リンクにマウスが乗ったら背景色を変更する*/
+}

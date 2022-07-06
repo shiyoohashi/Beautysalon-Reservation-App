@@ -310,26 +310,54 @@ export const Time: React.FC<Props> = (Props) => {
       return (
         <tr key={index}>
           <th scope="row">{time}</th>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-0`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-0`}
+          >
             {marubatsu[index][0]}
           </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-1`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-1`}
+          >
             {marubatsu[index][1]}
           </td>
 
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-2`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-2`}
+          >
             {marubatsu[index][2]}
           </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-3`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-3`}
+          >
             {marubatsu[index][3]}
           </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-4`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-4`}
+          >
             {marubatsu[index][4]}
           </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-5`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-5`}
+          >
             {marubatsu[index][5]}
           </td>
-          <td onClick={(e) => onClickMarubaru(e)} id={`${index}-6`}>
+          <td
+            className="time-cells"
+            onClick={(e) => onClickMarubaru(e)}
+            id={`${index}-6`}
+          >
             {marubatsu[index][6]}
           </td>
           <th scope="row">{time}</th>
