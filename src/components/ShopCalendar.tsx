@@ -114,7 +114,7 @@ export const ShopCalendar = () => {
   }
 
   return (
-    <div>
+    <div id="shopcalendar">
       <Calendar
         localizer={localizer}
         events={eventList}
