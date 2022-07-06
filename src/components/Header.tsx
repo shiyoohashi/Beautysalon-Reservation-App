@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./Header.css";
-import "./main.css";
+import "./Header.css";
 
 type Props = {
   signOut: any;
@@ -46,15 +45,12 @@ export const Header: React.FC<Props> = (Props) => {
       <h1 className="header__logo">
         <div className="header__logo__img">YAJIMA HAIR</div>
       </h1>
-      <div className="header__username">
-        User Name:
-        <br />
-        {Props.userName}
-      </div>
+
       <div className="header__container" style={{ height: "1037px" }}>
-        <span className="header__toggle">
+        <span className="header__username">{Props.userName}様</span>
+        {/* <span className="header__toggle">
           <span></span>
-        </span>
+        </span> */}
         <div className="header__reserve">
           <a
             href="
@@ -63,8 +59,7 @@ export const Header: React.FC<Props> = (Props) => {
             target="_blank"
             className="header__reserve__link"
           >
-            <span className="header__reserve__en">Sign out</span>
-            <span className="header__reserve__ja">退却</span>
+            <span className="header__reserve__ja">SignOut</span>
           </a>
         </div>
         <div className="header__container__inner" style={{ height: "1037px" }}>
@@ -76,7 +71,7 @@ export const Header: React.FC<Props> = (Props) => {
           </div>
           <div className="header__container__main">
             <nav className="header__nav">
-              <ul className="header__nav__list">
+              {/* <ul className="header__nav__list">
                 <li className="header__nav__item">
                   <a
                     href="https://Tashinami-hair.com/#concept"
@@ -117,7 +112,7 @@ export const Header: React.FC<Props> = (Props) => {
                     Access
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </nav>
             <div className="header__info">
               <dl className="header__info__column">

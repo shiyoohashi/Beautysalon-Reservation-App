@@ -50,32 +50,36 @@ export const CheckReserve = () => {
   }
 
   return (
-    <>
-      <h3>予約内容確認</h3>
-      <table className="table table-dark table-bordered ">
+    <div id="check-reserve">
+      <h3 className="text-center">Confirmation</h3>
+      <table className="table table-striped table-dark ">
         <tbody>
           <tr>
-            <td>予約日</td>
-            <td>
+            <td className="text-center">予約日</td>
+            <td className="text-center">
               {dayjs(sessionStorage.getItem("start")).format(
                 "YY年MM月DD日\nHH時mm分"
               )}
             </td>
           </tr>
           <tr>
-            <td>メニュー</td>
-            <td>{sessionStorage.getItem("menu")}</td>
+            <td className="text-center">メニュー</td>
+            <td className="text-center">{sessionStorage.getItem("menu")}</td>
           </tr>
           <tr>
-            <td>料金</td>
-            <td>{sessionStorage.getItem("amountOfMoney")} 円</td>
+            <td className="text-center">料金</td>
+            <td className="text-center">
+              {sessionStorage.getItem("amountOfMoney")} 円
+            </td>
           </tr>
         </tbody>
       </table>
-      <button className="btn btn-success" onClick={eventOnClick}>
-        予約確定
-      </button>
+      <div className="text-center">
+        <button className="btn btn-dark" onClick={eventOnClick}>
+          予約確定
+        </button>
+      </div>
       <Link id="home" to={"/"}></Link>
-    </>
+    </div>
   );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "./Header.css";
-import "./main.css";
+import "./Header.css";
 
 // type Props = {
 //   signOut: any;
@@ -33,7 +32,7 @@ export const Footer: React.FC = () => {
             ミッドランドスクウェア35階
           </dd>
           <dd>
-            <a href="https://goo.gl/maps/3tVaYJDV2Q4htBRY8" target="_blank">
+            <a href="https://goo.gl/maps/NxH656Hdhb2V9fhU6" target="_blank">
               View on Google Map
             </a>
           </dd>
