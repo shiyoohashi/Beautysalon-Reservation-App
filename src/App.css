@@ -62,4 +62,15 @@
 
 .time-cells:hover {
   background-color: #728888;
+  border: #282c34 1px;
+}
+
+.table-font-color {
+  color: white;
+  table-layout: fixed;
+  font-size: 11px;
+}
+
+.table-font {
+  font-size: 11px;
 }

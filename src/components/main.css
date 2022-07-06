@@ -82,7 +82,7 @@ var,
 video {
   margin: 0;
   padding: 0;
-  border: 0;
+  /* border: 0; */
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -172,7 +172,7 @@ a {
   margin-top: 15%;
 }
 #time {
-  margin-top: 10%;
+  margin-top: 15%;
 }
 #shopcalendar {
   margin-top: 10%;

@@ -61,7 +61,7 @@ export const Time = () => {
       forCalenderDate.setDate(forCalenderDate.getDate() + 1);
 
       return (
-        <td id={`dateAndDay${index}`} key={index}>
+        <td className="table-font" id={`dateAndDay${index}`} key={index}>
           {tempDate}
           <br />
           {`(${listDay[dayOfNumber]})`}
@@ -285,7 +285,7 @@ export const Time = () => {
 
   return (
     <div id="time">
-      <table className="table">
+      <table className="table table-bordered text-center table-font-color">
         <tbody>
           <tr>
             <th scope="row" rowSpan={2}>
