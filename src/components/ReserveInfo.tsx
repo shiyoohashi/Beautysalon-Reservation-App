@@ -112,8 +112,15 @@ export const ReserveInfo: React.FC<Props> = (Props) => {
         </tbody>
       </table>
       <div className="text-center">
+        <label>
+          ご予約ありがとうございます。
+          <br />
+          当日のご来店をお待ちしております。
+        </label>
+      </div>
+      <div className="text-center">
         <button className="btn btn-danger" onClick={onClickCancelButton}>
-          キャンセル
+          予約キャンセル
         </button>
       </div>
     </div>
