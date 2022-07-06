@@ -5,6 +5,8 @@ import { TypeOfReserve } from "./global";
 import { Home } from "./components/Home";
 import { Main } from "./components/main";
 import { Admin } from "./components/Admin";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
@@ -39,7 +41,7 @@ const components = {
       <View textAlign="center" padding={tokens.space.large}>
         <Image
           alt="Amplify logo"
-          src="https://user-images.githubusercontent.com/98013294/177288142-baffb92c-6129-4109-8dd0-9d1084bfa4db.png"
+          src="https://user-images.githubusercontent.com/98013294/177367993-fb3fa28a-1738-46c3-b178-28285a856cb0.png"
           height="200px"
         />
       </View>
@@ -64,10 +66,13 @@ const components = {
 
       return (
         <Heading
+          style={{ fontSize: "10" }}
           padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
-          level={3}
+          level={6}
         >
-          ログインしてください
+          どんな角刈りにする？
+          <br />
+          ログインしてね
         </Heading>
       );
     },
@@ -96,9 +101,11 @@ const components = {
       return (
         <Heading
           padding={`${tokens.space.xl} 0 0 ${tokens.space.xl}`}
-          level={3}
+          level={6}
         >
-          新規登録
+          初めまして。
+          <br />
+          あなたの男気見せてください。
         </Heading>
       );
     },
@@ -340,44 +347,42 @@ function App() {
           sessionStorage.setItem("user", user.attributes.name);
           console.log("=====user=====", user);
           return (
-            <main>
-              <div className="App">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/admin" element={<Admin />} />
-                  {/* <Route path="/" element={<Home user={user} />} /> */}
-                  {/* <Route path="/" element={<Main />} /> */}
-                  <Route
-                    path="/shopcalender"
-                    element={
-                      <ShopCalendar
-                        reserves={reserves}
-                        setReserves={setReserves}
-                      />
-                    }
-                  />
-                  <Route path="/menu" element={<Menu />} />
-                  <Route
-                    path="/menu/time"
-                    element={
-                      <Time reserves={reserves} setReserves={setReserves} />
-                    }
-                  />
 
-                  <Route
-                    path="/menu/time/checkreserve"
-                    element={<CheckReserve />}
-                  />
-                </Routes>
-                <Heading level={4}>
-                  ログインユーザー：{user.attributes.name} さん
-                </Heading>
+            <>
+              <Header signOut={signOut} userName={user.attributes.name} />
+              <main>
+                <div className="App">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/admin" element={<Admin />} />
+                    {/* <Route path="/" element={<Home user={user} />} /> */}
+                    {/* <Route path="/" element={<Main />} /> */}
+                    <Route
+                      path="/shopcalender"
+                      element={
+                        <ShopCalendar
+                          reserves={reserves}
+                          setReserves={setReserves}
+                        />
+                      }
+                    />
+                    <Route path="/menu" element={<Menu />} />
+                    <Route
+                      path="/menu/time"
+                      element={
+                        <Time reserves={reserves} setReserves={setReserves} />
+                      }
+                    />
 
-                {/* <Button onClick={signOut}>Sign out</Button> */}
-              </div>
-
-              <button onClick={signOut}>Sign out</button>
-            </main>
+                    <Route
+                      path="/menu/time/checkreserve"
+                      element={<CheckReserve />}
+                    />
+                  </Routes>
+                </div>
+              </main>
+              <Footer />
+            </>
           );
         }}
       </Authenticator>

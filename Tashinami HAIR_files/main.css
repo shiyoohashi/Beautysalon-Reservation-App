@@ -2430,7 +2430,7 @@ html:not(.wf-ebgaramond-n4-active) .features__section__label :before {
   top: 0;
   width: 125px;
   height: 64px;
-  background-image: url(../images/logo.svg);
+  background-image: url("../images/logo.svg");
   background-size: contain;
   background-position: 50%;
   background-repeat: no-repeat;

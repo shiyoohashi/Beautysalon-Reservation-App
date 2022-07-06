@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <BrowserRouter>
+    <script src="./Tashinami HAIR_files/zdy2dgp.js" async={true}></script>
     <App />
   </BrowserRouter>
 );
