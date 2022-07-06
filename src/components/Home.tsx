@@ -5,6 +5,8 @@ import { TypeOfReserve } from "../global";
 import { Menu } from "./Menu";
 import { ReserveInfo } from "./ReserveInfo";
 import { Admin } from "./Admin";
+import "./main.css";
+
 
 export const Home = () => {
   const [loadedScreen, setLoadedScreen] = useState(<></>);

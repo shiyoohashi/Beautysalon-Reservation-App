@@ -284,7 +284,7 @@ export const Time = () => {
   }
 
   return (
-    <div>
+    <div id="time">
       <table className="table">
         <tbody>
           <tr>
@@ -297,7 +297,7 @@ export const Time = () => {
                   return <></>;
                 } else {
                   return (
-                    <button onClick={() => onClickLastWeek()}>前の週へ</button>
+                    <button onClick={() => onClickLastWeek()}>◀︎◀︎</button>
                   );
                 }
               })()}
@@ -306,7 +306,7 @@ export const Time = () => {
               {dayjs(nowDate).format("YY年MM月")}
             </th>
             <th scope="row" rowSpan={2}>
-              <button onClick={() => onClickNextWeek()}>次の週へ</button>
+              <button onClick={() => onClickNextWeek()}>▶︎▶︎</button>
             </th>
           </tr>
           <tr>{createDateAndDayOfWeek()}</tr>

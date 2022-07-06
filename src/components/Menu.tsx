@@ -86,11 +86,11 @@ export const Menu = () => {
               id={menuObj.menu}
               type="checkbox"
               name="menuCheck"
-              className="menuCheck "
+              className="menuCheck"
               value={menuObj.menu}
               onChange={(e) => onChangeCheck(e)}
             />
-            <label>
+            <label htmlFor={menuObj.menu}>
               <b>{menuObj.menu}</b>
               {` (施術目安：${menuObj.treatmentTime}分）`}
             </label>
