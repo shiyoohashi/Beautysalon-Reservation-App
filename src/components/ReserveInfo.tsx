@@ -80,31 +80,33 @@ export const ReserveInfo = () => {
   }
 
   return (
-    <>
-      <h4 className="text-center">★お客さまの予約★</h4>
+    <div id="reserveInfo">
+      <h3 className="text-center">Reserve Information</h3>
       <table className="table table-dark table-bordered ">
         <tbody>
           <tr>
-            <td>予約日</td>
-            <td>
+            <td className="text-center">予約日</td>
+            <td className="text-center">
               {dayjs(sessionStorage.getItem("start")).format(
                 "YY年MM月DD日\nHH時mm分"
               )}
             </td>
           </tr>
-          <tr>
+          <tr className="text-center">
             <td>メニュー</td>
             <td>{sessionStorage.getItem("menu")}</td>
           </tr>
-          <tr>
+          <tr className="text-center">
             <td>料金</td>
             <td>{sessionStorage.getItem("amountOfMoney")} 円</td>
           </tr>
         </tbody>
       </table>
-      <button className="btn btn-danger" onClick={onClickCancelButton}>
-        キャンセル
-      </button>
-    </>
+      <div className="text-center">
+        <button className="btn btn-danger" onClick={onClickCancelButton}>
+          キャンセル
+        </button>
+      </div>
+    </div>
   );
 };

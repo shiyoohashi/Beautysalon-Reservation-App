@@ -44,6 +44,7 @@ export const Header: React.FC<Props> = (Props) => {
     <header className="header">
       <h1 className="header__logo">
         <div className="header__logo__img">YAJIMA HAIR</div>
+        <a href="./admin">Link</a>
       </h1>
 
       <div className="header__container" style={{ height: "1037px" }}>
