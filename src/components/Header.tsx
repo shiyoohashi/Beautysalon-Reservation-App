@@ -36,6 +36,16 @@ export const Header: React.FC<Props> = (Props) => {
     }
   }
 
+  function onClickSignout() {
+    // setTimeout(function () {
+    //   window.location.href =
+    //     "https://japan-crew-cut-association.github.io/Tashinami-HP/";
+    // }, 700);
+    // setTimeout(function () {
+    Props.signOut();
+    //   console.log("サインアウト実行");
+    // }, 500);
+  }
   return (
     // <>
     //   <header className="header">
@@ -69,8 +79,7 @@ export const Header: React.FC<Props> = (Props) => {
         </span> */}
         <div className="header__reserve">
           <a
-            href="https://japan-crew-cut-association.github.io/Tashinami-HP/"
-            onClick={Props.signOut}
+            onClick={onClickSignout}
             className="header__reserve__link header__reserve__ja"
           >
             SignOut
