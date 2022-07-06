@@ -1,76 +1,20 @@
-import React from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { useEffect } from "react";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import { deleteReservation } from "../graphql/mutations";
 import { listReserves } from "../graphql/queries";
-import awsExports from "../aws-exports";
 import { TypeOfShopCalendar, TypeOfReserve, TypeOfMenu } from "../global";
-Amplify.configure(awsExports);
 
 const localizer = momentLocalizer(moment);
 const eventList: TypeOfShopCalendar[] = [];
 
-type Props = {
-  reserves: TypeOfReserve[];
-  setReserves: (reserves: TypeOfReserve[]) => void;
-};
-
-export const ShopCalendar: React.FC<Props> = (Props) => {
-  async function delReservation(wantToDeleteReservation: TypeOfReserve) {
-    try {
-      if (
-        !wantToDeleteReservation.date ||
-        !wantToDeleteReservation.menu ||
-        !wantToDeleteReservation.stylistId ||
-        !wantToDeleteReservation.customerId
-      ) {
-        console.log("====deleteReservationできてないよ=====");
-        console.log(
-          "====wantToDeleteReservation.date=====",
-          wantToDeleteReservation.date
-        );
-        console.log(
-          "====wantToDeleteReservation.menuId=====",
-          wantToDeleteReservation.menu
-        );
-        console.log(
-          "====wantToDeleteReservation.stylistId=====",
-          wantToDeleteReservation.stylistId
-        );
-        console.log(
-          "====wantToDeleteReservation.customerId=====",
-          wantToDeleteReservation.customerId
-        );
-        return;
-      }
-      console.log("====このデータ消します=====", wantToDeleteReservation);
-      await API.graphql({
-        query: deleteReservation,
-        variables: { input: { id: wantToDeleteReservation.id } },
-      });
-      // await API.graphql(
-      //   graphqlOperation(deleteReservation, {
-      //     input: { id: wantToDeleteReservation.id },
-      //   })
-      // );
-
-      console.log("====このデータ消しました=====", wantToDeleteReservation);
-    } catch (err) {
-      console.log("error deleteReservation:", err);
-    }
-  }
-
-  async function deleteAllReservation() {
-    Props.reserves.forEach((reservation: TypeOfReserve) => {
-      delReservation(reservation);
-    });
-  }
+export const ShopCalendar = () => {
+  let reservations: any;
 
   useEffect(() => {
-    fetchReservations();
+    createEventList();
   }, []);
 
   async function fetchReservations() {
@@ -80,24 +24,31 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
       );
       const reservations: [TypeOfReserve] =
         reservationData.data.listReservations.items;
-      console.log("fetch", reservations);
-      Props.setReserves(reservations);
+      return reservations;
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
 
-      const shopMenu: TypeOfMenu[] = [
-        { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
-        { id: 2, menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
-        {
-          id: 3,
-          menu: "カット＋カラー",
-          amountOfMoney: 20000,
-          treatmentTime: 60,
-        },
-        { id: 4, menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
-        { id: 5, menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
-      ];
+  async function createEventList() {
+    reservations = await fetchReservations();
+    const shopMenu: TypeOfMenu[] = [
+      { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
+      { id: 2, menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
+      {
+        id: 3,
+        menu: "カット＋カラー",
+        amountOfMoney: 20000,
+        treatmentTime: 60,
+      },
+      { id: 4, menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
+      { id: 5, menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
+    ];
 
-      eventList.splice(0); //リスト消去しないと増えるので削除
-      reservations.forEach((element, index) => {
+    eventList.splice(0); //リスト消去しないと増えるので削除
+
+    if (reservations) {
+      reservations.forEach((element: any, index: number) => {
         const selectMenu: any = shopMenu.find((MenuObj) => {
           return MenuObj.menu === element.menu;
         });
@@ -109,7 +60,6 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
         const hour = elementDate.getHours();
         const minute = elementDate.getMinutes();
         const ttmmddhhmm = `${year}-${month}-${date} ${hour}:${minute}`;
-
         const endDate: Date = new Date(element.date);
 
         if (selectMenu !== undefined) {
@@ -127,9 +77,35 @@ export const ShopCalendar: React.FC<Props> = (Props) => {
           eventList.push(pushObj);
         }
       });
-    } catch (err) {
-      console.log("error fetching todos");
     }
+  }
+
+  async function delReservation(wantToDeleteReservation: TypeOfReserve) {
+    try {
+      if (
+        !wantToDeleteReservation.date ||
+        !wantToDeleteReservation.menu ||
+        !wantToDeleteReservation.stylistId ||
+        !wantToDeleteReservation.customerId
+      ) {
+        console.log("====deleteReservationできてないよ=====");
+        return;
+      }
+      console.log("====このデータ消します=====", wantToDeleteReservation);
+      await API.graphql({
+        query: deleteReservation,
+        variables: { input: { id: wantToDeleteReservation.id } },
+      });
+      console.log("====このデータ消しました=====", wantToDeleteReservation);
+    } catch (err) {
+      console.log("error deleteReservation:", err);
+    }
+  }
+
+  function deleteAllReservation() {
+    reservations.forEach((reservation: TypeOfReserve) => {
+      delReservation(reservation);
+    });
   }
 
   function onClickEvent(event: any) {

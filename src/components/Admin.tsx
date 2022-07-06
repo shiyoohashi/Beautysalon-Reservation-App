@@ -28,7 +28,7 @@ export const Admin: React.FC = () => {
       <br />
       <h1>Administrator access</h1>
       <div className="menus">
-        <Link id="confirm_reserve" to="/shopcalender"></Link>
+        <Link id="confirm_reserve" to="shopcalender"></Link>
 
         <button className="adminButton" onClick={() => confirmReservation()}>
           Reservations
@@ -38,18 +38,18 @@ export const Admin: React.FC = () => {
           </div>
           <br /> */}
         </button>
-        <Link id="edit_menu" to="/shopcalender"></Link>
+        <Link id="edit_menu" to="shopcalender"></Link>
         <button className="adminButton" onClick={() => editMenu()}>
           Menus
         </button>
-        <Link id="set_holidays" to="/shopcalender"></Link>
+        <Link id="set_holidays" to="shopcalender"></Link>
         <button className="adminButton" onClick={() => setHolidays()}>
           {/* <br />
           <div className="header__reserve__en">Set holidays</div>
           <br /> */}
           Holidays
         </button>
-        <Link id="edit_stylist" to="/shopcalender"></Link>
+        <Link id="edit_stylist" to="shopcalender"></Link>
         <button className="adminButton" onClick={() => editStylist()}>
           {/* <br />
           <div className="header__reserve__en">Edit stylist's status</div>

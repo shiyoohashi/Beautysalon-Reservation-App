@@ -115,48 +115,13 @@ export const Menu = () => {
       <br />
       <br />
       <h3 className="text-center">Menu</h3>
-
-      {/* 予約がある場合 */}
       <div className="border p-3 border m-5">{menuList()}</div>
-
       <div className="text-center">
         <button className="btn btn-dark" onClick={() => onClickButton()}>
           予約時間選択へ
         </button>
       </div>
-
-      <Link id="link" to={"/menu/time"}></Link>
+      <Link id="link" to={"selecttime"}></Link>
     </div>
-    // 予約がある場合
   );
 };
-
-// {
-//    <div class="menu_box">
-// 					<ul>
-// 					<div class="menu">
-// 					<li>
-// 					<input type="checkbox" name="menu_id[]" value="72" id="menu_id72">
-// 					<label for="menu_id72"><b>縮毛矯正、髪質改善ストレート</b></label>
-// 					</li>
-// 					</div>
-// 												<div class="price">
-// 							<li>
-// 							<label for="menu_id72">18,700円～</label>
-// 							</li>
-// 							</div>
-
-// 					<div class="text fs12 pB10">
-// 					<li class="pT10">
-// 											<label for="menu_id72">
-// 						ナチュラルに仕上げるものから板のように真っ直ぐ<br>
-// サラサラにするストレートまでご要望にお応え致します。BIKAKUを使用しています。<br>
-// 部分矯正<br>
-// 前髪や根元のクセの矯正に、ふくらみや<br>
-// 部分的なクセの矯正に。
-// 						</label>
-// 					</li>
-// 					</div>
-// 					</ul>
-// 					</div>
-// }
