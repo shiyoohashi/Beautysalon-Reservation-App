@@ -124,6 +124,18 @@ export const Menu = () => {
           予約時間選択へ
         </button>
       </div>
+
+      <div className="header__reserve">
+        <a
+          href="https"
+          onClick={() => onClickButton()}
+          target="_blank"
+          className="header__reserve__link"
+        >
+          <span className="header__reserve__en">Select time</span>
+          <span className="header__reserve__ja">予約時間選択</span>
+        </a>
+      </div>
       <Link id="link" to={"/menu/time"}></Link>
     </div>
     // 予約がある場合

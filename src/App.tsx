@@ -41,7 +41,7 @@ const components = {
       <View textAlign="center" padding={tokens.space.large}>
         <Image
           alt="Amplify logo"
-          src="https://user-images.githubusercontent.com/98013294/177288142-baffb92c-6129-4109-8dd0-9d1084bfa4db.png"
+          src="https://user-images.githubusercontent.com/98013294/177367993-fb3fa28a-1738-46c3-b178-28285a856cb0.png"
           height="200px"
         />
       </View>

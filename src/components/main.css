@@ -2430,7 +2430,7 @@ html:not(.wf-ebgaramond-n4-active) .features__section__label :before {
   top: 0;
   width: 125px;
   height: 64px;
-  /* background-image: url(https://user-images.githubusercontent.com/98013294/177367993-fb3fa28a-1738-46c3-b178-28285a856cb0.png); */
+  background-image: url(https://user-images.githubusercontent.com/98013294/177367993-fb3fa28a-1738-46c3-b178-28285a856cb0.png);
   background-size: contain;
   background-position: 50%;
   background-repeat: no-repeat;
@@ -2670,14 +2670,14 @@ body:not(.touch) .header__reserve__link:hover {
   font-weight: 400;
   font-style: normal;
 }
-/* html:not(.wf-ebgaramond-n4-active) .header__reserve__en,
+html:not(.wf-ebgaramond-n4-active) .header__reserve__en,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en *,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en:after,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en :after,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en:before,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en :before {
   color: rgba(0, 0, 0, 0) !important;
-} */
+}
 .header__reserve__ja {
   display: block;
   font-size: 11px;
@@ -2724,14 +2724,14 @@ html:not(.wf-ebgaramond-n4-active) .header__reserve__en :before {
   letter-spacing: 0.05em;
   line-height: 44px;
 }
-html:not(.wf-ebgaramond-n4-active) .header__nav__link,
+/* html:not(.wf-ebgaramond-n4-active) .header__nav__link,
 html:not(.wf-ebgaramond-n4-active) .header__nav__link *,
 html:not(.wf-ebgaramond-n4-active) .header__nav__link:after,
 html:not(.wf-ebgaramond-n4-active) .header__nav__link :after,
 html:not(.wf-ebgaramond-n4-active) .header__nav__link:before,
 html:not(.wf-ebgaramond-n4-active) .header__nav__link :before {
   color: rgba(0, 0, 0, 0) !important;
-}
+} */
 @media (min-width: 1024px) {
   .header__nav__link:after {
     content: "";
