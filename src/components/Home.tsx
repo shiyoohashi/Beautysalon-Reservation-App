@@ -39,7 +39,6 @@ export const Home = () => {
 
   return (
     <>
-      <h1 className="text-center">Beauty Yajima</h1>
       {loadedScreen}
       {/* {(() => {
         if (sessionStorage.getItem("user") === "administrator") {
