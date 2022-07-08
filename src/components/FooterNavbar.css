@@ -1,0 +1,21 @@
+@media (max-width: 1024px) {
+  .footer_navbar {
+    z-index: 10000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
+  .btn-next {
+    margin: 10px;
+  }
+}
+
+@media (min-width: 1023px) {
+  .footer_navbar {
+    text-align: center;
+  }
+}
+
+.footer_navbar {
+  font-family: "Sawarabi Mincho", sans-serif;
+}

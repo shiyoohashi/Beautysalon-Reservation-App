@@ -171,8 +171,15 @@ a {
 #reserveInfo {
   margin-top: 15%;
 }
-#time {
-  margin-top: 15%;
+@media (min-width: 1024px) {
+  #time {
+    margin-top: 95px;
+  }
+}
+@media (max-width: 1023px) {
+  #time {
+    margin-top: 65px;
+  }
 }
 #shopcalendar {
   margin-top: 10%;
@@ -2878,14 +2885,14 @@ html:not(.wf-ebgaramond-n4-active) .header__nav__link :before {
     width: 110px;
     height: 56px;
     top: 0px;
-    left: 50%;
+    left: 10%;
     margin-left: -55px;
     opacity: 1 !important;
   }
   .header__container {
-    position: fixed;
-    top: auto;
-    bottom: 0;
+    /* position: fixed; */
+    top: 0;
+    /* bottom: 0; */
     height: 64px;
     background-color: rgba(114, 113, 113, 0.95);
     z-index: 100;

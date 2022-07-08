@@ -116,12 +116,6 @@ export const Menu = () => {
       <br />
       <h3 className="text-center">Menu</h3>
       <div className="border p-3 border m-5">{menuList()}</div>
-      <div className="text-center">
-        <button className="btn btn-dark" onClick={() => onClickButton()}>
-          予約時間選択へ
-        </button>
-      </div>
-      <Link id="link" to={"selecttime"}></Link>
     </div>
   );
 };

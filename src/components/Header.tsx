@@ -26,14 +26,9 @@ export const Header: React.FC<Props> = (Props) => {
     link.click();
   }
 
-  function clickAdmin() {
-    if (
-      Props.userName === "Administrater" ||
-      Props.userName === "administrater"
-    ) {
-      const link: any = document.getElementById("admin");
-      link.click();
-    }
+  function clickLogo() {
+    const link: any = document.getElementById("logo");
+    link.click();
   }
 
   function onClickSignout() {
@@ -62,17 +57,16 @@ export const Header: React.FC<Props> = (Props) => {
     //   </header>
     // </>
     <header className="header">
-      <h1 className="header__logo">
-        <div className="header__logo__img" onClick={() => clickAdmin()}>
-          YAJIMA HAIR
-        </div>
-
-        {/* <a href="./admin">Link</a> */}
-
-        <Link id="admin" to={"/admin"}></Link>
-      </h1>
-
       <div className="header__container" style={{ height: "1037px" }}>
+        <h1 className="header__logo">
+          <div className="header__logo__img" onClick={() => clickLogo()}>
+            YAJIMA HAIR
+          </div>
+
+          {/* <a href="./admin">Link</a> */}
+
+          <Link id="logo" to={"/"}></Link>
+        </h1>
         <span className="header__username">{Props.userName}様</span>
         {/* <span className="header__toggle">
           <span></span>

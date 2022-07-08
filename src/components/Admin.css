@@ -975,7 +975,7 @@ h1 {
   );
 }
 .intromask {
-  position: fixed;
+  /* position: fixed; */
   overflow: hidden;
   z-index: 9999;
 }
@@ -2637,7 +2637,7 @@ html:not(.wf-ebgaramond-n4-active) .footer__main__column dt :before {
   display: block;
   width: 106px;
   height: 54px;
-  position: fixed;
+  /* position: fixed; */
   top: 23px;
   left: 50%;
   margin-left: -53px;
@@ -2901,9 +2901,9 @@ html:not(.wf-ebgaramond-n4-active) .header__nav__link :before {
     opacity: 1 !important;
   }
   .header__container {
-    position: fixed;
-    top: auto;
-    bottom: 0;
+    /* position: fixed; */
+    top: 0;
+    /* bottom: 0 */
     height: 64px;
     background-color: rgba(114, 113, 113, 0.95);
     z-index: 100;
