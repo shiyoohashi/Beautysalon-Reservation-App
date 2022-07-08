@@ -122,3 +122,30 @@ export const listCustomers = /* GraphQL */ `
     }
   }
 `;
+export const getHoliday = /* GraphQL */ `
+  query GetHoliday($id: ID!) {
+    getHoliday(id: $id) {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listHolidays = /* GraphQL */ `
+  query ListHolidays(
+    $filter: ModelHolidayFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHolidays(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        date
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

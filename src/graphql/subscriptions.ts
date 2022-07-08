@@ -140,3 +140,33 @@ export const onDeleteCustomer = /* GraphQL */ `
     }
   }
 `;
+export const onCreateHoliday = /* GraphQL */ `
+  subscription OnCreateHoliday {
+    onCreateHoliday {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateHoliday = /* GraphQL */ `
+  subscription OnUpdateHoliday {
+    onUpdateHoliday {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteHoliday = /* GraphQL */ `
+  subscription OnDeleteHoliday {
+    onDeleteHoliday {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;

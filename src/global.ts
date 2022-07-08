@@ -35,3 +35,19 @@ export interface TypeOfReserve {
   stylistId: number;
   customerId: string;
 }
+
+export interface TypeOfHoliday {
+  id?: number;
+  date: string;
+}
+
+export interface TypeOfCustomer {
+  id?: number;
+  name: String;
+  mail: String;
+}
+
+export interface TypeOfStylist {
+  id?: number;
+  name: String;
+}

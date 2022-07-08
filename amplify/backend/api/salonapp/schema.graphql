@@ -28,3 +28,8 @@ type customer @model {
   name: String
   mail: String
 }
+
+type holiday @model {
+  id: ID!
+  date: String
+}

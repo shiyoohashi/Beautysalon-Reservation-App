@@ -176,3 +176,42 @@ export const deleteCustomer = /* GraphQL */ `
     }
   }
 `;
+export const createHoliday = /* GraphQL */ `
+  mutation CreateHoliday(
+    $input: CreateHolidayInput!
+    $condition: ModelHolidayConditionInput
+  ) {
+    createHoliday(input: $input, condition: $condition) {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateHoliday = /* GraphQL */ `
+  mutation UpdateHoliday(
+    $input: UpdateHolidayInput!
+    $condition: ModelHolidayConditionInput
+  ) {
+    updateHoliday(input: $input, condition: $condition) {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteHoliday = /* GraphQL */ `
+  mutation DeleteHoliday(
+    $input: DeleteHolidayInput!
+    $condition: ModelHolidayConditionInput
+  ) {
+    deleteHoliday(input: $input, condition: $condition) {
+      id
+      date
+      createdAt
+      updatedAt
+    }
+  }
+`;

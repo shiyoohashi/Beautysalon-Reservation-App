@@ -194,6 +194,35 @@ export type DeleteCustomerInput = {
   id: string,
 };
 
+export type CreateHolidayInput = {
+  id?: string | null,
+  date?: string | null,
+};
+
+export type ModelHolidayConditionInput = {
+  date?: ModelStringInput | null,
+  and?: Array< ModelHolidayConditionInput | null > | null,
+  or?: Array< ModelHolidayConditionInput | null > | null,
+  not?: ModelHolidayConditionInput | null,
+};
+
+export type holiday = {
+  __typename: "holiday",
+  id: string,
+  date?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateHolidayInput = {
+  id: string,
+  date?: string | null,
+};
+
+export type DeleteHolidayInput = {
+  id: string,
+};
+
 export type ModelReservationFilterInput = {
   id?: ModelIDInput | null,
   date?: ModelStringInput | null,
@@ -269,6 +298,20 @@ export type ModelCustomerFilterInput = {
 export type ModelCustomerConnection = {
   __typename: "ModelCustomerConnection",
   items:  Array<customer | null >,
+  nextToken?: string | null,
+};
+
+export type ModelHolidayFilterInput = {
+  id?: ModelIDInput | null,
+  date?: ModelStringInput | null,
+  and?: Array< ModelHolidayFilterInput | null > | null,
+  or?: Array< ModelHolidayFilterInput | null > | null,
+  not?: ModelHolidayFilterInput | null,
+};
+
+export type ModelHolidayConnection = {
+  __typename: "ModelHolidayConnection",
+  items:  Array<holiday | null >,
   nextToken?: string | null,
 };
 
@@ -470,6 +513,51 @@ export type DeleteCustomerMutation = {
   } | null,
 };
 
+export type CreateHolidayMutationVariables = {
+  input: CreateHolidayInput,
+  condition?: ModelHolidayConditionInput | null,
+};
+
+export type CreateHolidayMutation = {
+  createHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateHolidayMutationVariables = {
+  input: UpdateHolidayInput,
+  condition?: ModelHolidayConditionInput | null,
+};
+
+export type UpdateHolidayMutation = {
+  updateHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteHolidayMutationVariables = {
+  input: DeleteHolidayInput,
+  condition?: ModelHolidayConditionInput | null,
+};
+
+export type DeleteHolidayMutation = {
+  deleteHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetReservationQueryVariables = {
   id: string,
 };
@@ -618,6 +706,40 @@ export type ListCustomersQuery = {
   } | null,
 };
 
+export type GetHolidayQueryVariables = {
+  id: string,
+};
+
+export type GetHolidayQuery = {
+  getHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListHolidaysQueryVariables = {
+  filter?: ModelHolidayFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListHolidaysQuery = {
+  listHolidays?:  {
+    __typename: "ModelHolidayConnection",
+    items:  Array< {
+      __typename: "holiday",
+      id: string,
+      date?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateReservationSubscription = {
   onCreateReservation?:  {
     __typename: "reservation",
@@ -751,6 +873,36 @@ export type OnDeleteCustomerSubscription = {
     id: string,
     name?: string | null,
     mail?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateHolidaySubscription = {
+  onCreateHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateHolidaySubscription = {
+  onUpdateHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteHolidaySubscription = {
+  onDeleteHoliday?:  {
+    __typename: "holiday",
+    id: string,
+    date?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
