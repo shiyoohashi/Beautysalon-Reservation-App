@@ -176,42 +176,6 @@ export const deleteCustomer = /* GraphQL */ `
     }
   }
 `;
-export const createTest = /* GraphQL */ `
-  mutation CreateTest(
-    $input: CreateTestInput!
-    $condition: ModelTestConditionInput
-  ) {
-    createTest(input: $input, condition: $condition) {
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateTest = /* GraphQL */ `
-  mutation UpdateTest(
-    $input: UpdateTestInput!
-    $condition: ModelTestConditionInput
-  ) {
-    updateTest(input: $input, condition: $condition) {
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteTest = /* GraphQL */ `
-  mutation DeleteTest(
-    $input: DeleteTestInput!
-    $condition: ModelTestConditionInput
-  ) {
-    deleteTest(input: $input, condition: $condition) {
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createHoliday = /* GraphQL */ `
   mutation CreateHoliday(
     $input: CreateHolidayInput!
