@@ -194,31 +194,6 @@ export type DeleteCustomerInput = {
   id: string,
 };
 
-export type CreateTestInput = {
-  id?: string | null,
-};
-
-export type ModelTestConditionInput = {
-  and?: Array< ModelTestConditionInput | null > | null,
-  or?: Array< ModelTestConditionInput | null > | null,
-  not?: ModelTestConditionInput | null,
-};
-
-export type test = {
-  __typename: "test",
-  id: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateTestInput = {
-  id: string,
-};
-
-export type DeleteTestInput = {
-  id: string,
-};
-
 export type CreateHolidayInput = {
   id?: string | null,
   date?: string | null,
@@ -323,19 +298,6 @@ export type ModelCustomerFilterInput = {
 export type ModelCustomerConnection = {
   __typename: "ModelCustomerConnection",
   items:  Array<customer | null >,
-  nextToken?: string | null,
-};
-
-export type ModelTestFilterInput = {
-  id?: ModelIDInput | null,
-  and?: Array< ModelTestFilterInput | null > | null,
-  or?: Array< ModelTestFilterInput | null > | null,
-  not?: ModelTestFilterInput | null,
-};
-
-export type ModelTestConnection = {
-  __typename: "ModelTestConnection",
-  items:  Array<test | null >,
   nextToken?: string | null,
 };
 
@@ -551,48 +513,6 @@ export type DeleteCustomerMutation = {
   } | null,
 };
 
-export type CreateTestMutationVariables = {
-  input: CreateTestInput,
-  condition?: ModelTestConditionInput | null,
-};
-
-export type CreateTestMutation = {
-  createTest?:  {
-    __typename: "test",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateTestMutationVariables = {
-  input: UpdateTestInput,
-  condition?: ModelTestConditionInput | null,
-};
-
-export type UpdateTestMutation = {
-  updateTest?:  {
-    __typename: "test",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteTestMutationVariables = {
-  input: DeleteTestInput,
-  condition?: ModelTestConditionInput | null,
-};
-
-export type DeleteTestMutation = {
-  deleteTest?:  {
-    __typename: "test",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type CreateHolidayMutationVariables = {
   input: CreateHolidayInput,
   condition?: ModelHolidayConditionInput | null,
@@ -786,38 +706,6 @@ export type ListCustomersQuery = {
   } | null,
 };
 
-export type GetTestQueryVariables = {
-  id: string,
-};
-
-export type GetTestQuery = {
-  getTest?:  {
-    __typename: "test",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListTestsQueryVariables = {
-  filter?: ModelTestFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListTestsQuery = {
-  listTests?:  {
-    __typename: "ModelTestConnection",
-    items:  Array< {
-      __typename: "test",
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetHolidayQueryVariables = {
   id: string,
 };
@@ -985,33 +873,6 @@ export type OnDeleteCustomerSubscription = {
     id: string,
     name?: string | null,
     mail?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateTestSubscription = {
-  onCreateTest?:  {
-    __typename: "test",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateTestSubscription = {
-  onUpdateTest?:  {
-    __typename: "test",
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteTestSubscription = {
-  onDeleteTest?:  {
-    __typename: "test",
-    id: string,
     createdAt: string,
     updatedAt: string,
   } | null,

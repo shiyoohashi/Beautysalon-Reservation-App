@@ -140,33 +140,6 @@ export const onDeleteCustomer = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTest = /* GraphQL */ `
-  subscription OnCreateTest {
-    onCreateTest {
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTest = /* GraphQL */ `
-  subscription OnUpdateTest {
-    onUpdateTest {
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTest = /* GraphQL */ `
-  subscription OnDeleteTest {
-    onDeleteTest {
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateHoliday = /* GraphQL */ `
   subscription OnCreateHoliday {
     onCreateHoliday {

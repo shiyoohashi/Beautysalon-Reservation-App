@@ -1,7 +1,19 @@
 import { useState, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { listReserves } from "../graphql/queries";
-import { TypeOfReserve } from "../global";
+import {
+  listReserves,
+  listHolidays,
+  listMenus,
+  listStylists,
+  listCustomers,
+} from "../graphql/queries";
+import {
+  TypeOfReserve,
+  TypeOfHoliday,
+  TypeOfMenu,
+  TypeOfStylist,
+  TypeOfCustomer,
+} from "../global";
 import { Menu } from "./Menu";
 import { ReserveInfo } from "./ReserveInfo";
 import { Admin } from "./Admin";
@@ -36,9 +48,64 @@ export const Home = () => {
       console.log("error fetching todos");
     }
   }
+  async function fetchHolyday() {
+    try {
+      const reservationData: any = await API.graphql(
+        graphqlOperation(listHolidays)
+      );
+
+      const reservations: [TypeOfHoliday] =
+        reservationData.data.listHolidays.items;
+      console.log("holiday fetch", reservations);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
+  async function fetchMenu() {
+    try {
+      const reservationData: any = await API.graphql(
+        graphqlOperation(listMenus)
+      );
+
+      const reservations: [TypeOfMenu] = reservationData.data.listMenus.items;
+      console.log("menus fetch", reservations);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
+  async function fetchStylist() {
+    try {
+      const reservationData: any = await API.graphql(
+        graphqlOperation(listStylists)
+      );
+
+      const reservations: [TypeOfStylist] =
+        reservationData.data.listStylists.items;
+      console.log("stylists fetch", reservations);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
+  async function fetchCustomer() {
+    try {
+      const reservationData: any = await API.graphql(
+        graphqlOperation(listCustomers)
+      );
+
+      const reservations: [TypeOfCustomer] =
+        reservationData.data.listCustomers.items;
+      console.log("customers fetch", reservations);
+    } catch (err) {
+      console.log("error fetching todos");
+    }
+  }
 
   useEffect(() => {
     fetchReserves();
+    fetchHolyday();
+    fetchMenu();
+    fetchStylist();
+    fetchCustomer();
   }, []);
 
   return <>{loadedScreen}</>;
