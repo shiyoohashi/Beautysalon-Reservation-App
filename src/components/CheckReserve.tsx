@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 import { TypeOfReserve } from "../global";
 import { API, graphqlOperation } from "aws-amplify";
-import { createReservation, createHoliday } from "../graphql/mutations";
+import { createReservation } from "../graphql/mutations";
 import dayjs from "dayjs";
 
 export const CheckReserve = () => {
-  // const location = useLocation();
-  // const { reservations } = location.state as State;
-
   async function addReservation(reservation: TypeOfReserve) {
     try {
       if (
@@ -21,28 +18,10 @@ export const CheckReserve = () => {
         console.log("====reservation.menuId=====", reservation.menu);
         console.log("====reservation.stylistId=====", reservation.stylistId);
         console.log("====reservation.customerId=====", reservation.customerId);
-
         return;
       }
-
       await API.graphql(
         graphqlOperation(createReservation, { input: reservation })
-      );
-    } catch (err) {
-      console.log("error creating reservation:", err);
-    }
-  }
-
-  async function addReservation2(reservation: TypeOfReserve) {
-    try {
-      if (!reservation.date) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.date=====", reservation.date);
-        return;
-      }
-
-      await API.graphql(
-        graphqlOperation(createHoliday, { input: reservation })
       );
     } catch (err) {
       console.log("error creating reservation:", err);
@@ -59,18 +38,11 @@ export const CheckReserve = () => {
 
     addReservation(reserve);
 
-    const reserveTest: any = {
-      date: sessionStorage.getItem("start")!,
-    };
-    console.log("reserveTest: ", reserveTest);
-    addReservation2(reserveTest);
-
     const homeLink: any | null = document.getElementById("home");
     setTimeout(function () {
       homeLink.click();
     }, 500);
   }
-  function eventOnClick2() {}
 
   return (
     <div id="check-reserve">

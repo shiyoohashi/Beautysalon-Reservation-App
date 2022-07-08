@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { FooterNavbar } from "./components/FooterNavbar";
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
 import {
@@ -274,7 +273,6 @@ function App() {
         background: {
           primary: {
             value: "#fff",
-            // value: tokens.colors.neutral["80"].value,
           },
           secondary: {
             value: "#ffffff",
@@ -283,11 +281,9 @@ function App() {
         font: {
           primary: {
             value: "#000000",
-            // value: tokens.colors.neutral["80"].value,
           },
           secondary: {
             value: "#000000",
-            // value: tokens.colors.neutral["80"].value,
           },
           interactive: {
             value: tokens.colors.black.value,
@@ -348,7 +344,6 @@ function App() {
                   </Routes>
                 </div>
               </main>
-              <FooterNavbar />
               <Footer />
             </>
           );
