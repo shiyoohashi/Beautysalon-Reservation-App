@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { TypeOfReserve } from "../global";
 import { API, graphqlOperation } from "aws-amplify";
-import { createReservation } from "../graphql/mutations";
+import { createReservation, createHoliday } from "../graphql/mutations";
 import dayjs from "dayjs";
 
 export const CheckReserve = () => {
@@ -33,6 +33,22 @@ export const CheckReserve = () => {
     }
   }
 
+  async function addReservation2(reservation: TypeOfReserve) {
+    try {
+      if (!reservation.date) {
+        console.log("====addTodoできてないよ=====");
+        console.log("====reservation.date=====", reservation.date);
+        return;
+      }
+
+      await API.graphql(
+        graphqlOperation(createHoliday, { input: reservation })
+      );
+    } catch (err) {
+      console.log("error creating reservation:", err);
+    }
+  }
+
   function eventOnClick() {
     const reserve: TypeOfReserve = {
       date: sessionStorage.getItem("start")!,
@@ -43,11 +59,18 @@ export const CheckReserve = () => {
 
     addReservation(reserve);
 
+    const reserveTest: any = {
+      date: sessionStorage.getItem("start")!,
+    };
+    console.log("reserveTest: ", reserveTest);
+    addReservation2(reserveTest);
+
     const homeLink: any | null = document.getElementById("home");
     setTimeout(function () {
       homeLink.click();
     }, 500);
   }
+  function eventOnClick2() {}
 
   return (
     <div id="check-reserve">
