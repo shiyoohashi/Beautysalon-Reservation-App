@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { TypeOfMenuDetail } from "../global";
 // import "@aws-amplify/ui-react/styles.css";
+import { FooterNavbar } from "../components/FooterNavbar";
 
 export const Menu = () => {
   //選択メニューの初期化(nullになる)
@@ -116,6 +117,7 @@ export const Menu = () => {
       <br />
       <h3 className="text-center">Menu</h3>
       <div className="border p-3 border m-5">{menuList()}</div>
+      <FooterNavbar />
     </div>
   );
 };

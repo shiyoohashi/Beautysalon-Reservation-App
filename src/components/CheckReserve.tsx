@@ -17,9 +17,6 @@ import {
 import dayjs from "dayjs";
 
 export const CheckReserve = () => {
-  // const location = useLocation();
-  // const { reservations } = location.state as State;
-
   async function addReservation(reservation: TypeOfReserve) {
     try {
       if (
@@ -33,10 +30,8 @@ export const CheckReserve = () => {
         console.log("====reservation.menuId=====", reservation.menu);
         console.log("====reservation.stylistId=====", reservation.stylistId);
         console.log("====reservation.customerId=====", reservation.customerId);
-
         return;
       }
-
       await API.graphql(
         graphqlOperation(createReservation, { input: reservation })
       );
