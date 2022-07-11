@@ -1,11 +1,6 @@
 import React from "react";
 import "./Header.css";
 
-// type Props = {
-//   signOut: any;
-//   userName: string;
-// };
-
 export const Footer: React.FC = () => {
   return (
     <footer className="footer">

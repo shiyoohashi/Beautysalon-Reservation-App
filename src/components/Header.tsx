@@ -3,134 +3,75 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 type Props = {
-  signOut: any;
+  signOut: VoidFunction;
   userName: string;
 };
 export const Header: React.FC<Props> = (Props) => {
   function confirmReservation() {
-    const link: any = document.getElementById("confirm_reservation");
-    link.click();
+    const link: HTMLElement | null = document.getElementById(
+      "confirm_reservation"
+    );
+    if (link) {
+      link.click();
+    }
   }
   function editMenu() {
-    const link: any = document.getElementById("edit_menu");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("edit_menu");
+    if (link) {
+      link.click();
+    }
   }
 
   function setHolidays() {
-    const link: any = document.getElementById("set_holidays");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("set_holidays");
+    if (link) {
+      link.click();
+    }
   }
 
   function editStylist() {
-    const link: any = document.getElementById("edit_stylist");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("edit_stylist");
+    if (link) {
+      link.click();
+    }
   }
 
   function clickLogo() {
-    const link: any = document.getElementById("logo");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("logo");
+    if (link) {
+      link.click();
+    }
   }
 
   function onClickSignout() {
     // setTimeout(function () {
     //   window.location.href =
     //     "https://japan-crew-cut-association.github.io/Tashinami-HP/";
-    // }, 700);
-    // setTimeout(function () {
+    // }, 900);
     Props.signOut();
-    //   console.log("サインアウト実行");
-    // }, 500);
   }
+
   return (
-    // <>
-    //   <header className="header">
-    //     <span className="user">
-    //       {Props.userName}様
-    //       <Link
-    //         id="confirm_reservation"
-    //         to="https://japan-crew-cut-association.github.io/Tashinami-HP/"
-    //       ></Link>
-    //       <button className="sign_out" onClick={Props.signOut}>
-    //         Sign Out
-    //       </button>
-    //     </span>
-    //   </header>
-    // </>
     <header className="header">
       <div className="header__container" style={{ height: "1037px" }}>
         <h1 className="header__logo">
           <div className="header__logo__img" onClick={() => clickLogo()}>
             YAJIMA HAIR
           </div>
-
-          {/* <a href="./admin">Link</a> */}
-
           <Link id="logo" to={"/"}></Link>
         </h1>
         <span className="header__username">{Props.userName}様</span>
-        {/* <span className="header__toggle">
-          <span></span>
-        </span> */}
         <div className="header__reserve">
-          <a
+          <div
             onClick={onClickSignout}
             className="header__reserve__link header__reserve__ja"
           >
             SignOut
-          </a>
+          </div>
         </div>
         <div className="header__container__inner" style={{ height: "1037px" }}>
-          <div className="header__sublogo">
-            <a
-              href="https://Tashinami-hair.com/#"
-              className="header__sublogo__link"
-            ></a>
-          </div>
           <div className="header__container__main">
-            <nav className="header__nav">
-              {/* <ul className="header__nav__list">
-                <li className="header__nav__item">
-                  <a
-                    href="https://Tashinami-hair.com/#concept"
-                    className="header__nav__link"
-                  >
-                    Concept
-                  </a>
-                </li>
-                <li className="header__nav__item">
-                  <a
-                    href="https://Tashinami-hair.com/#features"
-                    className="header__nav__link"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li className="header__nav__item">
-                  <a
-                    href="https://Tashinami-hair.com/#menu"
-                    className="header__nav__link"
-                  >
-                    Menu
-                  </a>
-                </li>
-                <li className="header__nav__item">
-                  <a
-                    href="https://Tashinami-hair.com/#staff"
-                    className="header__nav__link"
-                  >
-                    Staff
-                  </a>
-                </li>
-                <li className="header__nav__item">
-                  <a
-                    href="https://Tashinami-hair.com/#access"
-                    className="header__nav__link"
-                  >
-                    Access
-                  </a>
-                </li>
-              </ul> */}
-            </nav>
+            <nav className="header__nav"></nav>
             <div className="header__info">
               <dl className="header__info__column">
                 <div className="opentime">

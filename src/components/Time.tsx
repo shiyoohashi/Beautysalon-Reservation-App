@@ -1,3 +1,4 @@
+import "./Time.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
@@ -93,7 +94,7 @@ export const Time = () => {
   const batsu = "✖️";
 
   function changeReservePropriety(reserves: any) {
-    let result: any = JSON.parse(JSON.stringify(initialMarubatsu));
+    let result: [string[]] = JSON.parse(JSON.stringify(initialMarubatsu));
 
     for (let row = 0; row < 21; row++) {
       for (let col = 0; col < 7; col++) {
@@ -115,6 +116,21 @@ export const Time = () => {
             }
           }
         });
+      }
+    }
+
+    const nowDate: string = dayjs(new Date()).format("DD");
+    const nowMonth: string = dayjs(new Date()).format("MM");
+    // 月を取得
+    const yearMonth = document.getElementById("yearMonth")?.innerText;
+    const sliceYearMonth = yearMonth?.slice(0, -1);
+    const [, month] = sliceYearMonth!.split("年");
+    // 日を取得
+    const tempLeftDate = document.getElementById("dateAndDay0")!.innerText;
+    const [leftDate] = tempLeftDate.split("\n");
+    if (nowDate === leftDate && nowMonth === month) {
+      for (let i: number = 0; i < 21; i++) {
+        result[i][0] = "TEL";
       }
     }
     setMarubatsu(result);
@@ -248,14 +264,14 @@ export const Time = () => {
           const sliceYearMonth = yearMonth?.slice(0, -1);
           const [year, month] = sliceYearMonth!.split("年");
           const saveDate: Date = new Date(
-            `20${year}-${Number(month) + 1}-${selectedDate} ${time}`
+            `20${year}/${Number(month) + 1}/${selectedDate} ${time}`
           );
           sessionStorage.setItem("start", String(saveDate));
         } else {
           const sliceYearMonth = yearMonth?.slice(0, -1);
           const [year, month] = sliceYearMonth!.split("年");
           const saveDate: Date = new Date(
-            `20${year}-${month}-${selectedDate} ${time}`
+            `20${year}/${month}/${selectedDate} ${time}`
           );
           sessionStorage.setItem("start", String(saveDate));
         }
@@ -263,7 +279,7 @@ export const Time = () => {
         const sliceYearMonth = yearMonth?.slice(0, -1);
         const [year, month] = sliceYearMonth!.split("年");
         const saveDate: Date = new Date(
-          `20${year}-${month}-${selectedDate} ${time}`
+          `20${year}/${month}/${selectedDate} ${time}`
         );
         sessionStorage.setItem("start", String(saveDate));
       }
@@ -273,7 +289,7 @@ export const Time = () => {
     }
   }
 
-  function onClickLastWeek() {
+  function onClickPreviousWeek() {
     setNowDate(new Date(nowDate.setDate(nowDate.getDate() - 7)));
     fetchReserves();
     console.log("nowDate: ", nowDate);
@@ -283,30 +299,41 @@ export const Time = () => {
     fetchReserves();
   }
 
+  function returnPreviousWeekTh() {
+    if (
+      dayjs(nowDate).format("YYYYMMDD") === dayjs(new Date()).format("YYYYMMDD")
+    ) {
+      return <th scope="row" rowSpan={2}></th>;
+    } else {
+      return (
+        <th
+          className="week-button"
+          onClick={() => onClickPreviousWeek()}
+          scope="row"
+          rowSpan={2}
+        >
+          ◀︎◀︎
+        </th>
+      );
+    }
+  }
+
   return (
     <div id="time">
       <table className="table table-bordered text-center table-font-color">
         <tbody>
           <tr>
-            <th scope="row" rowSpan={2}>
-              {(() => {
-                if (
-                  dayjs(nowDate).format("YYYYMMDD") ===
-                  dayjs(new Date()).format("YYYYMMDD")
-                ) {
-                  return <></>;
-                } else {
-                  return (
-                    <button onClick={() => onClickLastWeek()}>◀︎◀︎</button>
-                  );
-                }
-              })()}
-            </th>
+            {returnPreviousWeekTh()}
             <th id="yearMonth" scope="col" colSpan={7}>
               {dayjs(nowDate).format("YY年MM月")}
             </th>
-            <th scope="row" rowSpan={2}>
-              <button onClick={() => onClickNextWeek()}>▶︎▶︎</button>
+            <th
+              className="week-button"
+              onClick={() => onClickNextWeek()}
+              scope="row"
+              rowSpan={2}
+            >
+              ▶︎▶︎
             </th>
           </tr>
           <tr>{createDateAndDayOfWeek()}</tr>

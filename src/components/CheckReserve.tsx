@@ -157,7 +157,9 @@ export const CheckReserve = () => {
 
     //testdataここまで
 
-    const homeLink: any | null = document.getElementById("home");
+    const homeLink: HTMLInputElement = document.getElementById(
+      "home"
+    ) as HTMLInputElement;
     setTimeout(function () {
       homeLink.click();
     }, 500);

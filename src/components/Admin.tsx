@@ -5,22 +5,30 @@ import "./Admin.css";
 
 export const Admin: React.FC = () => {
   function confirmReservation() {
-    const link: any = document.getElementById("confirm_reserve");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("confirm_reserve");
+    if (link) {
+      link.click();
+    }
   }
   function editMenu() {
-    const link: any = document.getElementById("edit_menu");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("edit_menu");
+    if (link) {
+      link.click();
+    }
   }
 
   function setHolidays() {
-    const link: any = document.getElementById("set_holidays");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("set_holidays");
+    if (link) {
+      link.click();
+    }
   }
 
   function editStylist() {
-    const link: any = document.getElementById("edit_stylist");
-    link.click();
+    const link: HTMLElement | null = document.getElementById("edit_stylist");
+    if (link) {
+      link.click();
+    }
   }
 
   return (
@@ -32,11 +40,6 @@ export const Admin: React.FC = () => {
 
         <button className="adminButton" onClick={() => confirmReservation()}>
           Reservations
-          {/* <br />
-          <div className="header__reserve__en">
-            Confirm customer's reservation
-          </div>
-          <br /> */}
         </button>
         <Link id="edit_menu" to="shopcalendar"></Link>
         <button className="adminButton" onClick={() => editMenu()}>
@@ -44,16 +47,10 @@ export const Admin: React.FC = () => {
         </button>
         <Link id="set_holidays" to="shopcalendar"></Link>
         <button className="adminButton" onClick={() => setHolidays()}>
-          {/* <br />
-          <div className="header__reserve__en">Set holidays</div>
-          <br /> */}
           Holidays
         </button>
-        <Link id="edit_stylist" to="shopcalendar"></Link>
+        <Link id="edit_stylist" to="editstylist"></Link>
         <button className="adminButton" onClick={() => editStylist()}>
-          {/* <br />
-          <div className="header__reserve__en">Edit stylist's status</div>
-          <br /> */}
           Stylists
         </button>
       </div>

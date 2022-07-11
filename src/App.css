@@ -1,14 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Sawarabi+Mincho");
 /* @import url("https://fonts.googleapis.com/css?family=Noto+Serif+JP"); */
 
-/* main {
-  margin-top: 60px;
-} */
-
-/* #check-reserve {
-  margin-top: 35%;
-} */
-
 #reserveInfo {
   margin-top: 50%;
 }
@@ -58,11 +50,6 @@
 
 .amplify-button[data-variation="primary"] {
   background: gray;
-}
-
-.time-cells:hover {
-  background-color: #728888;
-  border: #282c34 1px;
 }
 
 .table-font-color {

@@ -48,6 +48,8 @@ export interface TypeOfCustomer {
 }
 
 export interface TypeOfStylist {
-  id?: number;
+  id: string;
   name: String;
+  createdAt: Date;
+  updatedAt: Date;
 }

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { TypeOfMenuDetail } from "../global";
 // import "@aws-amplify/ui-react/styles.css";
 import { FooterNavbar } from "../components/FooterNavbar";
@@ -8,31 +7,21 @@ export const Menu = () => {
   sessionStorage.removeItem("menu");
 
   // 一つのチェックボックスしか選べないようにする関数
-  function onChangeCheck(e: any) {
+  function onChangeCheck(menu: string) {
     const checkBoxes = document.getElementsByClassName("menuCheck");
     const arrayCheckBoxes = Array.prototype.slice.call(checkBoxes);
     arrayCheckBoxes.forEach((checkBox: any) => {
       checkBox.checked = false;
     });
-    const selectCheckBox: any = document.getElementById(e.target.value);
+    const selectCheckBox: any = document.getElementById(menu);
     selectCheckBox.checked = true;
-    sessionStorage.setItem("menu", e.target.value);
-    console.log("e: ", e);
-    const menuObj = shopMenu.find((obj) => obj.menu === e.target.value);
+    sessionStorage.setItem("menu", menu);
+    const menuObj = shopMenu.find((obj) => obj.menu === menu);
     if (menuObj !== undefined) {
       sessionStorage.setItem(
         "amountOfMoney",
         String(menuObj.amountOfMoney.toLocaleString())
       );
-    }
-  }
-
-  function onClickButton() {
-    if (sessionStorage.getItem("menu") === null) {
-      alert("メニューを選択して下さい");
-    } else {
-      const link: any = document.getElementById("link");
-      link.click();
     }
   }
 
@@ -79,9 +68,13 @@ export const Menu = () => {
   ];
 
   function menuList() {
-    return shopMenu.map((menuObj, index) => {
+    return shopMenu.map((menuObj) => {
       return (
-        <div key={index} className="list-unstyled border-bottom ">
+        <div
+          key={menuObj.menu}
+          className="list-unstyled border-bottom"
+          onClick={() => onChangeCheck(menuObj.menu)}
+        >
           <div>
             <input
               id={menuObj.menu}
@@ -89,22 +82,21 @@ export const Menu = () => {
               name="menuCheck"
               className="menuCheck"
               value={menuObj.menu}
-              onChange={(e) => onChangeCheck(e)}
             />
-            <label htmlFor={menuObj.menu}>
+            <span>
               <b>{menuObj.menu}</b>
               {` (施術目安：${menuObj.treatmentTime}分）`}
-            </label>
+            </span>
           </div>
 
           <div>
-            <label className="row justify-content-end">
+            <p className="row justify-content-end">
               {Number(menuObj.amountOfMoney).toLocaleString()}円
-            </label>
+            </p>
           </div>
 
           <div>
-            <label className="small text-left">{menuObj.detail}</label>
+            <p className="small text-left">{menuObj.detail}</p>
           </div>
         </div>
       );
