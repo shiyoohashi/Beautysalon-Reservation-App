@@ -45,7 +45,7 @@ export const Admin: React.FC = () => {
         <button className="adminButton" onClick={() => editMenu()}>
           Menus
         </button>
-        <Link id="set_holidays" to="shopcalendar"></Link>
+        <Link id="set_holidays" to="holiday"></Link>
         <button className="adminButton" onClick={() => setHolidays()}>
           Holidays
         </button>

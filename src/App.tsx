@@ -4,6 +4,7 @@ import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ShopCalendar } from "./components/ShopCalendar";
+import { Holidays } from "./components/Holidays";
 import { CheckReserve } from "./components/CheckReserve";
 import {
   Authenticator,
@@ -353,6 +354,7 @@ function App() {
                       path="/selecttime/checkreserve"
                       element={<CheckReserve />}
                     />
+                    <Route path="/holiday" element={<Holidays />} />
                   </Routes>
                 </div>
               </main>
