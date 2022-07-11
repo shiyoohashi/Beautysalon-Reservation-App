@@ -1,22 +1,43 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteReservation } from "../graphql/mutations";
-import { listReserves } from "../graphql/queries";
-import { TypeOfReserve } from "../global";
+import { listReserves, listMenus } from "../graphql/queries";
+import { TypeOfReserve, TypeOfMenu } from "../global";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 
-type Props = {
-  reserve: TypeOfReserve;
-};
-export const ReserveInfo: React.FC<Props> = (Props) => {
-  async function fetchReservations() {
+export const ReserveInfo = () => {
+  const [reserveInfo, setReserveInfo] = useState<TypeOfReserve>();
+  const [menuInfo, setMenuInfo] = useState<TypeOfMenu>();
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  async function fetch() {
     try {
-      const reservationData: any = await API.graphql(
+      const listReservesGraphqlResult: any = await API.graphql(
         graphqlOperation(listReserves)
       );
-      const reservations: [TypeOfReserve] =
-        reservationData.data.listReservations.items;
-      console.log("fetch", reservations);
-      return reservations;
+      const arrayReserves: [TypeOfReserve] =
+        listReservesGraphqlResult.data.listReservations.items;
+
+      const myReserve = arrayReserves.find((element) => {
+        return element.customerId === sessionStorage.getItem("user");
+      });
+
+      const listMenusGraphqlResult: any = await API.graphql(
+        graphqlOperation(listMenus)
+      );
+      const arrayMenus: [TypeOfMenu] =
+        listMenusGraphqlResult.data.listMenus.items;
+
+      // const copyReserveInfo = JSON.parse(JSON.stringify(reserveInfo));
+      setReserveInfo(myReserve);
+      const resultObj = arrayMenus.find(
+        (element) => element.menu === myReserve?.menu
+      );
+
+      setMenuInfo(resultObj);
     } catch (err) {
       console.log("error fetching todos");
     }
@@ -31,22 +52,6 @@ export const ReserveInfo: React.FC<Props> = (Props) => {
         !wantToDeleteReservation.customerId
       ) {
         console.log("====deleteReservationできてないよ=====");
-        console.log(
-          "====wantToDeleteReservation.date=====",
-          wantToDeleteReservation.date
-        );
-        console.log(
-          "====wantToDeleteReservation.menuId=====",
-          wantToDeleteReservation.menu
-        );
-        console.log(
-          "====wantToDeleteReservation.stylistId=====",
-          wantToDeleteReservation.stylistId
-        );
-        console.log(
-          "====wantToDeleteReservation.customerId=====",
-          wantToDeleteReservation.customerId
-        );
         return;
       }
       console.log("====このデータ消します=====", wantToDeleteReservation);
@@ -54,7 +59,6 @@ export const ReserveInfo: React.FC<Props> = (Props) => {
         query: deleteReservation,
         variables: { input: { id: wantToDeleteReservation.id } },
       });
-
       console.log("====このデータ消しました=====", wantToDeleteReservation);
     } catch (err) {
       console.log("error deleteReservation:", err);
@@ -66,26 +70,22 @@ export const ReserveInfo: React.FC<Props> = (Props) => {
   async function onClickCancelButton() {
     const result: boolean = window.confirm(`予約をキャンセルしますか？`);
     if (result) {
-      const wantToDel = await fetchReservations().then((res) =>
-        res?.filter((reservation) => {
-          console.log("====reservation.customerId====", reservation.customerId);
-          return reservation.customerId === sessionStorage.getItem("user");
-        })
+      const listReservesGraphqlResult: any = await API.graphql(
+        graphqlOperation(listReserves)
       );
-      console.log("====wantToDel====", wantToDel);
-      if (wantToDel) {
-        wantToDel.forEach((reservation) => delReservation(reservation));
+      const arrayReserves: [TypeOfReserve] =
+        listReservesGraphqlResult.data.listReservations.items;
+
+      const delReserves = arrayReserves.filter((reserveObj) => {
+        console.log("====reservation.customerId====", reserveObj.customerId);
+        return reserveObj.customerId === sessionStorage.getItem("user");
+      });
+      console.log("====wantToDel====", delReserves);
+      if (delReserves) {
+        delReserves.forEach((reserveObj) => delReservation(reserveObj));
       }
     }
   }
-
-  const change: any = {
-    角刈り: "1,000,000",
-    カット: "1,000",
-    "カット＋カラー": "20,000",
-    パーマ: "10,000",
-    縮毛矯正: "10,000",
-  };
 
   return (
     <div id="reserveInfo">
@@ -95,19 +95,16 @@ export const ReserveInfo: React.FC<Props> = (Props) => {
           <tr>
             <td className="text-center">予約日</td>
             <td className="text-center">
-              {/* {dayjs(sessionStorage.getItem("start")).format(
-                "YY年MM月DD日\nHH時mm分"
-              )} */}
-              {dayjs(Props.reserve.date).format("YY年MM月DD日\nHH時mm分")}
+              {dayjs(reserveInfo?.date).format("YY年MM月DD日\nHH時mm分")}
             </td>
           </tr>
           <tr className="text-center">
             <td>メニュー</td>
-            <td>{Props.reserve.menu}</td>
+            <td>{reserveInfo?.menu}</td>
           </tr>
           <tr className="text-center">
             <td>料金</td>
-            <td>{change[Props.reserve.menu]} 円</td>
+            <td>{menuInfo?.amountOfMoney} 円</td>
           </tr>
         </tbody>
       </table>

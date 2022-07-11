@@ -81,7 +81,7 @@ export const Time = () => {
     marubatsuDate.setMinutes(marubatsuDate.getMinutes() + 30 * row);
     return marubatsuDate;
   }
-
+  /////////////ここのハードコーディングを修正！！！！！！！！！！！
   const menu_treatmentTime: any = {
     角刈り: 30,
     カット: 0,
@@ -89,6 +89,8 @@ export const Time = () => {
     パーマ: 30,
     縮毛矯正: 60,
   };
+  ///////////ハードゲイはここです////////
+  ////////////無修正に修正///////////////
 
   const maru = "◯";
   const batsu = "✖️";
