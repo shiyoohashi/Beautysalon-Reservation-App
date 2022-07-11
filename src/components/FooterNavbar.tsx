@@ -7,8 +7,10 @@ export const FooterNavbar = () => {
     if (sessionStorage.getItem("menu") === null) {
       alert("メニューを選択して下さい");
     } else {
-      const link: any = document.getElementById("link");
-      link.click();
+      const link: HTMLElement | null = document.getElementById("link");
+      if (link) {
+        link.click();
+      }
     }
   }
 
