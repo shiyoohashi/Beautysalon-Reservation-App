@@ -1,0 +1,11 @@
+.week-button {
+  vertical-align: middle;
+}
+
+.week-button:hover {
+  background-color: #728888;
+}
+
+.time-cells:hover {
+  background-color: #728888;
+}

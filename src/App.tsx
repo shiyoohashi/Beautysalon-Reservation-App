@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
+import { ScrollTop } from "./components/ScrollTop";
 import {
   Authenticator,
   Button,
@@ -321,7 +322,7 @@ function App() {
       },
     },
   };
-
+  window.scroll({ top: 0, behavior: "smooth" });
   return (
     <ThemeProvider theme={theme}>
       <Authenticator formFields={formFields} components={components}>
@@ -333,6 +334,7 @@ function App() {
               <Header signOut={signOut} userName={user.attributes.name} />
               <main>
                 <div className="App">
+                  <ScrollTop />
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/shopcalendar" element={<ShopCalendar />} />
