@@ -4,14 +4,12 @@ import {
   listReserves,
   listHolidays,
   listMenus,
-  listStylists,
   listCustomers,
 } from "../graphql/queries";
 import {
   TypeOfReserve,
   TypeOfHoliday,
   TypeOfMenu,
-  TypeOfStylist,
   TypeOfCustomer,
 } from "../global";
 import { Menu } from "./Menu";
@@ -73,19 +71,7 @@ export const Home = () => {
       console.log("error fetching todos");
     }
   }
-  async function fetchStylist() {
-    try {
-      const reservationData: any = await API.graphql(
-        graphqlOperation(listStylists)
-      );
 
-      const reservations: [TypeOfStylist] =
-        reservationData.data.listStylists.items;
-      console.log("stylists fetch", reservations);
-    } catch (err) {
-      console.log("error fetching todos");
-    }
-  }
   async function fetchCustomer() {
     try {
       const reservationData: any = await API.graphql(
@@ -104,7 +90,6 @@ export const Home = () => {
     fetchReserves();
     fetchHolyday();
     fetchMenu();
-    fetchStylist();
     fetchCustomer();
   }, []);
 

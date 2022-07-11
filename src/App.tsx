@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { ShopCalendar } from "./components/ShopCalendar";
 import { CheckReserve } from "./components/CheckReserve";
 import { ScrollTop } from "./components/ScrollTop";
+import { EditStylist } from "./components/EditStylist";
 import {
   Authenticator,
   Button,
@@ -338,6 +339,7 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/shopcalendar" element={<ShopCalendar />} />
+                    <Route path="/editstylist" element={<EditStylist />} />
                     <Route path="/selecttime" element={<Time />} />
                     <Route
                       path="/selecttime/checkreserve"
