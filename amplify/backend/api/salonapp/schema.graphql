@@ -33,3 +33,11 @@ type holiday @model {
   id: ID!
   date: String
 }
+
+type shopmenu @model {
+  id: ID!
+  menu: String
+  detail: String
+  amountOfMoney: Int
+  treatmentTime: Int
+}

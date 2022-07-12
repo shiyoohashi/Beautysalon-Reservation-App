@@ -41,15 +41,15 @@ export const Admin: React.FC = () => {
         <button className="adminButton" onClick={() => confirmReservation()}>
           Reservations
         </button>
-        <Link id="edit_menu" to="shopcalendar"></Link>
+        <Link id="edit_menu" to="editmenu"></Link>
         <button className="adminButton" onClick={() => editMenu()}>
           Menus
         </button>
-        <Link id="set_holidays" to="shopcalendar"></Link>
+        <Link id="set_holidays" to="holiday"></Link>
         <button className="adminButton" onClick={() => setHolidays()}>
           Holidays
         </button>
-        <Link id="edit_stylist" to="shopcalendar"></Link>
+        <Link id="edit_stylist" to="editstylist"></Link>
         <button className="adminButton" onClick={() => editStylist()}>
           Stylists
         </button>

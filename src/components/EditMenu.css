@@ -1,0 +1,10 @@
+#div-menu {
+  margin-top: 95px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.inputtext-center {
+  display: flex;
+  flex-flow: column;
+}

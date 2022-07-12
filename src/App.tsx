@@ -4,7 +4,11 @@ import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ShopCalendar } from "./components/ShopCalendar";
+import { Holidays } from "./components/Holidays";
 import { CheckReserve } from "./components/CheckReserve";
+import { ScrollTop } from "./components/ScrollTop";
+import { EditStylist } from "./components/EditStylist";
+import { EditMenu } from "./components/EditMenu";
 import {
   Authenticator,
   Button,
@@ -205,63 +209,75 @@ const formFields = {
     },
   },
   signUp: {
+    name: {
+      type: "name",
+      labelHidden: false,
+      label: "Name Push:",
+      order: 1,
+    },
+    email: {
+      type: "email",
+      labelHidden: false,
+      label: "Email Push:",
+      order: 2,
+    },
     password: {
       labelHidden: false,
       label: "Password:",
       placeholder: "Enter your Password:",
       isRequired: false,
-      order: 2,
+      order: 3,
     },
     confirm_password: {
       labelHidden: false,
       label: "Confirm Password:",
-      order: 1,
+      order: 4,
     },
   },
-  forceNewPassword: {
-    password: {
-      labelHidden: false,
-      placeholder: "Enter your Password:",
-    },
-  },
-  resetPassword: {
-    username: {
-      labelHidden: false,
-      placeholder: "Enter your email:",
-    },
-  },
-  confirmResetPassword: {
-    confirmation_code: {
-      labelHidden: false,
-      placeholder: "Enter your Confirmation Code:",
-      label: "New Label",
-      isRequired: false,
-    },
-    confirm_password: {
-      labelHidden: false,
-      placeholder: "Enter your Password Please:",
-    },
-  },
-  setupTOTP: {
-    QR: {
-      totpIssuer: "test issuer",
-      totpUsername: "amplify_qr_test_user",
-    },
-    confirmation_code: {
-      labelHidden: false,
-      label: "New Label",
-      placeholder: "Enter your Confirmation Code:",
-      isRequired: false,
-    },
-  },
-  confirmSignIn: {
-    confirmation_code: {
-      labelHidden: false,
-      label: "New Label",
-      placeholder: "Enter your Confirmation Code:",
-      isRequired: false,
-    },
-  },
+  // forceNewPassword: {
+  //   password: {
+  //     labelHidden: false,
+  //     placeholder: "Enter your Password:",
+  //   },
+  // },
+  // resetPassword: {
+  //   username: {
+  //     labelHidden: false,
+  //     placeholder: "Enter your email:",
+  //   },
+  // },
+  // confirmResetPassword: {
+  //   confirmation_code: {
+  //     labelHidden: false,
+  //     placeholder: "Enter your Confirmation Code:",
+  //     label: "New Label",
+  //     isRequired: false,
+  //   },
+  //   confirm_password: {
+  //     labelHidden: false,
+  //     placeholder: "Enter your Password Please:",
+  //   },
+  // },
+  // setupTOTP: {
+  //   QR: {
+  //     totpIssuer: "test issuer",
+  //     totpUsername: "amplify_qr_test_user",
+  //   },
+  //   confirmation_code: {
+  //     labelHidden: false,
+  //     label: "New Label",
+  //     placeholder: "Enter your Confirmation Code:",
+  //     isRequired: false,
+  //   },
+  // },
+  // confirmSignIn: {
+  //   confirmation_code: {
+  //     labelHidden: false,
+  //     label: "New Label",
+  //     placeholder: "Enter your Confirmation Code:",
+  //     isRequired: false,
+  //   },
+  // },
 };
 
 function App() {
@@ -321,7 +337,7 @@ function App() {
       },
     },
   };
-
+  window.scroll({ top: 0, behavior: "smooth" });
   return (
     <ThemeProvider theme={theme}>
       <Authenticator formFields={formFields} components={components}>
@@ -333,14 +349,18 @@ function App() {
               <Header signOut={signOut} userName={user.attributes.name} />
               <main>
                 <div className="App">
+                  <ScrollTop />
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/shopcalendar" element={<ShopCalendar />} />
+                    <Route path="/editstylist" element={<EditStylist />} />
+                    <Route path="/editmenu" element={<EditMenu />} />
                     <Route path="/selecttime" element={<Time />} />
                     <Route
                       path="/selecttime/checkreserve"
                       element={<CheckReserve />}
                     />
+                    <Route path="/holiday" element={<Holidays />} />
                   </Routes>
                 </div>
               </main>

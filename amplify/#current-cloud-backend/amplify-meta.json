@@ -48,11 +48,12 @@
         "IdentityPoolName": "salonapp1ee1b87a_identitypool_1ee1b87a__salonapp",
         "UserPoolName": "salonapp1ee1b87a_userpool_1ee1b87a"
       },
-      "lastPushTimeStamp": "2022-07-08T07:45:17.521Z",
+      "lastPushTimeStamp": "2022-07-11T01:14:32.525Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/auth/salonapp1ee1b87a-cloudformation-template.json",
         "logicalId": "authsalonapp1ee1b87a"
-      }
+      },
+      "lastPushDirHash": "DfjvQQAzQiMTd3u/CeLd3K7CtHI="
     }
   },
   "api": {
@@ -76,7 +77,7 @@
         "GraphQLAPIEndpointOutput": "https://zcypicaenncf5mzltgnxpsalli.appsync-api.ap-northeast-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-7tuwqdezlrel7lg6vsrh6a6th4"
       },
-      "lastPushTimeStamp": "2022-07-08T07:45:25.042Z",
+      "lastPushTimeStamp": "2022-07-11T01:14:32.525Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apisalonapp"
@@ -87,9 +88,7 @@
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
-      "type": "cicd",
-      "cicd": "cicd",
-      "lastPushTimeStamp": "2022-07-08T07:30:10.411Z"
+      "type": "cicd"
     }
   }
 }
