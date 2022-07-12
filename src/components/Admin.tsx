@@ -41,7 +41,7 @@ export const Admin: React.FC = () => {
         <button className="adminButton" onClick={() => confirmReservation()}>
           Reservations
         </button>
-        <Link id="edit_menu" to="shopcalendar"></Link>
+        <Link id="edit_menu" to="editmenu"></Link>
         <button className="adminButton" onClick={() => editMenu()}>
           Menus
         </button>

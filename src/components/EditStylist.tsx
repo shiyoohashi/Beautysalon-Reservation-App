@@ -23,12 +23,7 @@ export const EditStylist = () => {
 
   async function delstylist(deleteStylistObj: TypeOfStylist) {
     try {
-      if (
-        !deleteStylistObj.id ||
-        !deleteStylistObj.name ||
-        !deleteStylistObj.createdAt ||
-        !deleteStylistObj.updatedAt
-      ) {
+      if (!deleteStylistObj.name) {
         console.log("====deleteStylistできてないよ=====");
         return;
       }
@@ -122,7 +117,7 @@ export const EditStylist = () => {
           {stylist}
         </tbody>
       </table>
-      <div className="text-center">
+      <div className="inputtext-center">
         <input
           type="text"
           id="stylistName"

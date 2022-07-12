@@ -1,19 +1,7 @@
 import { Link } from "react-router-dom";
-import {
-  TypeOfReserve,
-  TypeOfMenu,
-  TypeOfHoliday,
-  TypeOfStylist,
-  TypeOfCustomer,
-} from "../global";
+import { TypeOfReserve } from "../global";
 import { API, graphqlOperation } from "aws-amplify";
-import {
-  createReservation,
-  createHoliday,
-  createMenu,
-  createStylist,
-  createCustomer,
-} from "../graphql/mutations";
+import { createReservation } from "../graphql/mutations";
 import dayjs from "dayjs";
 
 export const CheckReserve = () => {
@@ -40,83 +28,6 @@ export const CheckReserve = () => {
     }
   }
 
-  //holydaytest用
-  async function addReservationHoliday(reservation: TypeOfHoliday) {
-    try {
-      if (!reservation.date) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.date=====", reservation.date);
-        return;
-      }
-
-      await API.graphql(
-        graphqlOperation(createHoliday, { input: reservation })
-      );
-    } catch (err) {
-      console.log("error creating reservation:", err);
-    }
-  }
-  //mentest用
-  async function addReservationMenu(reservation: TypeOfMenu) {
-    try {
-      if (
-        !reservation.menu ||
-        !reservation.amountOfMoney ||
-        !reservation.treatmentTime
-      ) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.menu=====", reservation.menu);
-        console.log(
-          "====reservation.amountOfMenu=====",
-          reservation.amountOfMoney
-        );
-        console.log(
-          "====reservation.treatmentTime=====",
-          reservation.treatmentTime
-        );
-        return;
-      }
-
-      await API.graphql(graphqlOperation(createMenu, { input: reservation }));
-    } catch (err) {
-      console.log("error creating reservation:", err);
-    }
-  }
-  //stylist用
-  async function addReservationStylist(reservation: TypeOfStylist) {
-    try {
-      if (!reservation.name) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.name=====", reservation.name);
-        return;
-      }
-
-      await API.graphql(
-        graphqlOperation(createStylist, { input: reservation })
-      );
-    } catch (err) {
-      console.log("error creating reservation:", err);
-    }
-  }
-  //customer用
-  async function addReservationCustomer(reservation: TypeOfCustomer) {
-    try {
-      if (!reservation.name || !reservation.mail) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.name=====", reservation.name);
-        console.log("====reservation.mail=====", reservation.mail);
-        return;
-      }
-
-      await API.graphql(
-        graphqlOperation(createCustomer, { input: reservation })
-      );
-    } catch (err) {
-      console.log("error creating reservation:", err);
-    }
-  }
-  //testここまで
-
   function eventOnClick() {
     const reserve: TypeOfReserve = {
       date: sessionStorage.getItem("start")!,
@@ -124,38 +35,9 @@ export const CheckReserve = () => {
       stylistId: 2,
       customerId: sessionStorage.getItem("user")!,
     };
+    console.log("reserve: ", reserve);
 
     addReservation(reserve);
-
-    //testdata
-    const reserveTest: any = {
-      date: sessionStorage.getItem("start")!,
-    };
-    console.log("addReservationHoliday: ", reserveTest);
-    addReservationHoliday(reserveTest);
-
-    const addReservationMenuTest: any = {
-      menu: "test of 角刈り",
-      amountOfMoney: 1000000000,
-      treatmentTime: 60,
-    };
-    console.log("addReservationMenuTest: ", addReservationMenuTest);
-    addReservationMenu(addReservationMenuTest);
-
-    const addReservationStylistTest: any = {
-      name: "syo san",
-    };
-    console.log("addReservationStylistTest: ", addReservationStylistTest);
-    addReservationStylist(addReservationStylistTest);
-
-    const addReservationCustomerTest: any = {
-      name: "isaaaaaaji",
-      mail: "isaaaaaaji@io",
-    };
-    console.log("addReservationCustomerTest: ", addReservationCustomerTest);
-    addReservationCustomer(addReservationCustomerTest);
-
-    //testdataここまで
 
     const homeLink: HTMLInputElement = document.getElementById(
       "home"
