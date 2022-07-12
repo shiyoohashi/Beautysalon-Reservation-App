@@ -9,6 +9,7 @@ import { CheckReserve } from "./components/CheckReserve";
 import { ScrollTop } from "./components/ScrollTop";
 import { EditStylist } from "./components/EditStylist";
 import { EditMenu } from "./components/EditMenu";
+import { Ar } from "./components/Ar";
 import {
   Authenticator,
   Button,
@@ -361,6 +362,7 @@ function App() {
                       element={<CheckReserve />}
                     />
                     <Route path="/holiday" element={<Holidays />} />
+                    <Route path="/ar" element={<Ar />} />
                   </Routes>
                 </div>
               </main>
