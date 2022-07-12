@@ -40,6 +40,16 @@ type holiday {
   updatedAt: AWSDateTime!
 }
 
+type shopmenu {
+  id: ID!
+  menu: String
+  detail: String
+  amountOfMoney: Int
+  treatmentTime: Int
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
 input ModelStringInput {
   ne: String
   eq: String
@@ -158,6 +168,8 @@ type Query {
   listCustomers(filter: ModelCustomerFilterInput, limit: Int, nextToken: String): ModelCustomerConnection
   getHoliday(id: ID!): holiday
   listHolidays(filter: ModelHolidayFilterInput, limit: Int, nextToken: String): ModelHolidayConnection
+  getShopmenu(id: ID!): shopmenu
+  listShopmenus(filter: ModelShopmenuFilterInput, limit: Int, nextToken: String): ModelShopmenuConnection
 }
 
 input ModelReservationConditionInput {
@@ -206,6 +218,9 @@ type Mutation {
   createHoliday(input: CreateHolidayInput!, condition: ModelHolidayConditionInput): holiday
   updateHoliday(input: UpdateHolidayInput!, condition: ModelHolidayConditionInput): holiday
   deleteHoliday(input: DeleteHolidayInput!, condition: ModelHolidayConditionInput): holiday
+  createShopmenu(input: CreateShopmenuInput!, condition: ModelShopmenuConditionInput): shopmenu
+  updateShopmenu(input: UpdateShopmenuInput!, condition: ModelShopmenuConditionInput): shopmenu
+  deleteShopmenu(input: DeleteShopmenuInput!, condition: ModelShopmenuConditionInput): shopmenu
 }
 
 type Subscription {
@@ -224,6 +239,9 @@ type Subscription {
   onCreateHoliday: holiday @aws_subscribe(mutations: ["createHoliday"])
   onUpdateHoliday: holiday @aws_subscribe(mutations: ["updateHoliday"])
   onDeleteHoliday: holiday @aws_subscribe(mutations: ["deleteHoliday"])
+  onCreateShopmenu: shopmenu @aws_subscribe(mutations: ["createShopmenu"])
+  onUpdateShopmenu: shopmenu @aws_subscribe(mutations: ["updateShopmenu"])
+  onDeleteShopmenu: shopmenu @aws_subscribe(mutations: ["deleteShopmenu"])
 }
 
 type ModelMenuConnection {
@@ -371,6 +389,52 @@ input UpdateHolidayInput {
 }
 
 input DeleteHolidayInput {
+  id: ID!
+}
+
+type ModelShopmenuConnection {
+  items: [shopmenu]!
+  nextToken: String
+}
+
+input ModelShopmenuFilterInput {
+  id: ModelIDInput
+  menu: ModelStringInput
+  detail: ModelStringInput
+  amountOfMoney: ModelIntInput
+  treatmentTime: ModelIntInput
+  and: [ModelShopmenuFilterInput]
+  or: [ModelShopmenuFilterInput]
+  not: ModelShopmenuFilterInput
+}
+
+input ModelShopmenuConditionInput {
+  menu: ModelStringInput
+  detail: ModelStringInput
+  amountOfMoney: ModelIntInput
+  treatmentTime: ModelIntInput
+  and: [ModelShopmenuConditionInput]
+  or: [ModelShopmenuConditionInput]
+  not: ModelShopmenuConditionInput
+}
+
+input CreateShopmenuInput {
+  id: ID
+  menu: String
+  detail: String
+  amountOfMoney: Int
+  treatmentTime: Int
+}
+
+input UpdateShopmenuInput {
+  id: ID!
+  menu: String
+  detail: String
+  amountOfMoney: Int
+  treatmentTime: Int
+}
+
+input DeleteShopmenuInput {
   id: ID!
 }
 
