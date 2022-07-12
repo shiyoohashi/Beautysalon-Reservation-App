@@ -4,5 +4,5 @@
     "DynamoDBEnableServerSideEncryption": false,
     "AuthModeLastUpdated": "2022-06-30T13:00:14.135Z",
     "S3DeploymentBucket": "amplify-salonapp-salonapp-155108-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/1c0abdc0ee28b0a0cf68a88c46747f4419dfd91b"
+    "S3DeploymentRootKey": "amplify-appsync-files/ad8055939f5ad8ffc0f84af78ce84e4f9f046a31"
 }

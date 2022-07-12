@@ -112,6 +112,9 @@
     },
     "dependsOn": {
       "Type": "CommaDelimitedList"
+    },
+    "hostedUIProviderCreds": {
+      "Type": "String"
     }
   },
   "Conditions": {

@@ -1,94 +1,94 @@
 {
-  "providers": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-salonapp-salonapp-155108-authRole",
-      "UnauthRoleArn": "arn:aws:iam::847756220386:role/amplify-salonapp-salonapp-155108-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::847756220386:role/amplify-salonapp-salonapp-155108-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-salonapp-salonapp-155108-deployment",
-      "UnauthRoleName": "amplify-salonapp-salonapp-155108-unauthRole",
-      "StackName": "amplify-salonapp-salonapp-155108",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:847756220386:stack/amplify-salonapp-salonapp-155108/af631e20-fb65-11ec-933e-0a7ffdab4377",
-      "AmplifyAppId": "dyp00wl14x589"
-    }
-  },
-  "auth": {
-    "salonapp1ee1b87a": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL",
-          "NAME"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
-      "output": {
-        "UserPoolId": "ap-northeast-1_Krbac7Ok0",
-        "AppClientIDWeb": "1o20ue90b54coohvd66q6jkj2f",
-        "AppClientID": "1thrsl9t9sjgtsmls6i5fs0pop",
-        "IdentityPoolId": "ap-northeast-1:033a2f5f-d6cd-4dd5-81b7-6856d39e72e2",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:847756220386:userpool/ap-northeast-1_Krbac7Ok0",
-        "IdentityPoolName": "salonapp1ee1b87a_identitypool_1ee1b87a__salonapp",
-        "UserPoolName": "salonapp1ee1b87a_userpool_1ee1b87a"
-      },
-      "lastPushTimeStamp": "2022-07-11T01:14:32.525Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/auth/salonapp1ee1b87a-cloudformation-template.json",
-        "logicalId": "authsalonapp1ee1b87a"
-      },
-      "lastPushDirHash": "DfjvQQAzQiMTd3u/CeLd3K7CtHI="
-    }
-  },
-  "api": {
-    "salonapp": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "apiKeyExpirationDate": "2022-07-07T13:00:07.430Z",
-              "description": ""
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-salonapp-salonapp-155108-authRole",
+            "UnauthRoleArn": "arn:aws:iam::847756220386:role/amplify-salonapp-salonapp-155108-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::847756220386:role/amplify-salonapp-salonapp-155108-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-salonapp-salonapp-155108-deployment",
+            "UnauthRoleName": "amplify-salonapp-salonapp-155108-unauthRole",
+            "StackName": "amplify-salonapp-salonapp-155108",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:847756220386:stack/amplify-salonapp-salonapp-155108/af631e20-fb65-11ec-933e-0a7ffdab4377",
+            "AmplifyAppId": "dyp00wl14x589"
+        }
+    },
+    "auth": {
+        "salonapp1ee1b87a": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false,
+            "frontendAuthConfig": {
+                "socialProviders": [],
+                "usernameAttributes": [
+                    "EMAIL"
+                ],
+                "signupAttributes": [
+                    "EMAIL",
+                    "NAME"
+                ],
+                "passwordProtectionSettings": {
+                    "passwordPolicyMinLength": 8,
+                    "passwordPolicyCharacters": []
+                },
+                "mfaConfiguration": "OFF",
+                "mfaTypes": [
+                    "SMS"
+                ],
+                "verificationMechanisms": [
+                    "EMAIL"
+                ]
+            },
+            "output": {
+                "UserPoolId": "ap-northeast-1_Krbac7Ok0",
+                "AppClientIDWeb": "1o20ue90b54coohvd66q6jkj2f",
+                "AppClientID": "1thrsl9t9sjgtsmls6i5fs0pop",
+                "IdentityPoolId": "ap-northeast-1:033a2f5f-d6cd-4dd5-81b7-6856d39e72e2",
+                "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:847756220386:userpool/ap-northeast-1_Krbac7Ok0",
+                "IdentityPoolName": "salonapp1ee1b87a_identitypool_1ee1b87a__salonapp",
+                "UserPoolName": "salonapp1ee1b87a_userpool_1ee1b87a"
+            },
+            "lastPushTimeStamp": "2022-07-12T03:08:50.056Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/auth/salonapp1ee1b87a-cloudformation-template.json",
+                "logicalId": "authsalonapp1ee1b87a"
             }
-          },
-          "additionalAuthenticationProviders": []
-        },
-        "GraphQLAPIIdOutput": "erls5ufd5bcqhlq22zlg4hztli",
-        "GraphQLAPIEndpointOutput": "https://zcypicaenncf5mzltgnxpsalli.appsync-api.ap-northeast-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-7tuwqdezlrel7lg6vsrh6a6th4"
-      },
-      "lastPushTimeStamp": "2022-07-11T01:14:32.525Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-        "logicalId": "apisalonapp"
-      },
-      "lastPushDirHash": "tf8uG1mAu8LhuhNkLbGljE9Hh80="
+        }
+    },
+    "api": {
+        "salonapp": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "output": {
+                "authConfig": {
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "apiKeyExpirationDays": 7,
+                            "apiKeyExpirationDate": "2022-07-07T13:00:07.430Z",
+                            "description": ""
+                        }
+                    },
+                    "additionalAuthenticationProviders": []
+                },
+                "GraphQLAPIIdOutput": "erls5ufd5bcqhlq22zlg4hztli",
+                "GraphQLAPIEndpointOutput": "https://zcypicaenncf5mzltgnxpsalli.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-h4mz7y4v5zcmfbvvakqr47yj24"
+            },
+            "lastPushTimeStamp": "2022-07-12T03:08:52.838Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apisalonapp"
+            },
+            "lastPushDirHash": "32NqeWU75kbXAEOL0W2oy0ZJEvg="
+        }
+    },
+    "hosting": {
+        "amplifyhosting": {
+            "service": "amplifyhosting",
+            "type": "cicd",
+            "lastPushTimeStamp": "2022-07-12T04:31:05.355Z"
+        }
     }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd"
-    }
-  }
 }
