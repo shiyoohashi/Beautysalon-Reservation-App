@@ -215,3 +215,99 @@ export const deleteHoliday = /* GraphQL */ `
     }
   }
 `;
+export const createShopmenu = /* GraphQL */ `
+  mutation CreateShopmenu(
+    $input: CreateShopmenuInput!
+    $condition: ModelShopmenuConditionInput
+  ) {
+    createShopmenu(input: $input, condition: $condition) {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateShopmenu = /* GraphQL */ `
+  mutation UpdateShopmenu(
+    $input: UpdateShopmenuInput!
+    $condition: ModelShopmenuConditionInput
+  ) {
+    updateShopmenu(input: $input, condition: $condition) {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteShopmenu = /* GraphQL */ `
+  mutation DeleteShopmenu(
+    $input: DeleteShopmenuInput!
+    $condition: ModelShopmenuConditionInput
+  ) {
+    deleteShopmenu(input: $input, condition: $condition) {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createReserve = /* GraphQL */ `
+  mutation CreateReserve(
+    $input: CreateReserveInput!
+    $condition: ModelReserveConditionInput
+  ) {
+    createReserve(input: $input, condition: $condition) {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateReserve = /* GraphQL */ `
+  mutation UpdateReserve(
+    $input: UpdateReserveInput!
+    $condition: ModelReserveConditionInput
+  ) {
+    updateReserve(input: $input, condition: $condition) {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteReserve = /* GraphQL */ `
+  mutation DeleteReserve(
+    $input: DeleteReserveInput!
+    $condition: ModelReserveConditionInput
+  ) {
+    deleteReserve(input: $input, condition: $condition) {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;

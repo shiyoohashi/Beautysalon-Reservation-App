@@ -48,12 +48,11 @@
         "IdentityPoolName": "salonapp1ee1b87a_identitypool_1ee1b87a__salonapp",
         "UserPoolName": "salonapp1ee1b87a_userpool_1ee1b87a"
       },
-      "lastPushTimeStamp": "2022-07-11T01:14:32.525Z",
+      "lastPushTimeStamp": "2022-07-12T03:08:50.056Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/auth/salonapp1ee1b87a-cloudformation-template.json",
         "logicalId": "authsalonapp1ee1b87a"
-      },
-      "lastPushDirHash": "DfjvQQAzQiMTd3u/CeLd3K7CtHI="
+      }
     }
   },
   "api": {
@@ -75,14 +74,14 @@
         },
         "GraphQLAPIIdOutput": "erls5ufd5bcqhlq22zlg4hztli",
         "GraphQLAPIEndpointOutput": "https://zcypicaenncf5mzltgnxpsalli.appsync-api.ap-northeast-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-7tuwqdezlrel7lg6vsrh6a6th4"
+        "GraphQLAPIKeyOutput": "da2-h4mz7y4v5zcmfbvvakqr47yj24"
       },
-      "lastPushTimeStamp": "2022-07-11T01:14:32.525Z",
+      "lastPushTimeStamp": "2022-07-12T03:08:52.838Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-salonapp-salonapp-155108-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apisalonapp"
       },
-      "lastPushDirHash": "tf8uG1mAu8LhuhNkLbGljE9Hh80="
+      "lastPushDirHash": "32NqeWU75kbXAEOL0W2oy0ZJEvg="
     }
   },
   "hosting": {

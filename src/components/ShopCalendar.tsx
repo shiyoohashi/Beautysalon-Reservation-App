@@ -3,7 +3,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { deleteReservation } from "../graphql/mutations";
+import { deleteReserve } from "../graphql/mutations";
 import { listReserves } from "../graphql/queries";
 import { TypeOfShopCalendar, TypeOfReserve, TypeOfMenu } from "../global";
 
@@ -23,7 +23,7 @@ export const ShopCalendar = () => {
         graphqlOperation(listReserves)
       );
       const reservations: [TypeOfReserve] =
-        reservationData.data.listReservations.items;
+        reservationData.data.listReserves.items;
       return reservations;
     } catch (err) {
       console.log("error fetching todos");
@@ -93,7 +93,7 @@ export const ShopCalendar = () => {
       }
       console.log("====このデータ消します=====", wantToDeleteReservation);
       await API.graphql({
-        query: deleteReservation,
+        query: deleteReserve,
         variables: { input: { id: wantToDeleteReservation.id } },
       });
       console.log("====このデータ消しました=====", wantToDeleteReservation);

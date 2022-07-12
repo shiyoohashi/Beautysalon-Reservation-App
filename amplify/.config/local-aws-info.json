@@ -1,7 +1,0 @@
-{
-  "salonapp": {
-    "configLevel": "project",
-    "useProfile": false,
-    "awsConfigFilePath": "/Users/hiroki/.amplify/awscloudformation/6hmWlXA6vh"
-  }
-}

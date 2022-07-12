@@ -41,3 +41,11 @@ type shopmenu @model {
   amountOfMoney: Int
   treatmentTime: Int
 }
+
+type reserve @model {
+  id: ID!
+  date: String
+  menu: String
+  stylistId: Int
+  customerId: String
+}

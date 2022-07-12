@@ -1,7 +1,7 @@
 import "./EditMenu.css";
 import { useState, useEffect } from "react";
-import { listMenus } from "../graphql/queries";
-import { deleteMenu, createMenu } from "../graphql/mutations";
+import { listShopmenus } from "../graphql/queries";
+import { deleteShopmenu, createShopmenu } from "../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
 import { TypeOfMenuDetail } from "../global";
 
@@ -11,12 +11,15 @@ export const EditMenu = () => {
     menu: "",
     amountOfMoney: 0,
     treatmentTime: 0,
+    detail: "",
   });
 
   async function fetchMenus() {
     try {
-      const graphqlResult: any = await API.graphql(graphqlOperation(listMenus));
-      const menus: [TypeOfMenuDetail] = graphqlResult.data.listMenus.items;
+      const graphqlResult: any = await API.graphql(
+        graphqlOperation(listShopmenus)
+      );
+      const menus: [TypeOfMenuDetail] = graphqlResult.data.listShopmenus.items;
       return menus;
     } catch (err) {
       console.log("error fetching todos");
@@ -27,7 +30,7 @@ export const EditMenu = () => {
     try {
       if (
         !deleteMenuObj.menu ||
-        // !deleteMenuObj.detail ||
+        !deleteMenuObj.detail ||
         !deleteMenuObj.amountOfMoney ||
         !deleteMenuObj.treatmentTime
       ) {
@@ -35,12 +38,12 @@ export const EditMenu = () => {
         return;
       }
       await API.graphql({
-        query: deleteMenu,
+        query: deleteShopmenu,
         variables: { input: { id: deleteMenuObj.id } },
       });
       console.log("====このデータ消しました=====", deleteMenuObj);
     } catch (err) {
-      console.log("error deletemenu:", err);
+      console.log("error delmenu:", err);
     }
     alert(`メニュー「${deleteMenuObj.menu}」を封印しました。`);
     window.location.reload();
@@ -58,8 +61,10 @@ export const EditMenu = () => {
 
   async function createTableElement() {
     try {
-      const graphqlResult: any = await API.graphql(graphqlOperation(listMenus));
-      const menus: [TypeOfMenuDetail] = graphqlResult.data.listMenus.items;
+      const graphqlResult: any = await API.graphql(
+        graphqlOperation(listShopmenus)
+      );
+      const menus: [TypeOfMenuDetail] = graphqlResult.data.listShopmenus.items;
       console.log("fetchMenus", menus);
       const result: JSX.Element[] = menus.map((menuObj: any, index: number) => {
         return (
@@ -69,7 +74,7 @@ export const EditMenu = () => {
               {menuObj.amountOfMoney.toLocaleString()}円
             </td>
             <td className="text-center">{menuObj.treatmentTime}分</td>
-            {/* <td className="text-center">{menuObj.details}</td> */}
+            <td className="text-center">{menuObj.detail}</td>
             <td className="text-center">
               <button onClick={() => onClickDeleteButton(index)}>封印</button>
             </td>
@@ -97,12 +102,16 @@ export const EditMenu = () => {
     copyMenuStateObj["treatmentTime"] = e.target.value;
     setmenuStateObj(copyMenuStateObj);
   }
+  function onChangeInputDetail(e: any) {
+    const copyMenuStateObj = JSON.parse(JSON.stringify(menuStateObj));
+    copyMenuStateObj["detail"] = e.target.value;
+    setmenuStateObj(copyMenuStateObj);
+  }
 
   async function addmenu() {
     const menuObj = {
       menu: menuStateObj.menu,
-      //   detail:
-      //     "新しいメニューとか、角刈り舐めとるんかぇ？お前には100万年早いわ。",
+      detail: menuStateObj.detail,
       amountOfMoney: menuStateObj.amountOfMoney,
       treatmentTime: menuStateObj.treatmentTime,
     };
@@ -114,7 +123,7 @@ export const EditMenu = () => {
         return;
       }
       await API.graphql({
-        query: createMenu,
+        query: createShopmenu,
         variables: { input: menuObj },
       });
       console.log("====このデータ追加しました=====", menuObj);
@@ -137,7 +146,7 @@ export const EditMenu = () => {
             <th className="text-center">めにゅ〜</th>
             <th className="text-center">料金</th>
             <th className="text-center">施術時間</th>
-            {/* <th className="text-center">詳細</th> */}
+            <th className="text-center">詳細</th>
             <th className="text-center">操作</th>
           </tr>
           {menu}
@@ -164,6 +173,15 @@ export const EditMenu = () => {
             placeholder="分"
             id="treatmentTime"
             onChange={(e) => onChangeInputTreatmentTime(e)}
+          />
+        </div>
+        <div className="text-center">
+          <label> 　詳細　　</label>
+          <input
+            type="text"
+            placeholder="説明を入力"
+            id="detail"
+            onChange={(e) => onChangeInputDetail(e)}
           />
         </div>
         <div className="text-center">

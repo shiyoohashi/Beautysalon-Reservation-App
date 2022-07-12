@@ -45,7 +45,7 @@ export const Time = () => {
       const reserveData: any = await API.graphql(
         graphqlOperation(listReserves)
       );
-      const reserves: TypeOfReserve[] = reserveData.data.listReservations.items;
+      const reserves: TypeOfReserve[] = reserveData.data.listReserves.items;
       console.log("fetch", reserves);
       changeReservePropriety(reserves);
     } catch (err) {
