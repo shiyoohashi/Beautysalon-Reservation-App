@@ -223,6 +223,88 @@ export type DeleteHolidayInput = {
   id: string,
 };
 
+export type CreateShopmenuInput = {
+  id?: string | null,
+  menu?: string | null,
+  detail?: string | null,
+  amountOfMoney?: number | null,
+  treatmentTime?: number | null,
+};
+
+export type ModelShopmenuConditionInput = {
+  menu?: ModelStringInput | null,
+  detail?: ModelStringInput | null,
+  amountOfMoney?: ModelIntInput | null,
+  treatmentTime?: ModelIntInput | null,
+  and?: Array< ModelShopmenuConditionInput | null > | null,
+  or?: Array< ModelShopmenuConditionInput | null > | null,
+  not?: ModelShopmenuConditionInput | null,
+};
+
+export type shopmenu = {
+  __typename: "shopmenu",
+  id: string,
+  menu?: string | null,
+  detail?: string | null,
+  amountOfMoney?: number | null,
+  treatmentTime?: number | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateShopmenuInput = {
+  id: string,
+  menu?: string | null,
+  detail?: string | null,
+  amountOfMoney?: number | null,
+  treatmentTime?: number | null,
+};
+
+export type DeleteShopmenuInput = {
+  id: string,
+};
+
+export type CreateReserveInput = {
+  id?: string | null,
+  date?: string | null,
+  menu?: string | null,
+  stylistId?: number | null,
+  customerId?: string | null,
+};
+
+export type ModelReserveConditionInput = {
+  date?: ModelStringInput | null,
+  menu?: ModelStringInput | null,
+  stylistId?: ModelIntInput | null,
+  customerId?: ModelStringInput | null,
+  and?: Array< ModelReserveConditionInput | null > | null,
+  or?: Array< ModelReserveConditionInput | null > | null,
+  not?: ModelReserveConditionInput | null,
+};
+
+export type reserve = {
+  __typename: "reserve",
+  id: string,
+  date?: string | null,
+  menu?: string | null,
+  stylistId?: number | null,
+  customerId?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateReserveInput = {
+  id: string,
+  date?: string | null,
+  menu?: string | null,
+  stylistId?: number | null,
+  customerId?: string | null,
+};
+
+export type DeleteReserveInput = {
+  id: string,
+};
+
 export type ModelReservationFilterInput = {
   id?: ModelIDInput | null,
   date?: ModelStringInput | null,
@@ -312,6 +394,40 @@ export type ModelHolidayFilterInput = {
 export type ModelHolidayConnection = {
   __typename: "ModelHolidayConnection",
   items:  Array<holiday | null >,
+  nextToken?: string | null,
+};
+
+export type ModelShopmenuFilterInput = {
+  id?: ModelIDInput | null,
+  menu?: ModelStringInput | null,
+  detail?: ModelStringInput | null,
+  amountOfMoney?: ModelIntInput | null,
+  treatmentTime?: ModelIntInput | null,
+  and?: Array< ModelShopmenuFilterInput | null > | null,
+  or?: Array< ModelShopmenuFilterInput | null > | null,
+  not?: ModelShopmenuFilterInput | null,
+};
+
+export type ModelShopmenuConnection = {
+  __typename: "ModelShopmenuConnection",
+  items:  Array<shopmenu | null >,
+  nextToken?: string | null,
+};
+
+export type ModelReserveFilterInput = {
+  id?: ModelIDInput | null,
+  date?: ModelStringInput | null,
+  menu?: ModelStringInput | null,
+  stylistId?: ModelIntInput | null,
+  customerId?: ModelStringInput | null,
+  and?: Array< ModelReserveFilterInput | null > | null,
+  or?: Array< ModelReserveFilterInput | null > | null,
+  not?: ModelReserveFilterInput | null,
+};
+
+export type ModelReserveConnection = {
+  __typename: "ModelReserveConnection",
+  items:  Array<reserve | null >,
   nextToken?: string | null,
 };
 
@@ -558,6 +674,114 @@ export type DeleteHolidayMutation = {
   } | null,
 };
 
+export type CreateShopmenuMutationVariables = {
+  input: CreateShopmenuInput,
+  condition?: ModelShopmenuConditionInput | null,
+};
+
+export type CreateShopmenuMutation = {
+  createShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateShopmenuMutationVariables = {
+  input: UpdateShopmenuInput,
+  condition?: ModelShopmenuConditionInput | null,
+};
+
+export type UpdateShopmenuMutation = {
+  updateShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteShopmenuMutationVariables = {
+  input: DeleteShopmenuInput,
+  condition?: ModelShopmenuConditionInput | null,
+};
+
+export type DeleteShopmenuMutation = {
+  deleteShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateReserveMutationVariables = {
+  input: CreateReserveInput,
+  condition?: ModelReserveConditionInput | null,
+};
+
+export type CreateReserveMutation = {
+  createReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateReserveMutationVariables = {
+  input: UpdateReserveInput,
+  condition?: ModelReserveConditionInput | null,
+};
+
+export type UpdateReserveMutation = {
+  updateReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteReserveMutationVariables = {
+  input: DeleteReserveInput,
+  condition?: ModelReserveConditionInput | null,
+};
+
+export type DeleteReserveMutation = {
+  deleteReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetReservationQueryVariables = {
   id: string,
 };
@@ -740,6 +964,86 @@ export type ListHolidaysQuery = {
   } | null,
 };
 
+export type GetShopmenuQueryVariables = {
+  id: string,
+};
+
+export type GetShopmenuQuery = {
+  getShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListShopmenusQueryVariables = {
+  filter?: ModelShopmenuFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListShopmenusQuery = {
+  listShopmenus?:  {
+    __typename: "ModelShopmenuConnection",
+    items:  Array< {
+      __typename: "shopmenu",
+      id: string,
+      menu?: string | null,
+      detail?: string | null,
+      amountOfMoney?: number | null,
+      treatmentTime?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetReserveQueryVariables = {
+  id: string,
+};
+
+export type GetReserveQuery = {
+  getReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListReservesQueryVariables = {
+  filter?: ModelReserveFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListReservesQuery = {
+  listReserves?:  {
+    __typename: "ModelReserveConnection",
+    items:  Array< {
+      __typename: "reserve",
+      id: string,
+      date?: string | null,
+      menu?: string | null,
+      stylistId?: number | null,
+      customerId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateReservationSubscription = {
   onCreateReservation?:  {
     __typename: "reservation",
@@ -903,6 +1207,84 @@ export type OnDeleteHolidaySubscription = {
     __typename: "holiday",
     id: string,
     date?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateShopmenuSubscription = {
+  onCreateShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateShopmenuSubscription = {
+  onUpdateShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteShopmenuSubscription = {
+  onDeleteShopmenu?:  {
+    __typename: "shopmenu",
+    id: string,
+    menu?: string | null,
+    detail?: string | null,
+    amountOfMoney?: number | null,
+    treatmentTime?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateReserveSubscription = {
+  onCreateReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateReserveSubscription = {
+  onUpdateReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteReserveSubscription = {
+  onDeleteReserve?:  {
+    __typename: "reserve",
+    id: string,
+    date?: string | null,
+    menu?: string | null,
+    stylistId?: number | null,
+    customerId?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

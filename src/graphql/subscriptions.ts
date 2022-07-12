@@ -170,3 +170,81 @@ export const onDeleteHoliday = /* GraphQL */ `
     }
   }
 `;
+export const onCreateShopmenu = /* GraphQL */ `
+  subscription OnCreateShopmenu {
+    onCreateShopmenu {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateShopmenu = /* GraphQL */ `
+  subscription OnUpdateShopmenu {
+    onUpdateShopmenu {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteShopmenu = /* GraphQL */ `
+  subscription OnDeleteShopmenu {
+    onDeleteShopmenu {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateReserve = /* GraphQL */ `
+  subscription OnCreateReserve {
+    onCreateReserve {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateReserve = /* GraphQL */ `
+  subscription OnUpdateReserve {
+    onUpdateReserve {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteReserve = /* GraphQL */ `
+  subscription OnDeleteReserve {
+    onDeleteReserve {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;

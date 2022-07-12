@@ -50,6 +50,16 @@ type shopmenu {
   updatedAt: AWSDateTime!
 }
 
+type reserve {
+  id: ID!
+  date: String
+  menu: String
+  stylistId: Int
+  customerId: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
 input ModelStringInput {
   ne: String
   eq: String
@@ -170,6 +180,8 @@ type Query {
   listHolidays(filter: ModelHolidayFilterInput, limit: Int, nextToken: String): ModelHolidayConnection
   getShopmenu(id: ID!): shopmenu
   listShopmenus(filter: ModelShopmenuFilterInput, limit: Int, nextToken: String): ModelShopmenuConnection
+  getReserve(id: ID!): reserve
+  listReserves(filter: ModelReserveFilterInput, limit: Int, nextToken: String): ModelReserveConnection
 }
 
 input ModelReservationConditionInput {
@@ -221,6 +233,9 @@ type Mutation {
   createShopmenu(input: CreateShopmenuInput!, condition: ModelShopmenuConditionInput): shopmenu
   updateShopmenu(input: UpdateShopmenuInput!, condition: ModelShopmenuConditionInput): shopmenu
   deleteShopmenu(input: DeleteShopmenuInput!, condition: ModelShopmenuConditionInput): shopmenu
+  createReserve(input: CreateReserveInput!, condition: ModelReserveConditionInput): reserve
+  updateReserve(input: UpdateReserveInput!, condition: ModelReserveConditionInput): reserve
+  deleteReserve(input: DeleteReserveInput!, condition: ModelReserveConditionInput): reserve
 }
 
 type Subscription {
@@ -242,6 +257,9 @@ type Subscription {
   onCreateShopmenu: shopmenu @aws_subscribe(mutations: ["createShopmenu"])
   onUpdateShopmenu: shopmenu @aws_subscribe(mutations: ["updateShopmenu"])
   onDeleteShopmenu: shopmenu @aws_subscribe(mutations: ["deleteShopmenu"])
+  onCreateReserve: reserve @aws_subscribe(mutations: ["createReserve"])
+  onUpdateReserve: reserve @aws_subscribe(mutations: ["updateReserve"])
+  onDeleteReserve: reserve @aws_subscribe(mutations: ["deleteReserve"])
 }
 
 type ModelMenuConnection {
@@ -435,6 +453,52 @@ input UpdateShopmenuInput {
 }
 
 input DeleteShopmenuInput {
+  id: ID!
+}
+
+type ModelReserveConnection {
+  items: [reserve]!
+  nextToken: String
+}
+
+input ModelReserveFilterInput {
+  id: ModelIDInput
+  date: ModelStringInput
+  menu: ModelStringInput
+  stylistId: ModelIntInput
+  customerId: ModelStringInput
+  and: [ModelReserveFilterInput]
+  or: [ModelReserveFilterInput]
+  not: ModelReserveFilterInput
+}
+
+input ModelReserveConditionInput {
+  date: ModelStringInput
+  menu: ModelStringInput
+  stylistId: ModelIntInput
+  customerId: ModelStringInput
+  and: [ModelReserveConditionInput]
+  or: [ModelReserveConditionInput]
+  not: ModelReserveConditionInput
+}
+
+input CreateReserveInput {
+  id: ID
+  date: String
+  menu: String
+  stylistId: Int
+  customerId: String
+}
+
+input UpdateReserveInput {
+  id: ID!
+  date: String
+  menu: String
+  stylistId: Int
+  customerId: String
+}
+
+input DeleteReserveInput {
   id: ID!
 }
 

@@ -12,20 +12,20 @@ export const Home = () => {
 
   async function fetchReserves() {
     try {
-      const reservationData: any = await API.graphql(
+      const graphqlListReserves: any = await API.graphql(
         graphqlOperation(listReserves)
       );
-      const reservations: [TypeOfReserve] =
-        reservationData.data.listReservations.items;
-      console.log("fetch", reservations);
-      const wantToDel = reservations.find((reservation) => {
+      const reserves: [TypeOfReserve] =
+        graphqlListReserves.data.listReserves.items;
+      console.log("fetch", reserves);
+      const reserveObj = reserves.find((reservation) => {
         return reservation.customerId === sessionStorage.getItem("user");
       });
 
-      console.log("====wantToDel====", wantToDel);
+      console.log("====reserveObj====", reserveObj);
       if (sessionStorage.getItem("user") === "administrator") {
         setLoadedScreen(<Admin />);
-      } else if (wantToDel) {
+      } else if (reserveObj) {
         setTimeout(function () {
           setLoadedScreen(<ReserveInfo />);
         }, 500);
@@ -33,7 +33,7 @@ export const Home = () => {
         setLoadedScreen(<Menu />);
       }
     } catch (err) {
-      console.log("error fetching todos");
+      console.log("error fetching todos", err);
     }
   }
 

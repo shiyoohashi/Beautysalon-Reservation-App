@@ -111,7 +111,7 @@
                         "ApiId"
                     ]
                 },
-                "Expires": 1658106810
+                "Expires": 1658199903
             }
         },
         "GraphQLAPINONEDS95A13CF0": {
@@ -550,6 +550,182 @@
                 "GraphQLAPITransformerSchema3CB2AE18"
             ]
         },
+        "shopmenu": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/shopmenu.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "DynamoDBModelTableReadIOPS": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "DynamoDBModelTableWriteIOPS": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    },
+                    "DynamoDBBillingMode": {
+                        "Ref": "DynamoDBBillingMode"
+                    },
+                    "DynamoDBEnablePointInTimeRecovery": {
+                        "Ref": "DynamoDBEnablePointInTimeRecovery"
+                    },
+                    "DynamoDBEnableServerSideEncryption": {
+                        "Ref": "DynamoDBEnableServerSideEncryption"
+                    },
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationQuerygetReservationpostAuth0FunctionQuerygetReservationpostAuth0FunctionAppSyncFunctionDB301934FunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationQuerygetReservationpostAuth0FunctionQuerygetReservationpostAuth0FunctionAppSyncFunctionDB301934FunctionId"
+                        ]
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationMutationcreateReservationinit0FunctionMutationcreateReservationinit0FunctionAppSyncFunctionCE5C3FBBFunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationMutationcreateReservationinit0FunctionMutationcreateReservationinit0FunctionAppSyncFunctionCE5C3FBBFunctionId"
+                        ]
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationMutationupdateReservationinit0FunctionMutationupdateReservationinit0FunctionAppSyncFunction0AEB95F1FunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationMutationupdateReservationinit0FunctionMutationupdateReservationinit0FunctionAppSyncFunction0AEB95F1FunctionId"
+                        ]
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationSubscriptionOnCreateReservationDataResolverFnSubscriptionOnCreateReservationDataResolverFnAppSyncFunction965EE63CFunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationSubscriptionOnCreateReservationDataResolverFnSubscriptionOnCreateReservationDataResolverFnAppSyncFunction965EE63CFunctionId"
+                        ]
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
+        "reserve": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "https://s3.",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ".",
+                            {
+                                "Ref": "AWS::URLSuffix"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentBucket"
+                            },
+                            "/",
+                            {
+                                "Ref": "S3DeploymentRootKey"
+                            },
+                            "/stacks/reserve.json"
+                        ]
+                    ]
+                },
+                "Parameters": {
+                    "DynamoDBModelTableReadIOPS": {
+                        "Ref": "DynamoDBModelTableReadIOPS"
+                    },
+                    "DynamoDBModelTableWriteIOPS": {
+                        "Ref": "DynamoDBModelTableWriteIOPS"
+                    },
+                    "DynamoDBBillingMode": {
+                        "Ref": "DynamoDBBillingMode"
+                    },
+                    "DynamoDBEnablePointInTimeRecovery": {
+                        "Ref": "DynamoDBEnablePointInTimeRecovery"
+                    },
+                    "DynamoDBEnableServerSideEncryption": {
+                        "Ref": "DynamoDBEnableServerSideEncryption"
+                    },
+                    "referencetotransformerrootstackenv10C5A902Ref": {
+                        "Ref": "env"
+                    },
+                    "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
+                        "Fn::GetAtt": [
+                            "GraphQLAPI",
+                            "ApiId"
+                        ]
+                    },
+                    "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
+                        "Ref": "S3DeploymentBucket"
+                    },
+                    "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+                        "Ref": "S3DeploymentRootKey"
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationQuerygetReservationpostAuth0FunctionQuerygetReservationpostAuth0FunctionAppSyncFunctionDB301934FunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationQuerygetReservationpostAuth0FunctionQuerygetReservationpostAuth0FunctionAppSyncFunctionDB301934FunctionId"
+                        ]
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationMutationcreateReservationinit0FunctionMutationcreateReservationinit0FunctionAppSyncFunctionCE5C3FBBFunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationMutationcreateReservationinit0FunctionMutationcreateReservationinit0FunctionAppSyncFunctionCE5C3FBBFunctionId"
+                        ]
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationMutationupdateReservationinit0FunctionMutationupdateReservationinit0FunctionAppSyncFunction0AEB95F1FunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationMutationupdateReservationinit0FunctionMutationupdateReservationinit0FunctionAppSyncFunction0AEB95F1FunctionId"
+                        ]
+                    },
+                    "referencetotransformerrootstackreservationNestedStackreservationNestedStackResource7885E7ABOutputstransformerrootstackreservationSubscriptionOnCreateReservationDataResolverFnSubscriptionOnCreateReservationDataResolverFnAppSyncFunction965EE63CFunctionId": {
+                        "Fn::GetAtt": [
+                            "reservation",
+                            "Outputs.transformerrootstackreservationSubscriptionOnCreateReservationDataResolverFnSubscriptionOnCreateReservationDataResolverFnAppSyncFunction965EE63CFunctionId"
+                        ]
+                    }
+                }
+            },
+            "DependsOn": [
+                "GraphQLAPITransformerSchema3CB2AE18"
+            ]
+        },
         "CustomResourcesjson": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
@@ -597,7 +773,9 @@
                 "menu",
                 "stylist",
                 "customer",
-                "holiday"
+                "holiday",
+                "shopmenu",
+                "reserve"
             ]
         }
     },
