@@ -1,3 +1,4 @@
+import "./css/Home.css";
 import { useState, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listReserves } from "../graphql/queries";
@@ -5,9 +6,14 @@ import { TypeOfReserve } from "../global";
 import { Menu } from "./Menu";
 import { ReserveInfo } from "./ReserveInfo";
 import { Admin } from "./Admin";
-import "./main.css";
 
 export const Home = () => {
+  const [showComponent, setShowComponent] = useState(<></>);
+
+  useEffect(() => {
+    fetchReserves();
+  }, []);
+
   async function fetchReserves() {
     try {
       const graphqlListReserves: any = await API.graphql(
@@ -22,23 +28,18 @@ export const Home = () => {
 
       console.log("====reserveObj====", reserveObj);
       if (sessionStorage.getItem("user") === "administrator") {
-        setLoadedScreen(<Admin />);
+        setShowComponent(<Admin />);
       } else if (reserveObj) {
         setTimeout(function () {
-          setLoadedScreen(<ReserveInfo />);
+          setShowComponent(<ReserveInfo />);
         }, 500);
       } else {
-        setLoadedScreen(<Menu />);
+        setShowComponent(<Menu />);
       }
     } catch (err) {
       console.log("error fetching todos", err);
     }
   }
-  const [loadedScreen, setLoadedScreen] = useState(<></>);
 
-  useEffect(() => {
-    fetchReserves();
-  }, []);
-
-  return <>{loadedScreen}</>;
+  return <>{showComponent}</>;
 };

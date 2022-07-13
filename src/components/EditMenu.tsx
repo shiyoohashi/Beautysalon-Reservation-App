@@ -1,4 +1,4 @@
-import "./EditMenu.css";
+import "./css/EditMenu.css";
 import { useState, useEffect } from "react";
 import { listShopmenus } from "../graphql/queries";
 import { deleteShopmenu, createShopmenu } from "../graphql/mutations";

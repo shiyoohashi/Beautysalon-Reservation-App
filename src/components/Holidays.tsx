@@ -3,7 +3,6 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listHolidays } from "../graphql/queries";
 import { TypeOfHoliday } from "../global";
 import { createHoliday, deleteHoliday } from "../graphql/mutations";
-import "./main.css";
 
 export const Holidays = () => {
   const [holiday, setHoliday] = useState<Element[]>();

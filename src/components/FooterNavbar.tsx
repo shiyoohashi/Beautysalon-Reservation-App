@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import "./Header.css";
-import "./FooterNavbar.css";
+import "./css/Header.css";
+import "./css/FooterNavbar.css";
 
 export const FooterNavbar = () => {
   function onClickButton() {

@@ -1,4 +1,4 @@
-import "./EditStylist.css";
+import "./css/EditStylist.css";
 import { useState, useEffect } from "react";
 import { listStylists } from "../graphql/queries";
 import { deleteStylist, createStylist } from "../graphql/mutations";
@@ -111,7 +111,7 @@ export const EditStylist = () => {
       <table className="table table-striped table-dark ">
         <tbody>
           <tr key={0}>
-            <th className="text-center">スタイリスチョ</th>
+            <th className="text-center">スタイリスト名</th>
             <th className="text-center">操作</th>
           </tr>
           {stylist}

@@ -338,7 +338,7 @@ function App() {
       },
     },
   };
-  window.scroll({ top: 0, behavior: "smooth" });
+  // window.scroll({ top: 0, behavior: "smooth" });
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>

@@ -1,3 +1,4 @@
+import "./css/ShopCalendar.css";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
