@@ -31,10 +31,8 @@ export const CheckReserve = () => {
       stylistId: 2,
       customerId: sessionStorage.getItem("user")!,
     };
-    console.log("reserve: ", reserve);
 
     addReservation(reserve);
-
     const homeLink: HTMLInputElement = document.getElementById(
       "home"
     ) as HTMLInputElement;

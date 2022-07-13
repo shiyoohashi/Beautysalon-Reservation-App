@@ -8,8 +8,6 @@ import { Admin } from "./Admin";
 import "./main.css";
 
 export const Home = () => {
-  const [loadedScreen, setLoadedScreen] = useState(<></>);
-
   async function fetchReserves() {
     try {
       const graphqlListReserves: any = await API.graphql(
@@ -36,6 +34,7 @@ export const Home = () => {
       console.log("error fetching todos", err);
     }
   }
+  const [loadedScreen, setLoadedScreen] = useState(<></>);
 
   useEffect(() => {
     fetchReserves();

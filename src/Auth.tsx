@@ -11,6 +11,7 @@ import { EditStylist } from "./components/EditStylist";
 import { EditMenu } from "./components/EditMenu";
 import { Ar } from "./components/Ar";
 import { Time } from "./components/Time";
+import App from "./App";
 import {
   Authenticator,
   Button,
@@ -281,7 +282,9 @@ const formFields = {
   // },
 };
 
-function App() {
+function Auth() {
+  window.scroll({ top: 0, behavior: "smooth" });
+
   const { tokens } = useTheme();
   const theme: Theme = {
     name: "Auth Example Theme",
@@ -338,43 +341,26 @@ function App() {
       },
     },
   };
-  window.scroll({ top: 0, behavior: "smooth" });
+
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Authenticator formFields={formFields} components={components}>
-          {({ signOut, user }: any) => {
-            sessionStorage.setItem("user", user.attributes.name);
-            console.log("=====user=====", user);
-            return (
-              <>
-                <Header signOut={signOut} userName={user.attributes.name} />
-                <main>
-                  <div className="App">
-                    <ScrollTop />
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/shopcalendar" element={<ShopCalendar />} />
-                      <Route path="/editstylist" element={<EditStylist />} />
-                      <Route path="/editmenu" element={<EditMenu />} />
-                      <Route path="/selecttime" element={<Time />} />
-                      <Route
-                        path="/selecttime/checkreserve"
-                        element={<CheckReserve />}
-                      />
-                      <Route path="/holiday" element={<Holidays />} />
-                      <Route path="/ar" element={<Ar />} />
-                    </Routes>
-                  </div>
-                </main>
-                <Footer />
-              </>
-            );
-          }}
-        </Authenticator>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Authenticator formFields={formFields} components={components}>
+        {({ signOut, user }: any) => {
+          sessionStorage.setItem("user", user.attributes.name);
+          console.log("=====user=====", user);
+          return (
+            <>
+              <Header signOut={signOut} userName={user.attributes.name} />
+
+              <App />
+
+              <Footer />
+            </>
+          );
+        }}
+      </Authenticator>
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default Auth;
