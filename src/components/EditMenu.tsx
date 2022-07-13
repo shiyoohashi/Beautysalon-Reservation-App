@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { listShopmenus } from "../graphql/queries";
 import { deleteShopmenu, createShopmenu } from "../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
-import { TypeOfMenuDetail } from "../global";
+import { TypeOfMenu } from "../global";
 
 export const EditMenu = () => {
   const [menu, setMenu] = useState<JSX.Element[]>();
@@ -19,21 +19,16 @@ export const EditMenu = () => {
       const graphqlResult: any = await API.graphql(
         graphqlOperation(listShopmenus)
       );
-      const menus: [TypeOfMenuDetail] = graphqlResult.data.listShopmenus.items;
+      const menus: [TypeOfMenu] = graphqlResult.data.listShopmenus.items;
       return menus;
     } catch (err) {
       console.log("error fetching todos");
     }
   }
 
-  async function delMenu(deleteMenuObj: TypeOfMenuDetail) {
+  async function delMenu(deleteMenuObj: TypeOfMenu) {
     try {
-      if (
-        !deleteMenuObj.menu ||
-        !deleteMenuObj.detail ||
-        !deleteMenuObj.amountOfMoney ||
-        !deleteMenuObj.treatmentTime
-      ) {
+      if (!deleteMenuObj.menu) {
         console.log("====deletemenuできてないよ=====");
         return;
       }
@@ -52,7 +47,7 @@ export const EditMenu = () => {
   async function onClickDeleteButton(index: number) {
     const result: boolean = window.confirm(`メニューを封印しますか？`);
     if (result) {
-      const deleteMenuObj: [TypeOfMenuDetail] | undefined = await fetchMenus();
+      const deleteMenuObj: [TypeOfMenu] | undefined = await fetchMenus();
       if (deleteMenuObj) {
         delMenu(deleteMenuObj[index]);
       }
@@ -64,8 +59,7 @@ export const EditMenu = () => {
       const graphqlResult: any = await API.graphql(
         graphqlOperation(listShopmenus)
       );
-      const menus: [TypeOfMenuDetail] = graphqlResult.data.listShopmenus.items;
-      console.log("fetchMenus", menus);
+      const menus: [TypeOfMenu] = graphqlResult.data.listShopmenus.items;
       const result: JSX.Element[] = menus.map((menuObj: any, index: number) => {
         return (
           <tr key={index}>

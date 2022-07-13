@@ -1,4 +1,4 @@
-import { TypeOfMenuDetail, TypeOfMenu } from "../global";
+import { TypeOfMenu } from "../global";
 // import "@aws-amplify/ui-react/styles.css";
 import { FooterNavbar } from "../components/FooterNavbar";
 import { listShopmenus } from "../graphql/queries";
