@@ -3,7 +3,7 @@ import { FooterNavbar } from "../components/FooterNavbar";
 import { listShopmenus } from "../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
 import { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Menu = () => {
   const [stateMenus, setStateMenus] = useState<JSX.Element[]>([]);
@@ -60,11 +60,6 @@ export const Menu = () => {
             <div>
               <p className="small text-left">{menuObj.detail}</p>
             </div>
-            <div>
-              <button onClick={() => onClickArButton()}>
-                ARで角刈りを試す
-              </button>
-            </div>
           </div>
         );
       });
@@ -96,6 +91,9 @@ export const Menu = () => {
       <br />
       <br />
       <h3 className="text-center">Menu</h3>
+      <div>
+        <button onClick={() => onClickArButton()}>ARで角刈りを試す</button>
+      </div>
       <div className="border p-3 border m-5">
         <>{stateMenus}</>
       </div>
