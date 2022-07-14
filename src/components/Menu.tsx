@@ -1,10 +1,9 @@
-import { TypeOfMenuDetail, TypeOfMenu } from "../global";
-// import "@aws-amplify/ui-react/styles.css";
+import { TypeOfMenu } from "../global";
 import { FooterNavbar } from "../components/FooterNavbar";
 import { listShopmenus } from "../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export const Menu = () => {
   const [stateMenus, setStateMenus] = useState<JSX.Element[]>([]);
@@ -31,7 +30,7 @@ export const Menu = () => {
         graphqlOperation(listShopmenus)
       );
       const menus: TypeOfMenu[] = graphqlResult.data.listShopmenus.items;
-      const result: JSX.Element[] = menus.map((menuObj: any) => {
+      const result: JSX.Element[] = menus.map((menuObj: TypeOfMenu) => {
         return (
           <div
             key={menuObj.menu}
@@ -80,20 +79,16 @@ export const Menu = () => {
   function onChangeCheck(menu: string, amountOfMoney: number) {
     const checkBoxes = document.getElementsByClassName("menuCheck");
     const arrayCheckBoxes = Array.prototype.slice.call(checkBoxes);
-    arrayCheckBoxes.forEach((checkBox: any) => {
+    arrayCheckBoxes.forEach((checkBox) => {
       checkBox.checked = false;
     });
-    const selectCheckBox: any = document.getElementById(menu);
-    selectCheckBox.checked = true;
+    const selectCheckBox: HTMLElement | null = document.getElementById(menu);
+    (selectCheckBox as HTMLInputElement).checked = true;
     sessionStorage.setItem("menu", menu);
-
-    // const menuObj = menus.find((obj) => obj.menu === menu);
-    // if (menuObj !== undefined) {
     sessionStorage.setItem(
       "amountOfMoney",
       String(amountOfMoney.toLocaleString())
     );
-    // }
   }
 
   return (
@@ -105,7 +100,7 @@ export const Menu = () => {
         <>{stateMenus}</>
       </div>
       <FooterNavbar />
-      <Link id="ar" to="ar/"></Link>
+      {/* <Link id="ar" to="ar/"></Link> */}
     </div>
   );
 };

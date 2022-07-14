@@ -15,18 +15,19 @@ export interface TypeOfReserveCalendar {
 
 export interface TypeOfMenu {
   id: number;
-  menu: string | null;
-  amountOfMoney: number;
-  treatmentTime: number;
-}
-
-export interface TypeOfMenuDetail {
-  id: number;
   menu: string;
   detail: string;
   amountOfMoney: number;
   treatmentTime: number;
 }
+
+// export interface TypeOfMenuDetail {
+//   id: number;
+//   menu: string;
+//   detail: string;
+//   amountOfMoney: number;
+//   treatmentTime: number;
+// }
 
 export interface TypeOfReserve {
   id?: number;
@@ -52,4 +53,12 @@ export interface TypeOfStylist {
   name: String;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface TypeOfShopCalendarEvent {
+  allDay: boolean;
+  end: Date;
+  id: number;
+  start: Date;
+  title: string | null;
 }

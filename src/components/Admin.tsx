@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Admin.css";
-// import "./main.css";
 
 export const Admin: React.FC = () => {
   function confirmReservation() {

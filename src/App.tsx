@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Home } from "./components/Home";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -10,6 +10,7 @@ import { ScrollTop } from "./components/ScrollTop";
 import { EditStylist } from "./components/EditStylist";
 import { EditMenu } from "./components/EditMenu";
 import { Ar } from "./components/Ar";
+import { Time } from "./components/Time";
 import {
   Authenticator,
   Button,
@@ -22,7 +23,6 @@ import {
   ThemeProvider,
   Theme,
 } from "@aws-amplify/ui-react";
-import { Time } from "./components/Time";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
@@ -235,50 +235,6 @@ const formFields = {
       order: 4,
     },
   },
-  // forceNewPassword: {
-  //   password: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your Password:",
-  //   },
-  // },
-  // resetPassword: {
-  //   username: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your email:",
-  //   },
-  // },
-  // confirmResetPassword: {
-  //   confirmation_code: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your Confirmation Code:",
-  //     label: "New Label",
-  //     isRequired: false,
-  //   },
-  //   confirm_password: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your Password Please:",
-  //   },
-  // },
-  // setupTOTP: {
-  //   QR: {
-  //     totpIssuer: "test issuer",
-  //     totpUsername: "amplify_qr_test_user",
-  //   },
-  //   confirmation_code: {
-  //     labelHidden: false,
-  //     label: "New Label",
-  //     placeholder: "Enter your Confirmation Code:",
-  //     isRequired: false,
-  //   },
-  // },
-  // confirmSignIn: {
-  //   confirmation_code: {
-  //     labelHidden: false,
-  //     label: "New Label",
-  //     placeholder: "Enter your Confirmation Code:",
-  //     isRequired: false,
-  //   },
-  // },
 };
 
 function App() {
@@ -338,40 +294,42 @@ function App() {
       },
     },
   };
-  window.scroll({ top: 0, behavior: "smooth" });
+  // window.scroll({ top: 0, behavior: "smooth" });
   return (
-    <ThemeProvider theme={theme}>
-      <Authenticator formFields={formFields} components={components}>
-        {({ signOut, user }: any) => {
-          sessionStorage.setItem("user", user.attributes.name);
-          console.log("=====user=====", user);
-          return (
-            <>
-              <Header signOut={signOut} userName={user.attributes.name} />
-              <main>
-                <div className="App">
-                  <ScrollTop />
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/shopcalendar" element={<ShopCalendar />} />
-                    <Route path="/editstylist" element={<EditStylist />} />
-                    <Route path="/editmenu" element={<EditMenu />} />
-                    <Route path="/selecttime" element={<Time />} />
-                    <Route
-                      path="/selecttime/checkreserve"
-                      element={<CheckReserve />}
-                    />
-                    <Route path="/holiday" element={<Holidays />} />
-                    <Route path="/ar" element={<Ar />} />
-                  </Routes>
-                </div>
-              </main>
-              <Footer />
-            </>
-          );
-        }}
-      </Authenticator>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Authenticator formFields={formFields} components={components}>
+          {({ signOut, user }: any) => {
+            sessionStorage.setItem("user", user.attributes.name);
+            console.log("=====user=====", user);
+            return (
+              <>
+                <Header signOut={signOut} userName={user.attributes.name} />
+                <main>
+                  <div className="App">
+                    <ScrollTop />
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/shopcalendar" element={<ShopCalendar />} />
+                      <Route path="/editstylist" element={<EditStylist />} />
+                      <Route path="/editmenu" element={<EditMenu />} />
+                      <Route path="/selecttime" element={<Time />} />
+                      <Route
+                        path="/selecttime/checkreserve"
+                        element={<CheckReserve />}
+                      />
+                      <Route path="/holiday" element={<Holidays />} />
+                      <Route path="/ar" element={<Ar />} />
+                    </Routes>
+                  </div>
+                </main>
+                <Footer />
+              </>
+            );
+          }}
+        </Authenticator>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

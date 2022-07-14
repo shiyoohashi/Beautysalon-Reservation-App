@@ -1,15 +1,15 @@
-import "./Time.css";
+import "./css/Time.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { listReserves } from "../graphql/queries";
-import { TypeOfReserve } from "../global";
+import { listReserves, listShopmenus } from "../graphql/queries";
+import { TypeOfReserve, TypeOfMenu } from "../global";
 import dayjs from "dayjs";
 
 export const Time = () => {
   const [nowDate, setNowDate] = useState(new Date());
 
-  const initialMarubatsu: any = [
+  const initialMarubatsu: String[][] = [
     ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
     ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
     ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
@@ -81,43 +81,85 @@ export const Time = () => {
     marubatsuDate.setMinutes(marubatsuDate.getMinutes() + 30 * row);
     return marubatsuDate;
   }
-  /////////////ここのハードコーディングを修正！！！！！！！！！！！
-  const menu_treatmentTime: any = {
-    角刈り: 30,
-    カット: 0,
-    "カット＋カラー": 30,
-    パーマ: 30,
-    縮毛矯正: 60,
-  };
-  ///////////ハードゲイはここです////////
-  ////////////無修正に修正///////////////
 
   const maru = "◯";
   const batsu = "✖️";
 
-  function changeReservePropriety(reserves: any) {
+  async function changeReservePropriety(reserves: any) {
     let result: [string[]] = JSON.parse(JSON.stringify(initialMarubatsu));
+    let selectedMenuObj: TypeOfMenu = {
+      id: 0,
+      menu: "error",
+      detail: "error",
+      amountOfMoney: 0,
+      treatmentTime: 0,
+    };
+    let arrayOfShopMenuObj: TypeOfMenu[];
+
+    try {
+      const graphqlListShopmenus: any = await API.graphql(
+        graphqlOperation(listShopmenus)
+      );
+      arrayOfShopMenuObj = graphqlListShopmenus.data.listShopmenus.items;
+      console.log("arrayOfShopMenuObj-fetch", arrayOfShopMenuObj);
+      const result: TypeOfMenu | undefined = arrayOfShopMenuObj.find(
+        (menuObj) => {
+          return menuObj.menu === sessionStorage.getItem("menu");
+        }
+      );
+      if (result) {
+        selectedMenuObj = result;
+      }
+    } catch (err) {
+      console.log("error arrayOfShopMenuObj-fetching todos", err);
+    }
 
     for (let row = 0; row < 21; row++) {
       for (let col = 0; col < 7; col++) {
-        reserves.forEach((reserve: any) => {
-          if (
-            new Date(reserve.date).setMinutes(
-              new Date(reserve.date).getMinutes() -
-                menu_treatmentTime[sessionStorage.getItem("menu")!]
-            ) <= compairDate(col, row).getTime() &&
-            compairDate(col, row).getTime() <
+        reserves.forEach(
+          (reserve: {
+            id: string;
+            customerId: string;
+            stylistId: number;
+            date: Date;
+            menu: string;
+            createdAt: Date;
+            updatedAt: Date;
+          }) => {
+            let reserveMenuObj: TypeOfMenu = {
+              id: 0,
+              menu: "error",
+              detail: "error",
+              amountOfMoney: 0,
+              treatmentTime: 0,
+            };
+
+            const tempReserveMenuObj = arrayOfShopMenuObj.find(
+              (shpoMenuObj) => {
+                return shpoMenuObj.menu === reserve.menu;
+              }
+            );
+            if (tempReserveMenuObj) {
+              reserveMenuObj = tempReserveMenuObj;
+            }
+
+            if (
               new Date(reserve.date).setMinutes(
-                new Date(reserve.date).getMinutes() +
-                  menu_treatmentTime[reserve.menu] +
-                  30
-              )
-          ) {
-            if ((result[row][col] = maru)) {
-              result[row][col] = batsu;
+                new Date(reserve.date).getMinutes() -
+                  (selectedMenuObj.treatmentTime - 30)
+              ) <= compairDate(col, row).getTime() &&
+              compairDate(col, row).getTime() <
+                new Date(reserve.date).setMinutes(
+                  new Date(reserve.date).getMinutes() +
+                    reserveMenuObj.treatmentTime
+                )
+            ) {
+              if ((result[row][col] = maru)) {
+                result[row][col] = batsu;
+              }
             }
           }
-        });
+        );
       }
     }
 
@@ -286,8 +328,10 @@ export const Time = () => {
         sessionStorage.setItem("start", String(saveDate));
       }
 
-      const link: any | null = document.getElementById("link");
-      link.click();
+      const link: HTMLElement | null = document.getElementById("link");
+      if (link) {
+        link.click();
+      }
     }
   }
 

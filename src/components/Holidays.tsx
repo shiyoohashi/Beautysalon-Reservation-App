@@ -3,37 +3,72 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listHolidays } from "../graphql/queries";
 import { TypeOfHoliday } from "../global";
 import { createHoliday, deleteHoliday } from "../graphql/mutations";
-import "./main.css";
-import { AnyRecord, TIMEOUT } from "dns";
+import "./css/Holidays.css";
 
 export const Holidays = () => {
   const [holiday, setHoliday] = useState<Element[]>();
   const [calendar, setCalendar] = useState("");
-  // const [val, setVal] = useState([""]);
   const [day, setDay] = useState<string[]>([]);
   const holidayCalendar: any[] = [];
 
   const handleChange = (e: any) => {
-    console.log("eeeeeeeeee : ", typeof e.target.defaultValue);
-    // let defaultValue: string = "";
     let defaultValue: string = e.target.defaultValue;
     if (day.includes(defaultValue)) {
       setDay(day.filter((item: any) => item !== e.target.defaultValue));
-      console.log("day", day);
     } else {
       setDay([...day, e.target.defaultValue]);
-      console.log("else-day", day);
     }
   };
-  const days: string[] = [
-    "日曜日",
-    "月曜日",
-    "火曜日",
-    "水曜日",
-    "木曜日",
-    "金曜日",
-    "土曜日",
-  ];
+
+  // async function fetchHolyday() {
+  //   try {
+  //     const reservationData: any = await API.graphql(
+  //       graphqlOperation(listHolidays)
+  //     );
+
+  //     const reservations: [TypeOfHoliday] =
+  //       reservationData.data.listHolidays.items;
+  //     console.log("holiday fetch", reservations);
+  //     let elementDate: Date;
+  //     let year: number;
+  //     let month: number;
+  //     let date: number;
+  //     let ttmmdd: string;
+
+  //     reservations.map((ele: any, index) => {
+  //       elementDate = new Date(ele.date);
+  //       year = elementDate.getFullYear();
+  //       month = elementDate.getMonth() + 1;
+  //       date = elementDate.getDate();
+  //       let dateString: string = "";
+  //       let monthString: string = "";
+  //       date < 10 ? (dateString = "0" + date) : (dateString = String(date));
+  //       month < 10
+  //         ? (monthString = "0" + month)
+  //         : (monthString = String(month));
+
+  //       ttmmdd = `${year}-${monthString}-${dateString}`;
+  //       holidayCalendar.push([
+  //         <div>
+  //           <label key={index} htmlFor={"String(index)"}>
+  //             {ttmmdd}
+  //           </label>
+  //         </div>,
+  //       ]);
+  //     });
+  //     holidayCalendar.sort(function (a, b) {
+  //       return a[0].props.children.props.children >
+  //         b[0].props.children.props.children
+  //         ? 1
+  //         : -1;
+  //     });
+  //     setHoliday(holidayCalendar);
+  //     console.log("reservations :", reservations);
+  //     return reservations;
+  //   } catch (err) {
+  //     console.log("error fetching todos");
+  //   }
+  // }
 
   async function fetchHolyday() {
     try {
@@ -44,51 +79,48 @@ export const Holidays = () => {
       const reservations: [TypeOfHoliday] =
         reservationData.data.listHolidays.items;
       console.log("holiday fetch", reservations);
-      let elementDate: Date;
-      let year: number;
-      let month: number;
-      let date: number;
-      let ttmmdd: string;
 
-      reservations.map((ele: any, index) => {
-        elementDate = new Date(ele.date);
-        year = elementDate.getFullYear();
-        month = elementDate.getMonth() + 1;
-        date = elementDate.getDate();
-        let dateString: string = "";
-        let monthString: string = "";
-        date < 10 ? (dateString = "0" + date) : (dateString = String(date));
-        month < 10
-          ? (monthString = "0" + month)
-          : (monthString = String(month));
-
-        ttmmdd = `${year}-${monthString}-${dateString}`;
-        holidayCalendar.push([
-          <div>
-            {/* <input
-              // type="checkbox"
-              id={"String(index)"}
-              onClick={(e) => {
-                console.log("onclick : ", e.target);
-              }}
-            /> */}
-            <label key={index} htmlFor={"String(index)"}>
-              {ttmmdd}
-            </label>
-          </div>,
-        ]);
-      });
-      holidayCalendar.sort(function (a, b) {
-        return a[0].props.children.props.children >
-          b[0].props.children.props.children
-          ? 1
-          : -1;
-      });
-      setHoliday(holidayCalendar);
       return reservations;
     } catch (err) {
       console.log("error fetching todos");
     }
+  }
+
+  async function indicateHoliday() {
+    const getFetchHoliday: any = await fetchHolyday();
+    let elementDate: Date;
+    let year: number;
+    let month: number;
+    let date: number;
+    let ttmmdd: string;
+
+    getFetchHoliday.map((ele: any, index: number) => {
+      elementDate = new Date(ele.date);
+      year = elementDate.getFullYear();
+      month = elementDate.getMonth() + 1;
+      date = elementDate.getDate();
+      let dateString: string = "";
+      let monthString: string = "";
+      date < 10 ? (dateString = "0" + date) : (dateString = String(date));
+      month < 10 ? (monthString = "0" + month) : (monthString = String(month));
+
+      ttmmdd = `${year}-${monthString}-${dateString}`;
+      holidayCalendar.push([
+        <div>
+          <label key={index} htmlFor={"String(index)"}>
+            {ttmmdd}
+          </label>
+        </div>,
+      ]);
+    });
+    holidayCalendar.sort(function (a, b) {
+      return a[0].props.children.props.children >
+        b[0].props.children.props.children
+        ? 1
+        : -1;
+    });
+    setHoliday(holidayCalendar);
+    console.log("holiday : ", holiday);
   }
 
   async function setAddHoliday() {
@@ -99,7 +131,7 @@ export const Holidays = () => {
       const wantToDel = await fetchHolyday().then((res) =>
         res?.filter((reservation) => {
           console.log("calender : ", calendar);
-          let test: any = new Date(reservation.date);
+          let test: Date = new Date(reservation.date);
           return String(test) === String(calendar);
         })
       );
@@ -138,8 +170,8 @@ export const Holidays = () => {
       const wantToDel = await fetchHolyday().then((res) =>
         res?.filter((reservation) => {
           console.log("calender : ", calendar);
-          let test: any = new Date(reservation.date);
-          return String(test) === String(calendar);
+          let reservationDate: any = new Date(reservation.date);
+          return String(reservationDate) === String(calendar);
         })
       );
       console.log("====wantToDel====", wantToDel);
@@ -169,6 +201,7 @@ export const Holidays = () => {
     alert("カレンダーをキャンセルしました。");
     window.location.reload();
   }
+
   function weekHoliday(num: number) {
     const oneYearDate: string[] = [];
     for (let i = 0; i < num; i++) {
@@ -176,12 +209,10 @@ export const Holidays = () => {
       today.setDate(today.getDate() + i);
       oneYearDate.push(String(today));
     }
-    console.log("oneYearDate: ", oneYearDate);
-    const test = oneYearDate.filter((date) => {
+    const getFillterDate = oneYearDate.filter((date) => {
       return date.indexOf(day[0]) !== -1;
     });
-    console.log("test: ", test);
-    test.map((ele) => {
+    getFillterDate.map((ele) => {
       const reserveTest: any = {
         date: ele,
       };

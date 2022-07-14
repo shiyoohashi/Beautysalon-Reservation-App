@@ -1,55 +1,59 @@
+import "./css/ShopCalendar.css";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import { useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteReserve } from "../graphql/mutations";
-import { listReserves } from "../graphql/queries";
-import { TypeOfShopCalendar, TypeOfReserve, TypeOfMenu } from "../global";
+import { listReserves, listShopmenus } from "../graphql/queries";
+import {
+  TypeOfShopCalendar,
+  TypeOfReserve,
+  TypeOfShopCalendarEvent,
+  TypeOfMenu,
+} from "../global";
 
 const localizer = momentLocalizer(moment);
 const eventList: TypeOfShopCalendar[] = [];
 
 export const ShopCalendar = () => {
-  let reservations: any;
-
   useEffect(() => {
     createEventList();
   }, []);
 
-  async function fetchReservations() {
+  async function fetchReserves() {
     try {
-      const reservationData: any = await API.graphql(
+      const graphqlResult: any = await API.graphql(
         graphqlOperation(listReserves)
       );
-      const reservations: [TypeOfReserve] =
-        reservationData.data.listReserves.items;
-      return reservations;
+      const reserves: [TypeOfReserve] = graphqlResult.data.listReserves.items;
+      return reserves;
     } catch (err) {
-      console.log("error fetching todos");
+      console.log("error fetchReserves todos", err);
+    }
+  }
+
+  async function fetchMenus() {
+    try {
+      const graphqlResult: any = await API.graphql(
+        graphqlOperation(listShopmenus)
+      );
+      const menus: [TypeOfMenu] = graphqlResult.data.listShopmenus.items;
+      return menus;
+    } catch (err) {
+      console.log("error fetchMenus todos", err);
     }
   }
 
   async function createEventList() {
-    reservations = await fetchReservations();
-    const shopMenu: TypeOfMenu[] = [
-      { id: 1, menu: "角刈り", amountOfMoney: 10000, treatmentTime: 60 },
-      { id: 2, menu: "カット", amountOfMoney: 1000, treatmentTime: 30 },
-      {
-        id: 3,
-        menu: "カット＋カラー",
-        amountOfMoney: 20000,
-        treatmentTime: 60,
-      },
-      { id: 4, menu: "パーマ", amountOfMoney: 10000, treatmentTime: 60 },
-      { id: 5, menu: "縮毛矯正", amountOfMoney: 10000, treatmentTime: 90 },
-    ];
+    const reserves: TypeOfReserve[] | undefined = await fetchReserves();
+    const shopMenu: TypeOfMenu[] | undefined = await fetchMenus();
 
-    eventList.splice(0); //リスト消去しないと増えるので削除
+    eventList.splice(0); //リスト消去しないと再描画でどんどん増えるので初期化する
 
-    if (reservations) {
-      reservations.forEach((element: any, index: number) => {
-        const selectMenu: any = shopMenu.find((MenuObj) => {
+    if (reserves) {
+      reserves.forEach((element: any, index: number) => {
+        const selectMenu: any = shopMenu!.find((MenuObj) => {
           return MenuObj.menu === element.menu;
         });
 
@@ -80,36 +84,26 @@ export const ShopCalendar = () => {
     }
   }
 
-  async function delReservation(wantToDeleteReservation: TypeOfReserve) {
+  async function delReserve(reserveObj: TypeOfReserve) {
     try {
-      if (
-        !wantToDeleteReservation.date ||
-        !wantToDeleteReservation.menu ||
-        !wantToDeleteReservation.stylistId ||
-        !wantToDeleteReservation.customerId
-      ) {
-        console.log("====deleteReservationできてないよ=====");
-        return;
-      }
-      console.log("====このデータ消します=====", wantToDeleteReservation);
       await API.graphql({
         query: deleteReserve,
-        variables: { input: { id: wantToDeleteReservation.id } },
+        variables: { input: { id: reserveObj.id } },
       });
-      console.log("====このデータ消しました=====", wantToDeleteReservation);
+      console.log("====deleted=====", reserveObj);
     } catch (err) {
-      console.log("error deleteReservation:", err);
+      console.log("error function:delReserve:", err);
     }
   }
 
-  function deleteAllReservation() {
-    reservations.forEach((reservation: TypeOfReserve) => {
-      delReservation(reservation);
+  async function delReserves() {
+    const reserves: any = await fetchReserves();
+    reserves.forEach((reserveObj: TypeOfReserve) => {
+      delReserve(reserveObj);
     });
   }
 
-  function onClickEvent(event: any) {
-    console.log(event);
+  function onClickReserve(event: TypeOfShopCalendarEvent) {
     alert(`${event.title}\n来店時間：${event.start}\n退店時間：${event.end}`);
   }
 
@@ -122,12 +116,12 @@ export const ShopCalendar = () => {
         endAccessor="end"
         style={{ height: 2000 }}
         defaultView={Views.WEEK}
-        onSelectEvent={(event) => onClickEvent(event)}
+        onSelectEvent={(event) => onClickReserve(event)}
       />
       <input
         type="button"
         value={"全ての予約を消去する"}
-        onClick={() => deleteAllReservation()}
+        onClick={() => delReserves()}
       />
     </div>
   );
