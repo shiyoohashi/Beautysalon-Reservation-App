@@ -5,6 +5,7 @@ import { TypeOfHoliday } from "../global";
 import { createHoliday, deleteHoliday } from "../graphql/mutations";
 import "./css/Holidays.css";
 
+
 export const Holidays = () => {
   const [holiday, setHoliday] = useState<Element[]>();
   const [calendar, setCalendar] = useState("");
@@ -69,7 +70,6 @@ export const Holidays = () => {
   //     console.log("error fetching todos");
   //   }
   // }
-
   async function fetchHolyday() {
     try {
       const reservationData: any = await API.graphql(
@@ -120,7 +120,6 @@ export const Holidays = () => {
         : -1;
     });
     setHoliday(holidayCalendar);
-    console.log("holiday : ", holiday);
   }
 
   async function setAddHoliday() {

@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-    {/* <script src="./Tashinami HAIR_files/zdy2dgp.js" async={true}></script> */}
+    <script src="./Tashinami HAIR_files/zdy2dgp.js" async={true}></script>
     <App />
   </>
 );

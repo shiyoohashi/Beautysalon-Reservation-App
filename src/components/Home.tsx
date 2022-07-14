@@ -40,6 +40,7 @@ export const Home = () => {
       console.log("error fetching todos", err);
     }
   }
+  const [loadedScreen, setLoadedScreen] = useState(<></>);
 
   return <>{showComponent}</>;
 };
