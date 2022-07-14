@@ -80,7 +80,7 @@ export const EditMenu = () => {
       console.log("error fetching todos");
     }
   }
-
+  //{ target: HTMLButtonElement }
   function onChangeInputMenu(e: any) {
     const copyMenuStateObj = JSON.parse(JSON.stringify(menuStateObj));
     copyMenuStateObj["menu"] = e.target.value;
