@@ -34,20 +34,20 @@ export const Admin: React.FC = () => {
       <br />
       <h1>Administrator access</h1>
       <div className="menus">
-        <Link id="confirm_reserve" to="shopcalendar"></Link>
+        <Link id="confirm_reserve" to="shopcalendar/"></Link>
 
         <button className="adminButton" onClick={() => confirmReservation()}>
           Reservations
         </button>
-        <Link id="edit_menu" to="editmenu"></Link>
+        <Link id="edit_menu" to="editmenu/"></Link>
         <button className="adminButton" onClick={() => editMenu()}>
           Menus
         </button>
-        <Link id="set_holidays" to="holiday"></Link>
+        <Link id="set_holidays" to="holiday/"></Link>
         <button className="adminButton" onClick={() => setHolidays()}>
           Holidays
         </button>
-        <Link id="edit_stylist" to="editstylist"></Link>
+        <Link id="edit_stylist" to="editstylist/"></Link>
         <button className="adminButton" onClick={() => editStylist()}>
           Stylists
         </button>

@@ -13,13 +13,28 @@ export const FooterNavbar = () => {
       }
     }
   }
+  function onClickArButton() {
+    window.location.href =
+      "https://japan-crew-cut-association.github.io/photoedit-web-js/";
+    // const link: HTMLElement | null = document.getElementById("ar");
+    // if (link) {
+    //   link.click();
+    // }
+  }
 
   return (
     <div className="footer_navbar">
+      <button
+        className="btn btn-dark btn-next"
+        onClick={() => onClickArButton()}
+      >
+        ARで角刈りを試す
+      </button>
+
       <button className="btn btn-dark btn-next" onClick={() => onClickButton()}>
         予約時間選択へ
       </button>
-      <Link id="link" to={"selecttime"}></Link>
+      <Link id="link" to={"selecttime/"}></Link>
     </div>
   );
 };

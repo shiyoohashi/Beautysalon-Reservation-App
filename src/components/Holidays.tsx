@@ -3,16 +3,21 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listHolidays } from "../graphql/queries";
 import { TypeOfHoliday } from "../global";
 import { createHoliday, deleteHoliday } from "../graphql/mutations";
+import dayjs from "dayjs";
 import "./css/Holidays.css";
 
-
 export const Holidays = () => {
-  const [holiday, setHoliday] = useState<Element[]>();
+  const [holidays, setHolidays] = useState<string[]>();
+  const [holidayElements, setHolidayElements] = useState<JSX.Element[]>();
   const [calendar, setCalendar] = useState("");
   const [day, setDay] = useState<string[]>([]);
-  const holidayCalendar: any[] = [];
+  let arrayHolidays: string[] = [];
 
-  const handleChange = (e: any) => {
+  useEffect(() => {
+    indicateHoliday();
+  }, []);
+
+  const onChangeCheckBox = (e: any) => {
     let defaultValue: string = e.target.defaultValue;
     if (day.includes(defaultValue)) {
       setDay(day.filter((item: any) => item !== e.target.defaultValue));
@@ -21,81 +26,30 @@ export const Holidays = () => {
     }
   };
 
-  // async function fetchHolyday() {
-  //   try {
-  //     const reservationData: any = await API.graphql(
-  //       graphqlOperation(listHolidays)
-  //     );
-
-  //     const reservations: [TypeOfHoliday] =
-  //       reservationData.data.listHolidays.items;
-  //     console.log("holiday fetch", reservations);
-  //     let elementDate: Date;
-  //     let year: number;
-  //     let month: number;
-  //     let date: number;
-  //     let ttmmdd: string;
-
-  //     reservations.map((ele: any, index) => {
-  //       elementDate = new Date(ele.date);
-  //       year = elementDate.getFullYear();
-  //       month = elementDate.getMonth() + 1;
-  //       date = elementDate.getDate();
-  //       let dateString: string = "";
-  //       let monthString: string = "";
-  //       date < 10 ? (dateString = "0" + date) : (dateString = String(date));
-  //       month < 10
-  //         ? (monthString = "0" + month)
-  //         : (monthString = String(month));
-
-  //       ttmmdd = `${year}-${monthString}-${dateString}`;
-  //       holidayCalendar.push([
-  //         <div>
-  //           <label key={index} htmlFor={"String(index)"}>
-  //             {ttmmdd}
-  //           </label>
-  //         </div>,
-  //       ]);
-  //     });
-  //     holidayCalendar.sort(function (a, b) {
-  //       return a[0].props.children.props.children >
-  //         b[0].props.children.props.children
-  //         ? 1
-  //         : -1;
-  //     });
-  //     setHoliday(holidayCalendar);
-  //     console.log("reservations :", reservations);
-  //     return reservations;
-  //   } catch (err) {
-  //     console.log("error fetching todos");
-  //   }
-  // }
-  async function fetchHolyday() {
+  async function fetchHolydays() {
     try {
-      const reservationData: any = await API.graphql(
+      const graphqlData: any = await API.graphql(
         graphqlOperation(listHolidays)
       );
-
-      const reservations: [TypeOfHoliday] =
-        reservationData.data.listHolidays.items;
-      console.log("holiday fetch", reservations);
-
-      return reservations;
+      const holidays: [TypeOfHoliday] = graphqlData.data.listHolidays.items;
+      console.log("holiday fetch", holidays);
+      setHolidays(holidays.map((holiday) => holiday.date));
+      return holidays;
     } catch (err) {
-      console.log("error fetching todos");
+      console.log("error fetchHolydays", err);
     }
   }
 
   async function indicateHoliday() {
-    const getFetchHoliday: any = await fetchHolyday();
+    const getFetchHolidays: any = await fetchHolydays();
     let elementDate: Date;
     let year: number;
     let month: number;
     let date: number;
     let ttmmdd: string;
-
-    getFetchHoliday.map((ele: any, index: number) => {
-      elementDate = new Date(ele.date);
+    // 文字列の日付の配列にする
+    arrayHolidays = getFetchHolidays.map((holidayObj: any, index: number) => {
+      elementDate = new Date(holidayObj.date);
       year = elementDate.getFullYear();
       month = elementDate.getMonth() + 1;
       date = elementDate.getDate();
@@ -103,102 +57,87 @@ export const Holidays = () => {
       let monthString: string = "";
       date < 10 ? (dateString = "0" + date) : (dateString = String(date));
       month < 10 ? (monthString = "0" + month) : (monthString = String(month));
-
       ttmmdd = `${year}-${monthString}-${dateString}`;
-      holidayCalendar.push([
-        <div>
-          <label key={index} htmlFor={"String(index)"}>
-            {ttmmdd}
-          </label>
-        </div>,
-      ]);
+      return ttmmdd;
     });
-    holidayCalendar.sort(function (a, b) {
-      return a[0].props.children.props.children >
-        b[0].props.children.props.children
-        ? 1
-        : -1;
+    // 配列を並び替える
+    arrayHolidays.sort(function (a: string, b: string) {
+      return a > b ? 1 : -1;
     });
-    setHoliday(holidayCalendar);
+    // 表示する休日要素を作成
+    const holidayCalendarElements: JSX.Element[] = arrayHolidays.map(
+      (holiday: string, index: number) => {
+        return (
+          <>
+            <label key={index} htmlFor={"String(index)"}>
+              {holiday}
+            </label>
+            <br></br>
+          </>
+        );
+      }
+    );
+    setHolidayElements(holidayCalendarElements);
   }
 
-  async function setAddHoliday() {
-    const reserveTest: any = {
+  function setAddHoliday() {
+    const holidayObj: TypeOfHoliday = {
       date: calendar,
     };
     {
-      const wantToDel = await fetchHolyday().then((res) =>
-        res?.filter((reservation) => {
-          console.log("calender : ", calendar);
-          let test: Date = new Date(reservation.date);
-          return String(test) === String(calendar);
-        })
-      );
-      console.log("====wantToDel====", wantToDel);
-      if (wantToDel!.length > 0) {
+      // 選択した日と同じ日付が既に休日として入っているか確認
+      const duplicateHoliday = holidays?.filter((holiday) => {
+        return holiday === calendar;
+      });
+      if (duplicateHoliday) {
         window.alert("既に休日予定です。");
       } else {
-        addReservationHoliday(reserveTest);
+        addHoliday(holidayObj);
         setTimeout(() => window.location.reload(), 500);
       }
     }
   }
-  async function addReservationHoliday(reservation: TypeOfHoliday) {
-    console.log("reservation : ", reservation);
+
+  async function addHoliday(holidayObj: TypeOfHoliday) {
     try {
-      if (!reservation.date) {
-        console.log("====addTodoできてないよ=====");
-        console.log("====reservation.date=====", reservation.date);
-        return;
-      }
-      await API.graphql(
-        graphqlOperation(createHoliday, { input: reservation })
-      );
+      await API.graphql(graphqlOperation(createHoliday, { input: holidayObj }));
     } catch (err) {
-      console.log("error creating reservation:", err);
+      console.log("error addHoliday:", err);
     }
   }
 
-  useEffect(() => {
-    fetchHolyday();
-  }, []);
-
   async function onClickCancelButton() {
-    const result: boolean = window.confirm(`休みをキャンセルしますか？`);
-    if (result) {
-      const wantToDel = await fetchHolyday().then((res) =>
-        res?.filter((reservation) => {
-          console.log("calender : ", calendar);
-          let reservationDate: any = new Date(reservation.date);
-          return String(reservationDate) === String(calendar);
-        })
+    const duplicateHoliday = holidays?.find((holiday) => {
+      return (
+        dayjs(holiday).format("YYYY年MM月DD日") ===
+        dayjs(calendar).format("YYYY年MM月DD日")
       );
-      console.log("====wantToDel====", wantToDel);
-      if (wantToDel) {
-        wantToDel.forEach((reservation) => delHoliday(reservation));
-      }
+    });
+    if (duplicateHoliday) {
+      const arrayHoliday = await fetchHolydays();
+      // 選択した日付と一致する日付のあるオブジェクト取得
+      const canncelHolidayObj = arrayHoliday!.find(
+        (holidayObj: TypeOfHoliday) =>
+          dayjs(holidayObj.date).format("YYYY年MM月DD日") ===
+          dayjs(calendar).format("YYYY年MM月DD日")
+      );
+      delHoliday(canncelHolidayObj!);
+    } else {
+      window.alert("指定した日付は登録されていません");
     }
   }
 
   async function delHoliday(wantToDeleteReservation: TypeOfHoliday) {
     try {
-      if (!wantToDeleteReservation.date) {
-        console.log("====deleteReservationできてないよ=====");
-        console.log(
-          "====wantToDeleteReservation.date=====",
-          wantToDeleteReservation.date
-        );
-        return;
-      }
       await API.graphql({
         query: deleteHoliday,
         variables: { input: { id: wantToDeleteReservation.id } },
       });
+      alert("休日予定を削除しました。");
+      setTimeout(() => window.location.reload(), 500);
     } catch (err) {
       console.log("error deleteReservation:", err);
     }
-    alert("カレンダーをキャンセルしました。");
-    window.location.reload();
   }
 
   function weekHoliday(num: number) {
@@ -215,7 +154,7 @@ export const Holidays = () => {
       const reserveTest: any = {
         date: ele,
       };
-      addReservationHoliday(reserveTest);
+      addHoliday(reserveTest);
     });
     setTimeout(() => window.location.reload(), 500);
   }
@@ -227,7 +166,7 @@ export const Holidays = () => {
       <br />
       <br />
       <h2>臨時定休日</h2>
-      {holiday}
+      {holidayElements}
       <input
         type="date"
         onChange={(e: any) => {
@@ -239,25 +178,60 @@ export const Holidays = () => {
 
       <h2>定休日選択</h2>
       <div>
-        <input id="sun" type="checkbox" onChange={handleChange} value="Sun" />
+        <input
+          id="sun"
+          type="checkbox"
+          onChange={onChangeCheckBox}
+          value="Sun"
+        />
         <label htmlFor="sun">日</label>
 
-        <input id="sun" type="checkbox" onChange={handleChange} value="Mon" />
+        <input
+          id="sun"
+          type="checkbox"
+          onChange={onChangeCheckBox}
+          value="Mon"
+        />
         <label htmlFor="mon">月</label>
 
-        <input id="sun" type="checkbox" onChange={handleChange} value="Tue" />
+        <input
+          id="sun"
+          type="checkbox"
+          onChange={onChangeCheckBox}
+          value="Tue"
+        />
         <label htmlFor="tue">火</label>
 
-        <input id="sun" type="checkbox" onChange={handleChange} value="Wed" />
+        <input
+          id="sun"
+          type="checkbox"
+          onChange={onChangeCheckBox}
+          value="Wed"
+        />
         <label htmlFor="wed">水</label>
 
-        <input id="sun" type="checkbox" onChange={handleChange} value="Thu" />
+        <input
+          id="sun"
+          type="checkbox"
+          onChange={onChangeCheckBox}
+          value="Thu"
+        />
         <label htmlFor="tho">木</label>
 
-        <input id="sun" type="checkbox" onChange={handleChange} value="Fri" />
+        <input
+          id="sun"
+          type="checkbox"
+          onChange={onChangeCheckBox}
+          value="Fri"
+        />
         <label htmlFor="fri">金</label>
 
-        <input id="sun" type="checkbox" onChange={handleChange} value="Sat" />
+        <input
+          id="sun"
+          type="checkbox"
+          onClick={onChangeCheckBox}
+          value="Sat"
+        />
         <label htmlFor="sat">土</label>
       </div>
       <button onClick={() => weekHoliday(50)}>定休日決定</button>

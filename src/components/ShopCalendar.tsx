@@ -2,21 +2,17 @@ import "./css/ShopCalendar.css";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteReserve } from "../graphql/mutations";
 import { listReserves, listShopmenus } from "../graphql/queries";
-import {
-  TypeOfShopCalendar,
-  TypeOfReserve,
-  TypeOfShopCalendarEvent,
-  TypeOfMenu,
-} from "../global";
+import { TypeOfReserve, TypeOfMenu, TypeOfEventList } from "../global";
 
 const localizer = momentLocalizer(moment);
-const eventList: TypeOfShopCalendar[] = [];
 
 export const ShopCalendar = () => {
+  const [eventList, setEventList] = useState<TypeOfEventList[]>();
+
   useEffect(() => {
     createEventList();
   }, []);
@@ -49,9 +45,10 @@ export const ShopCalendar = () => {
     const reserves: TypeOfReserve[] | undefined = await fetchReserves();
     const shopMenu: TypeOfMenu[] | undefined = await fetchMenus();
 
-    eventList.splice(0); //リスト消去しないと再描画でどんどん増えるので初期化する
+    setEventList([]); //リスト消去しないと再描画でどんどん増えるので初期化する
 
     if (reserves) {
+      const arrayOfEventObj: TypeOfEventList[] = [];
       reserves.forEach((element: any, index: number) => {
         const selectMenu: any = shopMenu!.find((MenuObj) => {
           return MenuObj.menu === element.menu;
@@ -78,9 +75,10 @@ export const ShopCalendar = () => {
               )
             ),
           };
-          eventList.push(pushObj);
+          arrayOfEventObj.push(pushObj);
         }
       });
+      setEventList(arrayOfEventObj);
     }
   }
 
@@ -103,7 +101,7 @@ export const ShopCalendar = () => {
     });
   }
 
-  function onClickReserve(event: TypeOfShopCalendarEvent) {
+  function onClickReserve(event: TypeOfEventList) {
     alert(`${event.title}\n来店時間：${event.start}\n退店時間：${event.end}`);
   }
 

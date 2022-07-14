@@ -7,40 +7,46 @@ import { Menu } from "./Menu";
 import { ReserveInfo } from "./ReserveInfo";
 import { Admin } from "./Admin";
 
+export async function fetchReserveObj(userName: string | null) {
+  try {
+    const graphqlListReserves: any = await API.graphql(
+      graphqlOperation(listReserves)
+    );
+    const reserves: [TypeOfReserve] =
+      graphqlListReserves.data.listReserves.items;
+    const reserveObj: TypeOfReserve | undefined = reserves.find(
+      (reservation) => {
+        return reservation.customerId === userName;
+      }
+    );
+    return reserveObj;
+  } catch (err) {
+    console.log("error fetchReserveObj", err);
+    return undefined;
+  }
+}
+
 export const Home = () => {
   const [showComponent, setShowComponent] = useState(<></>);
 
   useEffect(() => {
-    fetchReserves();
+    displayComponent();
   }, []);
 
-  async function fetchReserves() {
-    try {
-      const graphqlListReserves: any = await API.graphql(
-        graphqlOperation(listReserves)
-      );
-      const reserves: [TypeOfReserve] =
-        graphqlListReserves.data.listReserves.items;
-      console.log("fetch", reserves);
-      const reserveObj = reserves.find((reservation) => {
-        return reservation.customerId === sessionStorage.getItem("user");
-      });
-
-      console.log("====reserveObj====", reserveObj);
-      if (sessionStorage.getItem("user") === "administrator") {
-        setShowComponent(<Admin />);
-      } else if (reserveObj) {
-        setTimeout(function () {
-          setShowComponent(<ReserveInfo />);
-        }, 500);
-      } else {
-        setShowComponent(<Menu />);
-      }
-    } catch (err) {
-      console.log("error fetching todos", err);
+  async function displayComponent() {
+    const reserveObj: TypeOfReserve | undefined = await fetchReserveObj(
+      sessionStorage.getItem("user")
+    );
+    if (sessionStorage.getItem("user") === "administrator") {
+      setShowComponent(<Admin />);
+    } else if (reserveObj) {
+      setTimeout(function () {
+        setShowComponent(<ReserveInfo />);
+      }, 500);
+    } else {
+      console.log("else: ");
+      setShowComponent(<Menu />);
     }
   }
-  const [loadedScreen, setLoadedScreen] = useState(<></>);
-
   return <>{showComponent}</>;
 };

@@ -15,15 +15,6 @@ export const Menu = () => {
     createMenuList();
   }, []);
 
-  function onClickArButton() {
-    window.location.href =
-      "https://japan-crew-cut-association.github.io/photoedit-web-js/";
-    // const link: HTMLElement | null = document.getElementById("ar");
-    // if (link) {
-    //   link.click();
-    // }
-  }
-
   async function createMenuList() {
     try {
       const graphqlResult: any = await API.graphql(
@@ -91,9 +82,6 @@ export const Menu = () => {
       <br />
       <br />
       <h3 className="text-center">Menu</h3>
-      <div>
-        <button onClick={() => onClickArButton()}>ARで角刈りを試す</button>
-      </div>
       <div className="border p-3 border m-5">
         <>{stateMenus}</>
       </div>

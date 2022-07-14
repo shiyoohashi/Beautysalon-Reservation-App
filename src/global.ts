@@ -1,11 +1,3 @@
-export interface TypeOfShopCalendar {
-  id: number;
-  title: string | null;
-  allDay: boolean;
-  start: Date;
-  end: Date;
-}
-
 export interface TypeOfReserveCalendar {
   start: Date;
   end: Date;
@@ -20,14 +12,6 @@ export interface TypeOfMenu {
   amountOfMoney: number;
   treatmentTime: number;
 }
-
-// export interface TypeOfMenuDetail {
-//   id: number;
-//   menu: string;
-//   detail: string;
-//   amountOfMoney: number;
-//   treatmentTime: number;
-// }
 
 export interface TypeOfReserve {
   id?: number;
@@ -55,10 +39,10 @@ export interface TypeOfStylist {
   updatedAt: Date;
 }
 
-export interface TypeOfShopCalendarEvent {
-  allDay: boolean;
-  end: Date;
+export interface TypeOfEventList {
   id: number;
-  start: Date;
   title: string | null;
+  allDay: boolean;
+  start: Date;
+  end: Date;
 }

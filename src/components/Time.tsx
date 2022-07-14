@@ -2,8 +2,8 @@ import "./css/Time.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { listReserves, listShopmenus } from "../graphql/queries";
-import { TypeOfReserve, TypeOfMenu } from "../global";
+import { listReserves, listShopmenus, listHolidays } from "../graphql/queries";
+import { TypeOfReserve, TypeOfMenu, TypeOfHoliday } from "../global";
 import dayjs from "dayjs";
 
 export const Time = () => {
@@ -53,6 +53,19 @@ export const Time = () => {
     }
   }
 
+  async function fetchHolydays() {
+    try {
+      const graphqlData: any = await API.graphql(
+        graphqlOperation(listHolidays)
+      );
+      const holidays: [TypeOfHoliday] = graphqlData.data.listHolidays.items;
+      console.log("holiday fetch", holidays);
+      return holidays;
+    } catch (err) {
+      console.log("error fetchHolydays", err);
+    }
+  }
+
   function createDateAndDayOfWeek() {
     const listDay = ["日", "月", "火", "水", "木", "金", "土"];
 
@@ -85,7 +98,7 @@ export const Time = () => {
   const maru = "◯";
   const batsu = "✖️";
 
-  async function changeReservePropriety(reserves: any) {
+  async function changeReservePropriety(reserves: TypeOfReserve[]) {
     let result: [string[]] = JSON.parse(JSON.stringify(initialMarubatsu));
     let selectedMenuObj: TypeOfMenu = {
       id: 0,
@@ -116,50 +129,38 @@ export const Time = () => {
 
     for (let row = 0; row < 21; row++) {
       for (let col = 0; col < 7; col++) {
-        reserves.forEach(
-          (reserve: {
-            id: string;
-            customerId: string;
-            stylistId: number;
-            date: Date;
-            menu: string;
-            createdAt: Date;
-            updatedAt: Date;
-          }) => {
-            let reserveMenuObj: TypeOfMenu = {
-              id: 0,
-              menu: "error",
-              detail: "error",
-              amountOfMoney: 0,
-              treatmentTime: 0,
-            };
+        reserves.forEach((reserve: TypeOfReserve) => {
+          let reserveMenuObj: TypeOfMenu = {
+            id: 0,
+            menu: "error",
+            detail: "error",
+            amountOfMoney: 0,
+            treatmentTime: 0,
+          };
 
-            const tempReserveMenuObj = arrayOfShopMenuObj.find(
-              (shpoMenuObj) => {
-                return shpoMenuObj.menu === reserve.menu;
-              }
-            );
-            if (tempReserveMenuObj) {
-              reserveMenuObj = tempReserveMenuObj;
-            }
+          const tempReserveMenuObj = arrayOfShopMenuObj.find((shpoMenuObj) => {
+            return shpoMenuObj.menu === reserve.menu;
+          });
+          if (tempReserveMenuObj) {
+            reserveMenuObj = tempReserveMenuObj;
+          }
 
-            if (
+          if (
+            new Date(reserve.date).setMinutes(
+              new Date(reserve.date).getMinutes() -
+                (selectedMenuObj.treatmentTime - 30)
+            ) <= compairDate(col, row).getTime() &&
+            compairDate(col, row).getTime() <
               new Date(reserve.date).setMinutes(
-                new Date(reserve.date).getMinutes() -
-                  (selectedMenuObj.treatmentTime - 30)
-              ) <= compairDate(col, row).getTime() &&
-              compairDate(col, row).getTime() <
-                new Date(reserve.date).setMinutes(
-                  new Date(reserve.date).getMinutes() +
-                    reserveMenuObj.treatmentTime
-                )
-            ) {
-              if ((result[row][col] = maru)) {
-                result[row][col] = batsu;
-              }
+                new Date(reserve.date).getMinutes() +
+                  reserveMenuObj.treatmentTime
+              )
+          ) {
+            if ((result[row][col] = maru)) {
+              result[row][col] = batsu;
             }
           }
-        );
+        });
       }
     }
 
@@ -168,7 +169,7 @@ export const Time = () => {
     // 月を取得
     const yearMonth = document.getElementById("yearMonth")?.innerText;
     const sliceYearMonth = yearMonth?.slice(0, -1);
-    const [, month] = sliceYearMonth!.split("年");
+    const [year, month] = sliceYearMonth!.split("年");
     // 日を取得
     const tempLeftDate = document.getElementById("dateAndDay0")!.innerText;
     const [leftDate] = tempLeftDate.split("\n");
@@ -176,6 +177,24 @@ export const Time = () => {
       for (let i: number = 0; i < 21; i++) {
         result[i][0] = "TEL";
       }
+    }
+
+    // 定休日をDBから持ってきて、その日は全て「休」表示とする
+    const holidays: TypeOfHoliday[] | undefined = await fetchHolydays();
+    const dayCounter: Date = new Date(`20${year}/${month}/${leftDate}`);
+    for (let col = 0; col < 7; col++) {
+      console.log("dayCounter: ", dayCounter);
+      const duplicateHoliday = holidays?.find(
+        (holidayObj) =>
+          dayjs(holidayObj.date).format("YYYY/MM/DD") ===
+          dayjs(dayCounter).format("YYYY/MM/DD")
+      );
+      if (duplicateHoliday) {
+        for (let row = 0; row < 21; row++) {
+          result[row][col] = "休";
+        }
+      }
+      dayCounter.setDate(dayCounter.getDate() + 1);
     }
     setMarubatsu(result);
   }
@@ -387,7 +406,7 @@ export const Time = () => {
           {createReservePropriety()}
         </tbody>
       </table>
-      <Link id="link" to={"checkreserve"}></Link>
+      <Link id="link" to={"checkreserve/"}></Link>
     </div>
   );
 };

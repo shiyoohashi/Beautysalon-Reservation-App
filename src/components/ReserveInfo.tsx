@@ -105,7 +105,7 @@ export const ReserveInfo = () => {
           </tr>
           <tr className="text-center">
             <td>料金</td>
-            <td>{menuInfo?.amountOfMoney} 円</td>
+            <td>{menuInfo?.amountOfMoney.toLocaleString()} 円</td>
           </tr>
         </tbody>
       </table>
