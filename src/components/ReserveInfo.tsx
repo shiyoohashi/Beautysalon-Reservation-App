@@ -1,3 +1,4 @@
+import "./css/ReserveInfo.css";
 import { API, graphqlOperation } from "aws-amplify";
 import { deleteReserve } from "../graphql/mutations";
 import { listReserves, listShopmenus } from "../graphql/queries";

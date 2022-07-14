@@ -3,7 +3,8 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listHolidays } from "../graphql/queries";
 import { TypeOfHoliday } from "../global";
 import { createHoliday, deleteHoliday } from "../graphql/mutations";
-import "./main.css";
+import "./css/Holidays.css";
+
 
 export const Holidays = () => {
   const [holiday, setHoliday] = useState<Element[]>();
@@ -129,7 +130,7 @@ export const Holidays = () => {
       const wantToDel = await fetchHolyday().then((res) =>
         res?.filter((reservation) => {
           console.log("calender : ", calendar);
-          let test: any = new Date(reservation.date);
+          let test: Date = new Date(reservation.date);
           return String(test) === String(calendar);
         })
       );
@@ -199,6 +200,7 @@ export const Holidays = () => {
     alert("カレンダーをキャンセルしました。");
     window.location.reload();
   }
+
   function weekHoliday(num: number) {
     const oneYearDate: string[] = [];
     for (let i = 0; i < num; i++) {

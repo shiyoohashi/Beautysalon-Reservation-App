@@ -235,50 +235,6 @@ const formFields = {
       order: 4,
     },
   },
-  // forceNewPassword: {
-  //   password: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your Password:",
-  //   },
-  // },
-  // resetPassword: {
-  //   username: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your email:",
-  //   },
-  // },
-  // confirmResetPassword: {
-  //   confirmation_code: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your Confirmation Code:",
-  //     label: "New Label",
-  //     isRequired: false,
-  //   },
-  //   confirm_password: {
-  //     labelHidden: false,
-  //     placeholder: "Enter your Password Please:",
-  //   },
-  // },
-  // setupTOTP: {
-  //   QR: {
-  //     totpIssuer: "test issuer",
-  //     totpUsername: "amplify_qr_test_user",
-  //   },
-  //   confirmation_code: {
-  //     labelHidden: false,
-  //     label: "New Label",
-  //     placeholder: "Enter your Confirmation Code:",
-  //     isRequired: false,
-  //   },
-  // },
-  // confirmSignIn: {
-  //   confirmation_code: {
-  //     labelHidden: false,
-  //     label: "New Label",
-  //     placeholder: "Enter your Confirmation Code:",
-  //     isRequired: false,
-  //   },
-  // },
 };
 
 function App() {
@@ -338,7 +294,7 @@ function App() {
       },
     },
   };
-  window.scroll({ top: 0, behavior: "smooth" });
+  // window.scroll({ top: 0, behavior: "smooth" });
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>

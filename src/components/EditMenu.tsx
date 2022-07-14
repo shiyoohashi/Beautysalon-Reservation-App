@@ -1,4 +1,4 @@
-import "./EditMenu.css";
+import "./css/EditMenu.css";
 import { useState, useEffect } from "react";
 import { listShopmenus } from "../graphql/queries";
 import { deleteShopmenu, createShopmenu } from "../graphql/mutations";
@@ -80,7 +80,7 @@ export const EditMenu = () => {
       console.log("error fetching todos");
     }
   }
-
+  //{ target: HTMLButtonElement }
   function onChangeInputMenu(e: any) {
     const copyMenuStateObj = JSON.parse(JSON.stringify(menuStateObj));
     copyMenuStateObj["menu"] = e.target.value;

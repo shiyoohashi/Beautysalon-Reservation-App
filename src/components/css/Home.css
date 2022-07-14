@@ -147,6 +147,30 @@ a {
   color: #fff;
   text-decoration: none;
 }
+h1 {
+  text-align: center;
+}
+.menus {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+.adminButton {
+  width: 50%;
+  height: 120px;
+  border-radius: 5px;
+  font-size: large;
+}
+
+.h-70 {
+  height: 70px !important;
+}
+
+#admin_page {
+  margin-top: 10%;
+}
 .gradientbar {
   display: block;
   position: relative;
@@ -167,22 +191,6 @@ a {
   transition: opacity 0.75s linear 1s;
   -webkit-animation: gradanim 10s linear 0s infinite;
   animation: gradanim 10s linear 0s infinite;
-}
-#reserveInfo {
-  margin-top: 15%;
-}
-@media (min-width: 1024px) {
-  #time {
-    margin-top: 95px;
-  }
-}
-@media (max-width: 1023px) {
-  #time {
-    margin-top: 65px;
-  }
-}
-#shopcalendar {
-  margin-top: 10%;
 }
 @-webkit-keyframes gradanim {
   0% {
@@ -967,7 +975,7 @@ a {
   );
 }
 .intromask {
-  position: fixed;
+  /* position: fixed; */
   overflow: hidden;
   z-index: 9999;
 }
@@ -2586,6 +2594,7 @@ html:not(.wf-ebgaramond-n4-active) .footer__main__column dt :before {
   text-indent: 200%;
   white-space: nowrap;
   overflow: hidden;
+
   color: rgba(0, 0, 0, 0);
   position: relative;
   width: 120%;
@@ -2629,7 +2638,7 @@ html:not(.wf-ebgaramond-n4-active) .footer__main__column dt :before {
   display: block;
   width: 106px;
   height: 54px;
-  position: fixed;
+  /* position: fixed; */
   top: 23px;
   left: 50%;
   margin-left: -53px;
@@ -2690,7 +2699,10 @@ body:not(.touch) .header__reserve__link:hover {
   background-color: #fff;
   color: #727171;
 }
-
+.adminButton:hover {
+  background-color: #fff;
+  color: #727171;
+}
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en *,
 html:not(.wf-ebgaramond-n4-active) .header__reserve__en:after,
@@ -2885,14 +2897,14 @@ html:not(.wf-ebgaramond-n4-active) .header__nav__link :before {
     width: 110px;
     height: 56px;
     top: 0px;
-    left: 10%;
+    left: 50%;
     margin-left: -55px;
     opacity: 1 !important;
   }
   .header__container {
     /* position: fixed; */
     top: 0;
-    /* bottom: 0; */
+    /* bottom: 0 */
     height: 64px;
     background-color: rgba(114, 113, 113, 0.95);
     z-index: 100;

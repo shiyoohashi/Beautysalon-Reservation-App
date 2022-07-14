@@ -1,3 +1,4 @@
+import "./css/ShopCalendar.css";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
@@ -48,7 +49,7 @@ export const ShopCalendar = () => {
     const reserves: TypeOfReserve[] | undefined = await fetchReserves();
     const shopMenu: TypeOfMenu[] | undefined = await fetchMenus();
 
-    eventList.splice(0); //リスト消去しないと増えるので削除
+    eventList.splice(0); //リスト消去しないと再描画でどんどん増えるので初期化する
 
     if (reserves) {
       reserves.forEach((element: any, index: number) => {
@@ -85,20 +86,11 @@ export const ShopCalendar = () => {
 
   async function delReserve(reserveObj: TypeOfReserve) {
     try {
-      if (
-        !reserveObj.date ||
-        !reserveObj.menu ||
-        !reserveObj.stylistId ||
-        !reserveObj.customerId
-      ) {
-        console.log("====function:delReserve失敗=====");
-        return;
-      }
       await API.graphql({
         query: deleteReserve,
         variables: { input: { id: reserveObj.id } },
       });
-      console.log("====このデータ消しました=====", reserveObj);
+      console.log("====deleted=====", reserveObj);
     } catch (err) {
       console.log("error function:delReserve:", err);
     }
