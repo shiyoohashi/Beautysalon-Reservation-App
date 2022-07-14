@@ -1,9 +1,9 @@
-import { TypeOfMenuDetail, TypeOfMenu } from "../global";
-// import "@aws-amplify/ui-react/styles.css";
+import { TypeOfMenu } from "../global";
 import { FooterNavbar } from "../components/FooterNavbar";
-import { listMenus } from "../graphql/queries";
+import { listShopmenus } from "../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
 import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
 
 export const Menu = () => {
   const [stateMenus, setStateMenus] = useState<JSX.Element[]>([]);
@@ -11,58 +11,26 @@ export const Menu = () => {
   //選択メニューの初期化(nullになる)
   sessionStorage.removeItem("menu");
 
-  // const shopMenu: TypeOfMenuDetail[] = [
-  //   {
-  //     id: 1,
-  //     menu: "角刈り",
-  //     detail:
-  //       "「イケメンすぎる角刈り」がTwitterで話題になっている。角刈りにサングラスと、ワイルドなファッションに身を包んだ角刈り男性。フォロワーからは「イケメンすぎる」などの声が寄せられている。",
-  //     amountOfMoney: 1000000,
-  //     treatmentTime: 60,
-  //   },
-  //   {
-  //     id: 2
-  //     menu: "カット",
-  //     detail: "こんなただのカット選んで楽しいんかぇ？",
-  //     amountOfMoney: 1000,
-  //     treatmentTime: 30,
-  //   },
-  //   {
-  //     id: 3,
-  //     menu: "カット＋カラー",
-  //     detail:
-  //       "儂はこんな浮ついたメニューやらんど？絶対丸刈りにしちゃるけぇの。",
-  //     amountOfMoney: 20000,
-  //     treatmentTime: 60,
-  //   },
-  //   {
-  //     id: 4,
-  //     menu: "パーマ",
-  //     detail:
-  //       "パーマの微妙な仕上がりにキレた女性のエピソードを紹介。パーマをかけに行ったが、担当した美容師に「パーマはかけられない」と言われたそう。その美容師は、以前別の客にも「パーマは微妙だからかけない」と言っていたらしい。",
-  //     amountOfMoney: 10000,
-  //     treatmentTime: 60,
-  //   },
-  //   {
-  //     id: 5,
-  //     menu: "縮毛矯正",
-  //     detail:
-  //       "「縮毛矯正」「デジタルパーマ」の違いを解説する。縮毛矯正はクセを伸ばすのに対し、デジタルパーマはクセを活かす。どちらにもメリット・デメリットがあり、満足できる方を選ぶのがよい。",
-  //     amountOfMoney: 10000,
-  //     treatmentTime: 90,
-  //   },
-  // ];
-
   useEffect(() => {
     createMenuList();
   }, []);
 
+  function onClickArButton() {
+    window.location.href =
+      "https://japan-crew-cut-association.github.io/photoedit-web-js/";
+    // const link: HTMLElement | null = document.getElementById("ar");
+    // if (link) {
+    //   link.click();
+    // }
+  }
+
   async function createMenuList() {
     try {
-      const graphqlResult: any = await API.graphql(graphqlOperation(listMenus));
-      const menus: TypeOfMenu[] = graphqlResult.data.listMenus.items;
-
-      const result: JSX.Element[] = menus.map((menuObj: any) => {
+      const graphqlResult: any = await API.graphql(
+        graphqlOperation(listShopmenus)
+      );
+      const menus: TypeOfMenu[] = graphqlResult.data.listShopmenus.items;
+      const result: JSX.Element[] = menus.map((menuObj: TypeOfMenu) => {
         return (
           <div
             key={menuObj.menu}
@@ -92,6 +60,11 @@ export const Menu = () => {
             <div>
               <p className="small text-left">{menuObj.detail}</p>
             </div>
+            <div>
+              <button onClick={() => onClickArButton()}>
+                ARで角刈りを試す
+              </button>
+            </div>
           </div>
         );
       });
@@ -106,20 +79,16 @@ export const Menu = () => {
   function onChangeCheck(menu: string, amountOfMoney: number) {
     const checkBoxes = document.getElementsByClassName("menuCheck");
     const arrayCheckBoxes = Array.prototype.slice.call(checkBoxes);
-    arrayCheckBoxes.forEach((checkBox: any) => {
+    arrayCheckBoxes.forEach((checkBox) => {
       checkBox.checked = false;
     });
-    const selectCheckBox: any = document.getElementById(menu);
-    selectCheckBox.checked = true;
+    const selectCheckBox: HTMLElement | null = document.getElementById(menu);
+    (selectCheckBox as HTMLInputElement).checked = true;
     sessionStorage.setItem("menu", menu);
-
-    // const menuObj = menus.find((obj) => obj.menu === menu);
-    // if (menuObj !== undefined) {
     sessionStorage.setItem(
       "amountOfMoney",
       String(amountOfMoney.toLocaleString())
     );
-    // }
   }
 
   return (
@@ -131,6 +100,7 @@ export const Menu = () => {
         <>{stateMenus}</>
       </div>
       <FooterNavbar />
+      {/* <Link id="ar" to="ar/"></Link> */}
     </div>
   );
 };

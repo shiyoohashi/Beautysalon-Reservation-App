@@ -9,3 +9,14 @@
 .time-cells:hover {
   background-color: #728888;
 }
+
+@media (min-width: 1024px) {
+  #time {
+    margin-top: 95px;
+  }
+}
+@media (max-width: 1023px) {
+  #time {
+    margin-top: 65px;
+  }
+}

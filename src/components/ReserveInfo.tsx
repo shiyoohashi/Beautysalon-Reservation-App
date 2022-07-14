@@ -1,6 +1,7 @@
+import "./css/ReserveInfo.css";
 import { API, graphqlOperation } from "aws-amplify";
-import { deleteReservation } from "../graphql/mutations";
-import { listReserves, listMenus } from "../graphql/queries";
+import { deleteReserve } from "../graphql/mutations";
+import { listReserves, listShopmenus } from "../graphql/queries";
 import { TypeOfReserve, TypeOfMenu } from "../global";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
@@ -19,17 +20,17 @@ export const ReserveInfo = () => {
         graphqlOperation(listReserves)
       );
       const arrayReserves: [TypeOfReserve] =
-        listReservesGraphqlResult.data.listReservations.items;
+        listReservesGraphqlResult.data.listReserves.items;
 
       const myReserve = arrayReserves.find((element) => {
         return element.customerId === sessionStorage.getItem("user");
       });
 
-      const listMenusGraphqlResult: any = await API.graphql(
-        graphqlOperation(listMenus)
+      const listShopmenusGraphqlResult: any = await API.graphql(
+        graphqlOperation(listShopmenus)
       );
       const arrayMenus: [TypeOfMenu] =
-        listMenusGraphqlResult.data.listMenus.items;
+        listShopmenusGraphqlResult.data.listShopmenus.items;
 
       // const copyReserveInfo = JSON.parse(JSON.stringify(reserveInfo));
       setReserveInfo(myReserve);
@@ -43,23 +44,23 @@ export const ReserveInfo = () => {
     }
   }
 
-  async function delReservation(wantToDeleteReservation: TypeOfReserve) {
+  async function delReserve(delReserveObj: TypeOfReserve) {
     try {
       if (
-        !wantToDeleteReservation.date ||
-        !wantToDeleteReservation.menu ||
-        !wantToDeleteReservation.stylistId ||
-        !wantToDeleteReservation.customerId
+        !delReserveObj.date ||
+        !delReserveObj.menu ||
+        !delReserveObj.stylistId ||
+        !delReserveObj.customerId
       ) {
         console.log("====deleteReservationできてないよ=====");
         return;
       }
-      console.log("====このデータ消します=====", wantToDeleteReservation);
+      console.log("====このデータ消します=====", delReserveObj);
       await API.graphql({
-        query: deleteReservation,
-        variables: { input: { id: wantToDeleteReservation.id } },
+        query: deleteReserve,
+        variables: { input: { id: delReserveObj.id } },
       });
-      console.log("====このデータ消しました=====", wantToDeleteReservation);
+      console.log("====このデータ消しました=====", delReserveObj);
     } catch (err) {
       console.log("error deleteReservation:", err);
     }
@@ -74,7 +75,7 @@ export const ReserveInfo = () => {
         graphqlOperation(listReserves)
       );
       const arrayReserves: [TypeOfReserve] =
-        listReservesGraphqlResult.data.listReservations.items;
+        listReservesGraphqlResult.data.listReserves.items;
 
       const delReserves = arrayReserves.filter((reserveObj) => {
         console.log("====reservation.customerId====", reserveObj.customerId);
@@ -82,7 +83,7 @@ export const ReserveInfo = () => {
       });
       console.log("====wantToDel====", delReserves);
       if (delReserves) {
-        delReserves.forEach((reserveObj) => delReservation(reserveObj));
+        delReserves.forEach((reserveObj) => delReserve(reserveObj));
       }
     }
   }

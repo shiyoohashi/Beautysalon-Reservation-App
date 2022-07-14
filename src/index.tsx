@@ -3,16 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
-  <BrowserRouter>
-    <script src="./Tashinami HAIR_files/zdy2dgp.js" async={true}></script>
+  <>
+    {/* <script src="./Tashinami HAIR_files/zdy2dgp.js" async={true}></script> */}
     <App />
-  </BrowserRouter>
+  </>
 );
 
 //<React.StrictMode>

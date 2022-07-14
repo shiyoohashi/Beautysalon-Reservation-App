@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { TypeOfReserve } from "../global";
 import { API, graphqlOperation } from "aws-amplify";
-import { createReservation } from "../graphql/mutations";
+import { createReserve } from "../graphql/mutations";
 import dayjs from "dayjs";
 
 export const CheckReserve = () => {
@@ -14,14 +14,10 @@ export const CheckReserve = () => {
         !reservation.customerId
       ) {
         console.log("====addTodoできてないよ=====");
-        console.log("====reservation.date=====", reservation.date);
-        console.log("====reservation.menuId=====", reservation.menu);
-        console.log("====reservation.stylistId=====", reservation.stylistId);
-        console.log("====reservation.customerId=====", reservation.customerId);
         return;
       }
       await API.graphql(
-        graphqlOperation(createReservation, { input: reservation })
+        graphqlOperation(createReserve, { input: reservation })
       );
     } catch (err) {
       console.log("error creating reservation:", err);
@@ -35,10 +31,8 @@ export const CheckReserve = () => {
       stylistId: 2,
       customerId: sessionStorage.getItem("user")!,
     };
-    console.log("reserve: ", reserve);
 
     addReservation(reserve);
-
     const homeLink: HTMLInputElement = document.getElementById(
       "home"
     ) as HTMLInputElement;

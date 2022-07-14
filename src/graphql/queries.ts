@@ -15,7 +15,7 @@ export const getReservation = /* GraphQL */ `
     }
   }
 `;
-export const listReserves = /* GraphQL */ `
+export const listReservations = /* GraphQL */ `
   query ListReservations(
     $filter: ModelReservationFilterInput
     $limit: Int
@@ -142,6 +142,72 @@ export const listHolidays = /* GraphQL */ `
       items {
         id
         date
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getShopmenu = /* GraphQL */ `
+  query GetShopmenu($id: ID!) {
+    getShopmenu(id: $id) {
+      id
+      menu
+      detail
+      amountOfMoney
+      treatmentTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listShopmenus = /* GraphQL */ `
+  query ListShopmenus(
+    $filter: ModelShopmenuFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listShopmenus(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        menu
+        detail
+        amountOfMoney
+        treatmentTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getReserve = /* GraphQL */ `
+  query GetReserve($id: ID!) {
+    getReserve(id: $id) {
+      id
+      date
+      menu
+      stylistId
+      customerId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listReserves = /* GraphQL */ `
+  query ListReserves(
+    $filter: ModelReserveFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReserves(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        date
+        menu
+        stylistId
+        customerId
         createdAt
         updatedAt
       }
