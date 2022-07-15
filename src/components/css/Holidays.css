@@ -1,0 +1,14 @@
+#holidays {
+  /* margin-top: 10%; */
+  margin: 7% auto;
+  width: 80%;
+}
+#inputDate {
+  width: 200px;
+  height: 50px;
+}
+@media (max-width: 1023px) {
+  #holidays {
+    margin-top: 18%;
+  }
+}

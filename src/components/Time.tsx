@@ -10,27 +10,27 @@ export const Time = () => {
   const [nowDate, setNowDate] = useState(new Date());
 
   const initialMarubatsu: String[][] = [
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
-    ["◯", "◯", "◯", "◯", "◯", "◯", "◯"],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
   ];
 
   const [marubatsu, setMarubatsu] = useState(initialMarubatsu);
@@ -156,9 +156,11 @@ export const Time = () => {
                   reserveMenuObj.treatmentTime
               )
           ) {
-            if ((result[row][col] = maru)) {
+            if ((result[row][col] = " ")) {
               result[row][col] = batsu;
             }
+          } else {
+            result[row][col] = maru;
           }
         });
       }
@@ -355,11 +357,12 @@ export const Time = () => {
   }
 
   function onClickPreviousWeek() {
+    setMarubatsu(initialMarubatsu);
     setNowDate(new Date(nowDate.setDate(nowDate.getDate() - 7)));
     fetchReserves();
-    console.log("nowDate: ", nowDate);
   }
   function onClickNextWeek() {
+    setMarubatsu(initialMarubatsu);
     setNowDate(new Date(nowDate.setDate(nowDate.getDate() + 7)));
     fetchReserves();
   }
@@ -373,7 +376,7 @@ export const Time = () => {
       return (
         <th
           className="week-button"
-          onClick={() => onClickPreviousWeek()}
+          onClick={onClickPreviousWeek}
           scope="row"
           rowSpan={2}
         >
@@ -394,7 +397,7 @@ export const Time = () => {
             </th>
             <th
               className="week-button"
-              onClick={() => onClickNextWeek()}
+              onClick={onClickNextWeek}
               scope="row"
               rowSpan={2}
             >

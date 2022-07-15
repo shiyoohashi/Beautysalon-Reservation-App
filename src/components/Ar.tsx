@@ -1,4 +1,3 @@
-
 // import { listShopmenus } from "../graphql/queries";
 // import { API, graphqlOperation } from "aws-amplify";
 // import { Link } from "react-router-dom";
@@ -7,7 +6,7 @@
 // import "@aws-amplify/ui-react/styles.css";
 import Webcam from "react-webcam";
 import { useState, useCallback, useRef } from "react";
-import "./Ar.css";
+import "./css/Ar.css";
 import { EditPhoto } from "./EditPhoto";
 
 const videoConstraints = {

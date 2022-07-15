@@ -7,40 +7,9 @@ type Props = {
   userName: string;
 };
 export const Header: React.FC<Props> = (Props) => {
-  function confirmReservation() {
-    const link: HTMLElement | null = document.getElementById(
-      "confirm_reservation"
-    );
-    if (link) {
-      link.click();
-    }
-  }
-  function editMenu() {
-    const link: HTMLElement | null = document.getElementById("edit_menu");
-    if (link) {
-      link.click();
-    }
-  }
-
-  function setHolidays() {
-    const link: HTMLElement | null = document.getElementById("set_holidays");
-    if (link) {
-      link.click();
-    }
-  }
-
-  function editStylist() {
-    const link: HTMLElement | null = document.getElementById("edit_stylist");
-    if (link) {
-      link.click();
-    }
-  }
-
-  function clickLogo() {
-    const link: HTMLElement | null = document.getElementById("logo");
-    if (link) {
-      link.click();
-    }
+  function returnHomePage() {
+    window.location.href =
+      "https://japan-crew-cut-association.github.io/Tashinami-HP/";
   }
 
   function onClickSignout() {
@@ -55,7 +24,7 @@ export const Header: React.FC<Props> = (Props) => {
     <header className="header">
       <div className="header__container" style={{ height: "1037px" }}>
         <h1 className="header__logo">
-          <div className="header__logo__img" onClick={() => clickLogo()}>
+          <div className="header__logo__img" onClick={returnHomePage}>
             YAJIMA HAIR
           </div>
           <Link id="logo" to={"/"}></Link>

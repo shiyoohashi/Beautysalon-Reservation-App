@@ -68,12 +68,9 @@ export const Holidays = () => {
     const holidayCalendarElements: JSX.Element[] = arrayHolidays.map(
       (holiday: string, index: number) => {
         return (
-          <>
-            <label key={index} htmlFor={"String(index)"}>
-              {holiday}
-            </label>
-            <br></br>
-          </>
+          <tr key={index}>
+            <td className="text-center">{holiday}</td>
+          </tr>
         );
       }
     );
@@ -87,9 +84,12 @@ export const Holidays = () => {
     {
       // 選択した日と同じ日付が既に休日として入っているか確認
       const duplicateHoliday = holidays?.filter((holiday) => {
-        return holiday === calendar;
+        return (
+          dayjs(holiday).format("YYYY年MM月DD日") ===
+          dayjs(calendar).format("YYYY年MM月DD日")
+        );
       });
-      if (duplicateHoliday) {
+      if (duplicateHoliday!.length > 0) {
         window.alert("既に休日予定です。");
       } else {
         addHoliday(holidayObj);
@@ -159,82 +159,116 @@ export const Holidays = () => {
     setTimeout(() => window.location.reload(), 500);
   }
   return (
-    <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <h2>臨時定休日</h2>
-      {holidayElements}
-      <input
-        type="date"
-        onChange={(e: any) => {
-          setCalendar(e.target.valueAsDate);
-        }}
-      />
-      <button onClick={() => setAddHoliday()}>追加</button>
-      <button onClick={() => onClickCancelButton()}>削除</button>
-
-      <h2>定休日選択</h2>
-      <div>
+    <div id="holidays">
+      <table className="table table-striped table-dark hplidayTable">
+        <tbody>
+          <tr>
+            <th className="text-center">定休日</th>
+          </tr>
+          {holidayElements}
+        </tbody>
+      </table>
+      <div className="text-center">
+        <h3>臨時定休日選択</h3>
         <input
-          id="sun"
+          id="inputDate"
+          type="date"
+          onChange={(e: any) => {
+            setCalendar(e.target.valueAsDate);
+          }}
+        />
+        <div className="text-center">
+          <button className="btn btn-dark" onClick={() => setAddHoliday()}>
+            追加
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => onClickCancelButton()}
+          >
+            削除
+          </button>
+        </div>
+      </div>
+      <div className="text-center">
+        <h3>定休日選択</h3>
+        <input
+          className="selectHoliday"
           type="checkbox"
           onChange={onChangeCheckBox}
           value="Sun"
         />
-        <label htmlFor="sun">日</label>
+        <label className="selectHolidaylabel" htmlFor="smun">
+          Sum
+        </label>
 
         <input
-          id="sun"
+          className="selectHoliday"
           type="checkbox"
           onChange={onChangeCheckBox}
           value="Mon"
         />
-        <label htmlFor="mon">月</label>
+        <label className="selectHolidaylabel" htmlFor="mon">
+          Mon
+        </label>
 
         <input
-          id="sun"
+          className="selectHoliday"
           type="checkbox"
           onChange={onChangeCheckBox}
           value="Tue"
         />
-        <label htmlFor="tue">火</label>
+        <label className="selectHolidaylabel" htmlFor="tue">
+          Tue
+        </label>
 
         <input
-          id="sun"
+          className="selectHoliday"
           type="checkbox"
           onChange={onChangeCheckBox}
           value="Wed"
         />
-        <label htmlFor="wed">水</label>
+        <label className="selectHolidaylabel" htmlFor="wed">
+          Wed
+        </label>
 
         <input
-          id="sun"
+          className="selectHoliday"
           type="checkbox"
           onChange={onChangeCheckBox}
           value="Thu"
         />
-        <label htmlFor="tho">木</label>
+        <label className="selectHolidaylabel" htmlFor="tho">
+          Tho
+        </label>
 
         <input
-          id="sun"
+          className="selectHoliday"
           type="checkbox"
           onChange={onChangeCheckBox}
           value="Fri"
         />
-        <label htmlFor="fri">金</label>
+        <label className="selectHolidaylabel" htmlFor="fri">
+          Fri
+        </label>
 
         <input
-          id="sun"
+          className="selectHoliday"
           type="checkbox"
           onClick={onChangeCheckBox}
           value="Sat"
         />
-        <label htmlFor="sat">土</label>
+        <label className="selectHolidaylabel" htmlFor="sat">
+          Sat
+        </label>
       </div>
-      <button onClick={() => weekHoliday(50)}>定休日決定</button>
-    </>
+      <div className="text-center">
+        <button
+          className="btn btn-dark mx-auto"
+          onClick={() => weekHoliday(50)}
+        >
+          定休日決定
+        </button>
+      </div>
+    </div>
   );
 };

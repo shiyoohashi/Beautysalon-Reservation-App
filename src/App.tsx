@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { Home } from "./components/Home";
-import { Header } from "./components/Header";
+import { Header } from "./components/HeaderNavbar";
 import { Footer } from "./components/Footer";
 import { ShopCalendar } from "./components/ShopCalendar";
 import { Holidays } from "./components/Holidays";
@@ -32,12 +32,18 @@ const components = {
   Header() {
     const { tokens } = useTheme();
 
+    function returnHomePage() {
+      window.location.href =
+        "https://japan-crew-cut-association.github.io/Tashinami-HP/";
+    }
+
     return (
       <View textAlign="center" padding={tokens.space.large}>
         <Image
           alt="Amplify logo"
           src="https://user-images.githubusercontent.com/98013294/177367993-fb3fa28a-1738-46c3-b178-28285a856cb0.png"
           height="200px"
+          onClick={returnHomePage}
         />
       </View>
     );
@@ -213,13 +219,13 @@ const formFields = {
     name: {
       type: "name",
       labelHidden: false,
-      label: "Name Push:",
+      label: "Name:",
       order: 1,
     },
     email: {
       type: "email",
       labelHidden: false,
-      label: "Email Push:",
+      label: "Email:",
       order: 2,
     },
     password: {
