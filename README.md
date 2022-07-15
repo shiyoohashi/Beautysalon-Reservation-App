@@ -1,46 +1,81 @@
-# Getting Started with Create React App
+# Name（嗜"たしなみ"）
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+"嗜"は美容室向け予約アプリです。
+煩雑な予約システムにイライラしているそこのアナタ。
+ビジネスチャンスです。
 
-## Available Scripts
+# DEMO
 
-In the project directory, you can run:
+## Customer demo
 
-### `npm start`
+![Customer](https://user-images.githubusercontent.com/100478703/179184478-328f8e55-2b6d-4671-8643-c300181fc0a4.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Clerk demo
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Features
 
-### `npm test`
+お客様：「予約機能」に特化した直感的な操作とカット後のイメージが沸く様に AR 機能の実装
+オーナー：予約情報を一目で確認できる見た目と各種編集機能（メニュー追加,休日追加等）の追加
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Requirement
 
-### `npm run build`
+need 　 library
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+    "@aws-amplify/ui-react": "^3.0.3",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.8.6",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.41",
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
+    "aws-amplify": "^4.3.26",
+    "dayjs": "^1.11.3",
+    "moment": "^2.29.3",
+    "react": "^18.2.0",
+    "react-big-calendar": "^0.40.2",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-table": "^7.8.0",
+    "react-webcam": "^7.0.1",
+    "typescript": "^4.7.4",
+    "web-vitals": "^2.1.4"
+    "@types/mui-datatables": "^3.7.9",
+    "@types/react-big-calendar": "^0.38.0",
+    "@types/react-table": "^7.7.12"
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone {url}
+npm install
+(amplifyの設定必要(install,configure,init,add api,push))
+```
 
-### `npm run eject`
+# Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+DEMO の実行方法など、"hoge"の基本的な使い方を説明する
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Local environment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm run start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+URL
+///////////////////amplify の URL を貼る
 
-## Learn More
+# Note
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+注意点などがあれば書く
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Author
+
+- 作成者：Japan-Crew-Cut-Associatio
+- 所属:全日本角刈り協会
