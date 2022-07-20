@@ -198,7 +198,7 @@ export const Holidays = () => {
           value="Sun"
         />
         <label className="selectHolidaylabel" htmlFor="smun">
-          Sum
+          日
         </label>
 
         <input
@@ -208,7 +208,7 @@ export const Holidays = () => {
           value="Mon"
         />
         <label className="selectHolidaylabel" htmlFor="mon">
-          Mon
+          月
         </label>
 
         <input
@@ -218,7 +218,7 @@ export const Holidays = () => {
           value="Tue"
         />
         <label className="selectHolidaylabel" htmlFor="tue">
-          Tue
+          火
         </label>
 
         <input
@@ -228,7 +228,7 @@ export const Holidays = () => {
           value="Wed"
         />
         <label className="selectHolidaylabel" htmlFor="wed">
-          Wed
+          水
         </label>
 
         <input
@@ -238,7 +238,7 @@ export const Holidays = () => {
           value="Thu"
         />
         <label className="selectHolidaylabel" htmlFor="tho">
-          Tho
+          木
         </label>
 
         <input
@@ -248,7 +248,7 @@ export const Holidays = () => {
           value="Fri"
         />
         <label className="selectHolidaylabel" htmlFor="fri">
-          Fri
+          金
         </label>
 
         <input
@@ -258,7 +258,7 @@ export const Holidays = () => {
           value="Sat"
         />
         <label className="selectHolidaylabel" htmlFor="sat">
-          Sat
+          土
         </label>
       </div>
       <div className="text-center">

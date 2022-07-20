@@ -32,24 +32,24 @@ export const Admin: React.FC = () => {
   return (
     <div id="admin_page">
       <br />
-      <h1>Administrator access</h1>
+      <h1>管理者画面</h1>
       <div className="menus">
         <Link id="confirm_reserve" to="shopcalendar/"></Link>
 
         <button className="adminButton" onClick={() => confirmReservation()}>
-          Reservations
+          予約を確認する
         </button>
         <Link id="edit_menu" to="editmenu/"></Link>
         <button className="adminButton" onClick={() => editMenu()}>
-          Menus
+          メニューの編集
         </button>
         <Link id="set_holidays" to="holiday/"></Link>
         <button className="adminButton" onClick={() => setHolidays()}>
-          Holidays
+          定休日の設定
         </button>
         <Link id="edit_stylist" to="editstylist/"></Link>
         <button className="adminButton" onClick={() => editStylist()}>
-          Stylists
+          スタイリストの管理
         </button>
       </div>
     </div>
