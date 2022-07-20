@@ -28,7 +28,7 @@ export const FooterNavbar = () => {
         className="btn btn-dark btn-next"
         onClick={() => onClickArButton()}
       >
-        ARで角刈りを試す
+        ARで髪型を試す
       </button>
 
       <button className="btn btn-dark btn-next" onClick={() => onClickButton()}>

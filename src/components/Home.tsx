@@ -40,11 +40,15 @@ export const Home = () => {
     if (sessionStorage.getItem("user") === "administrator") {
       setShowComponent(<Admin />);
     } else if (reserveObj) {
-      setTimeout(function () {
-        setShowComponent(<ReserveInfo />);
-      }, 500);
+      // 予約され時間が過去なら予約可能なコンポーネント表示
+      if (new Date(reserveObj.date) < new Date()) {
+        setShowComponent(<Menu />);
+      } else {
+        setTimeout(function () {
+          setShowComponent(<ReserveInfo />);
+        }, 500);
+      }
     } else {
-      console.log("else: ");
       setShowComponent(<Menu />);
     }
   }

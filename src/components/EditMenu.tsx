@@ -137,7 +137,7 @@ export const EditMenu = () => {
       <table className="table table-striped table-dark ">
         <tbody>
           <tr key={0}>
-            <th className="text-center">めにゅ〜</th>
+            <th className="text-center">メニュー</th>
             <th className="text-center">料金</th>
             <th className="text-center">施術時間</th>
             <th className="text-center">詳細</th>
