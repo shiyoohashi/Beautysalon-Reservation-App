@@ -138,8 +138,8 @@ export const Time = () => {
             treatmentTime: 0,
           };
 
-          const tempReserveMenuObj = arrayOfShopMenuObj.find((shpoMenuObj) => {
-            return shpoMenuObj.menu === reserve.menu;
+          const tempReserveMenuObj = arrayOfShopMenuObj.find((shopMenuObj) => {
+            return shopMenuObj.menu === reserve.menu;
           });
           if (tempReserveMenuObj) {
             reserveMenuObj = tempReserveMenuObj;
@@ -156,16 +156,15 @@ export const Time = () => {
                   reserveMenuObj.treatmentTime
               )
           ) {
-            if ((result[row][col] = " ")) {
-              result[row][col] = batsu;
-            }
-          } else {
+            result[row][col] = batsu;
+          } else if (result[row][col] === " ") {
             result[row][col] = maru;
           }
         });
       }
     }
 
+    // 当日をTEL表示にする
     const nowDate: string = dayjs(new Date()).format("DD");
     const nowMonth: string = dayjs(new Date()).format("MM");
     // 月を取得
@@ -198,6 +197,8 @@ export const Time = () => {
       }
       dayCounter.setDate(dayCounter.getDate() + 1);
     }
+
+    console.log("result: ", result);
     setMarubatsu(result);
   }
 
